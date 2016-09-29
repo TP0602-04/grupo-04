@@ -4,13 +4,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Game implements IGame {
-	final private IGrid grid;
-	final private List<IRule> rules;
+	private IGrid grid;
+	private List<IRule> rules;
 
-	public Game(final IGrid iGrid, final List<IRule> iRule) {
-		this.grid = iGrid;
-		this.rules = iRule;
-	}
 
 	public void fillCell(final Integer xPostition, final Integer yPostition, final Integer value) {
 		grid.put(value, xPostition, yPostition);
@@ -19,5 +15,13 @@ public class Game implements IGame {
 
 	public boolean checkRules() {
 		return rules.stream().allMatch(IRule::check);
+	}
+
+	public void setRules(List<IRule> rules) {
+		this.rules = rules;
+	}
+
+	public void setGrid(IGrid grid) {
+		this.grid = grid;
 	}
 }
