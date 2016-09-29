@@ -1,0 +1,49 @@
+{
+  "grid": {
+    "size": 9,
+    "cells": [
+      {
+        "type": "number",
+        "default": true,
+        "editable": true
+      },
+      {
+        "type": "number",
+        "editable": false,
+        "coordinates": [
+          {
+            "x": 1,
+            "y": 1,
+            "value": 3
+          }
+        ]
+      }
+    ]
+  },
+  "rules": [
+    {
+      "groups": [
+        {
+          "filters": [{"type": "row"}]
+        }
+      ],
+      "condition": "unique"
+    },
+    {
+      "groups": [
+        {
+          "filters": [{"type": "column"}]
+        }
+      ],
+      "condition": "unique"
+    },
+    {
+      "groups": [
+        {
+          "filters": [{"type": "block", "param": 3}]
+        }
+      ],
+      "condition": "unique"
+    }
+  ]
+}
