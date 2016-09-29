@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04;
 
 public interface IGrid {
-	public void fillCell(final Integer xPostition, final Integer yPostition, final Integer value);
+	void put(Integer value, Integer row, Integer column);
+	ICell get(Integer row, Integer column);
 }

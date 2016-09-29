@@ -13,7 +13,7 @@ public class Game implements IGame {
 	}
 
 	public void fillCell(final Integer xPostition, final Integer yPostition, final Integer value) {
-		grid.fillCell(xPostition, yPostition, value);
+		grid.put(value, xPostition, yPostition);
 
 	}
 
