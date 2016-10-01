@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.grupo04;
+package ar.fiuba.tdd.grupo04.grid;
 
 public class NumberCell implements ICell {
 	private Integer value;

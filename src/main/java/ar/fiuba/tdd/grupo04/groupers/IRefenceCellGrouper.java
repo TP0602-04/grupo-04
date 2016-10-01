@@ -5,6 +5,6 @@ import ar.fiuba.tdd.grupo04.grid.IGrid;
 
 import java.util.List;
 
-public interface ICellGrouper {
-	List<List<ICell>> createCellGroup(IGrid grid);
+public interface IRefenceCellGrouper extends  ICellGrouper {
+	List<Integer> getReferencedValues(IGrid grid);
 }

@@ -1,4 +1,8 @@
-package ar.fiuba.tdd.grupo04;
+package ar.fiuba.tdd.grupo04.groupers;
+
+import ar.fiuba.tdd.grupo04.grid.ICell;
+import ar.fiuba.tdd.grupo04.grid.IGrid;
+import javafx.collections.transformation.SortedList;
 
 import java.util.ArrayList;
 import java.util.List;
