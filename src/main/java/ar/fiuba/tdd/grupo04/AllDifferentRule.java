@@ -1,19 +1,17 @@
 package ar.fiuba.tdd.grupo04.rules;
 
-import ar.fiuba.tdd.grupo04.grid.ICell;
-import ar.fiuba.tdd.grupo04.grid.IGrid;
 import ar.fiuba.tdd.grupo04.groupers.ICellGrouper;
 
 import java.util.List;
 
-public class AllDifferentRule extends IRule {
+public class AllDifferentRule<T, S> extends IRule<T, S> {
 
 	public AllDifferentRule(ICellGrouper cellGrouper) {
 		this.cellGrouper = cellGrouper;
 	}
 
 	@Override
-	public boolean checkList(List<ICell>  cells) {
-		return cells.stream().map(ICell::getValue).distinct().count() == cells.stream().count();
+	public boolean checkList(List<T>  cells) {
+		return cells.stream().distinct().count() == cells.stream().count();
 	}
 }

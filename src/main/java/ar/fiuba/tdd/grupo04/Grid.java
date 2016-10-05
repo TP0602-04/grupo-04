@@ -3,41 +3,41 @@ package ar.fiuba.tdd.grupo04.grid;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid implements IGrid{
-	List<List<ICell>> cells;
-	List<IReference> references;
+public class Grid<T, S> implements IGrid<T, S>{
+	List<List<T>> cells;
+	List<IReference<T, S>> references;
 
 	public Grid(Integer rows, Integer columns){
-		this.cells = new ArrayList<List<ICell>>();
+		this.cells = new ArrayList<>();
 		this.initCells(rows, columns);
 		this.references = new ArrayList<>();
 	}
 
 	private void initCells(Integer rows, Integer columns){
 		for(Integer row = 0; row < rows; row++){
-			List<ICell> rowList = new ArrayList<ICell>();
+			List<T> rowList = new ArrayList<T>();
 			this.cells.add(rowList);
 			for(Integer column = 0; column < columns; column++){
-				rowList.add(new NumberCell());
+				rowList.add(null);
 			}
 		}
 	}
 
-	public void put(Integer value, Integer row, Integer column){
-		cells.get(row).get(column).setValue(value);
+	public void put(T value, Integer row, Integer column){
+		cells.get(row).set(column, value);
 	}
 
 	@Override
-	public void addReference(IReference iReference) {
+	public void addReference(IReference<T, S> iReference) {
 		references.add(iReference);
 	}
 
-	public ICell get(Integer row, Integer column){
+	public T get(Integer row, Integer column){
 		return cells.get(row).get(column);
 	}
 
 	@Override
-	public List<IReference> getReferences() {
+	public List<IReference<T, S>> getReferences() {
 		return references;
 	}
 

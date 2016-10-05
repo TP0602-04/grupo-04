@@ -2,7 +2,7 @@ package ar.fiuba.tdd.grupo04.grid;
 
 import java.util.List;
 
-public interface IReference {
-	List<ICell> getReferencedCells(final IGrid iGrid);
-	Integer getReferencedValue();
+public interface IReference<T, S> {
+	List<T> getReferencedCells(final IGrid<T, S> iGrid);
+	S getReferencedValue();
 }

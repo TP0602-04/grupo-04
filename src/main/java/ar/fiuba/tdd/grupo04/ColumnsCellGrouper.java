@@ -1,20 +1,18 @@
 package ar.fiuba.tdd.grupo04.groupers;
 
-import ar.fiuba.tdd.grupo04.grid.ICell;
 import ar.fiuba.tdd.grupo04.grid.IGrid;
-import javafx.collections.transformation.SortedList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColumnsCellGrouper implements ICellGrouper {
+public class ColumnsCellGrouper<T, S> implements ICellGrouper<T, S> {
 	@Override
-	public List<List<ICell>> createCellGroup(IGrid grid) {
+	public List<List<T>> createCellGroup(IGrid<T, S> grid) {
 		Integer rowLength = grid.rowsLength();
 		Integer colLength = grid.columnsLength();
-		List<List<ICell>> columns = new ArrayList<List<ICell>>();
+		List<List<T>> columns = new ArrayList<List<T>>();
 		for(Integer i = 0; i < colLength; i++){
-			List<ICell> column = new ArrayList<ICell>();
+			List<T> column = new ArrayList<T>();
 			columns.add(column);
 			for(Integer j = 0; j < rowLength; j++){
 				column.add(grid.get(j, i));

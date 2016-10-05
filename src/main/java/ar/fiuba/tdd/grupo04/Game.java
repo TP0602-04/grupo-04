@@ -8,15 +8,15 @@ import ar.fiuba.tdd.grupo04.rules.IRule;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements IGame {
-	private IGrid grid;
-	final private List<IRule> rules;
+public class Game<T, S> implements IGame<T, S> {
+	private IGrid<T, S> grid;
+	final private List<IRule<T, S>> rules;
 
 	public Game() {
 		this.rules = new ArrayList<>();
 	}
 
-	public void fillCell(final Integer xPostition, final Integer yPostition, final Integer value) {
+	public void fillCell(final Integer xPostition, final Integer yPostition, final T value) {
 		grid.put(value, xPostition, yPostition);
 	}
 
@@ -24,11 +24,11 @@ public class Game implements IGame {
 		return rules.stream().allMatch(IRule::check);
 	}
 
-	public void addRule(IRule rule) {
+	public void addRule(IRule<T, S> rule) {
 		rules.add(rule);
 	}
 
-	public void addReference(IReference reference) {
+	public void addReference(IReference<T, S> reference) {
 		grid.addReference(reference);
 	}
 
