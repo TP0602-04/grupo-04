@@ -1,42 +1,40 @@
-package ar.fiuba.tdd.grupo04.game;
+package ar.fiuba.tdd.grupo04;
 
-import ar.fiuba.tdd.grupo04.grid.Grid;
-import ar.fiuba.tdd.grupo04.grid.IGrid;
-import ar.fiuba.tdd.grupo04.grid.IReference;
-import ar.fiuba.tdd.grupo04.rules.IRule;
+import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.board.IBoard;
+import ar.fiuba.tdd.grupo04.rule.IRule;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interface for a game.
+ */
 public class Game<T, S> implements IGame<T, S> {
-	private IGrid<T, S> grid;
-	final private List<IRule<T, S>> rules;
+    private IBoard<T> board;
+    private List<IRule> rules;
 
-	public Game() {
-		this.rules = new ArrayList<>();
-	}
+    public Game() {
+        this.rules = new ArrayList<>();
+    }
 
-	public void fillCell(final Integer xPostition, final Integer yPostition, final T value) {
-		grid.put(value, xPostition, yPostition);
-	}
+    @Override
+    public void fillCell(final Coordinate coordinate, T value) {
+        board.put(value, coordinate);
+    }
 
-	public boolean checkRules() {
-		return rules.stream().allMatch(IRule::check);
-	}
+    @Override
+    public boolean checkRules() {
+        return rules.stream().allMatch(IRule::check);
+    }
 
-	public void addRule(IRule<T, S> rule) {
-		rules.add(rule);
-	}
+    @Override
+    public void addRule(IRule rule) {
+        rules.add(rule);
+    }
 
-	public void addReference(IReference<T, S> reference) {
-		grid.addReference(reference);
-	}
-
-	public void setGrid(Integer rows, Integer columns) {
-		this.grid = new Grid(rows, columns);
-	}
-
-	public void start() {
-		rules.forEach(r -> r.startRule(grid));
-	}
+    @Override
+    public void setBoard(IBoard board) {
+        this.board = board;
+    }
 }
