@@ -26,7 +26,7 @@ public class CustomGroupCollector<T, R extends IValuedInputGroup> implements ICo
     public List<R> getInputGroups() {
         List inputGroups = new ArrayList();
         for (int i = 0; i < referencedBlockGroups.size(); i++) {
-            List<T> inputs = new ArrayList<>();
+            List inputs = new ArrayList<>();
             IReferencedGroup rg = referencedBlockGroups.get(i);
             List<Coordinate> coordinates = rg.getCoordinates();
             for (Coordinate coordinate : coordinates) {

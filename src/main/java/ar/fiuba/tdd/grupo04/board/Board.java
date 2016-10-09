@@ -2,9 +2,10 @@ package ar.fiuba.tdd.grupo04.board;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Board<T> implements IBoard<T> {
-    List<List<T>> cells;
+    List<List<Optional<T>>> cells;
 
     public Board(Integer rows, Integer columns) {
         this.cells = new ArrayList<>();
@@ -13,22 +14,22 @@ public class Board<T> implements IBoard<T> {
 
     private void initCells(Integer rows, Integer columns) {
         for (Integer row = 0; row < rows; row++) {
-            List<T> rowList = new ArrayList<T>();
+            List rowList = new ArrayList<>();
             this.cells.add(rowList);
             for (Integer column = 0; column < columns; column++) {
-                rowList.add(null);
+                rowList.add(Optional.empty());
             }
         }
     }
 
     @Override
     public void put(T value, Coordinate coordinate) {
-        cells.get(coordinate.row()).set(coordinate.column(), value);
+        cells.get(coordinate.row()).set(coordinate.column(), Optional.ofNullable(value));
     }
 
 
     @Override
-    public T get(Coordinate coordinate) {
+    public Optional<T> get(Coordinate coordinate) {
         return cells.get(coordinate.row()).get(coordinate.column());
     }
 

@@ -20,7 +20,7 @@ public class ColumnsCollector<T> implements ICollector {
         Integer colLength = board.columnsLength();
         List<InputGroup> inputGroups = new ArrayList<>();
         for (Integer i = 0; i < colLength; i++) {
-            List<T> inputs = new ArrayList<>();
+            List inputs = new ArrayList<>();
             for (Integer j = 0; j < rowLength; j++) {
                 inputs.add(board.get(new Coordinate(j, i)));
             }
