@@ -4,6 +4,7 @@ import ar.fiuba.tdd.grupo04.board.Board;
 
 import java.util.List;
 
+@SuppressWarnings("CPD-START")
 public class RowsCollector<T> implements ICollector {
     private BlocksCollector<T> blocksCollector;
 

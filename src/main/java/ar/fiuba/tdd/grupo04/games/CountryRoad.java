@@ -14,6 +14,7 @@ public class CountryRoad {
     IGame game;
     private Board board;
     private CustomGroupCollector customGroupCollector;
+    
     public CountryRoad() {
         createGame();
         createBoard();
