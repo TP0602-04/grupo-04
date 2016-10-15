@@ -5,7 +5,10 @@ import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.rule.Rule;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 public class Sudoku {
@@ -23,10 +26,10 @@ public class Sudoku {
         board = new Board(9, 9);
         game.setBoard(board);
         game.addRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
-//        game.addRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
-//        game.addRule(new Rule<>(new BlocksCollector<>(board), new UniqueCondition()));
-//        game.addRule(new Rule<>(new AllCollector<>(board), new AllLesserThanCondition()));
-//        game.addRule(new Rule<>(new AllCollector<>(board), new AllGreaterThanCondition()));
+        //game.addRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
+        //game.addRule(new Rule<>(new BlocksCollector<>(board), new UniqueCondition()));
+        game.addRule(new Rule<>(new AllCollector<>(board, 10), new AllLesserThanCondition()));
+        game.addRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
     }
 
     private void createBoard() {
@@ -39,10 +42,11 @@ public class Sudoku {
     }
 
     public void playGame() {
-        // aca estaria el loop con el input
-        // fillCell tendria q fijarse q no esta puesto ya o algo asi
+        //while(!game.winCondition() && !game.loseCondition()){
         while (game.checkRules()) {
+            //tomar input
             game.fillCell(new Coordinate(2, 7), 8);
         }
+
     }
 }

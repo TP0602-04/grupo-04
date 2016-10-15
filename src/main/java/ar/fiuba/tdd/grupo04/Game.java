@@ -20,6 +20,7 @@ public class Game<T, S> implements IGame<T, S> {
 
     @Override
     public void fillCell(final Coordinate coordinate, T value) {
+        //do nothing if cell is already filled
         board.put(value, coordinate);
     }
 
