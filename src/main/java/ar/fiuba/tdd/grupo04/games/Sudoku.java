@@ -4,11 +4,13 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.rule.IRule;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.BlocksCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
@@ -45,11 +47,14 @@ public class Sudoku {
     }
 
     public void playGame() {
-        //while(!game.winCondition() && !game.loseCondition()){
-        while (game.checkRules()) {
-            //tomar input
+        IRule fullBoard = new Rule<>(new AllCollector<>(board), new AllFilledCondition());
+        while (!fullBoard.check() && game.checkRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
-
+        if (game.checkRules()) {
+            //ganaste
+        } else {
+            //perdiste
+        }
     }
 }
