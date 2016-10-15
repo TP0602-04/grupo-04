@@ -13,6 +13,7 @@ import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
+@SuppressWarnings("CPD-START")
 public class Sudoku {
     IGame game;
     private Board board;

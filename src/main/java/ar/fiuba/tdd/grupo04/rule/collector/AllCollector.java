@@ -17,6 +17,12 @@ public class AllCollector<T> implements ICollector {
         this.value = value;
     }
 
+
+    public AllCollector(Board<T> board) {
+        this.board = board;
+        this.value = 0;
+    }
+
     @Override
     public List getInputGroups() {
         Integer rowLength = board.rowsLength();
