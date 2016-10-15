@@ -4,11 +4,11 @@ import ar.fiuba.tdd.grupo04.board.Board;
 
 import java.util.List;
 
-public class ColumnsCollector<T> implements ICollector {
+public class RowsCollector<T> implements ICollector {
     private BlocksCollector<T> blocksCollector;
 
-    public ColumnsCollector(Board<T> board) {
-        blocksCollector = new BlocksCollector<T>(board, 1, board.columnsLength());
+    public RowsCollector(Board<T> board) {
+        blocksCollector = new BlocksCollector<T>(board, 1, board.rowsLength());
     }
 
     @Override
