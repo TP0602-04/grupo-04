@@ -6,4 +6,6 @@ public interface IInput<T> {
     Optional<T> getValue();
 
     Coordinate getCoordinate();
+
+    boolean isBlocked();
 }

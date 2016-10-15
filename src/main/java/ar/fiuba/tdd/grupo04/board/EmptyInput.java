@@ -2,18 +2,19 @@ package ar.fiuba.tdd.grupo04.board;
 
 import java.util.Optional;
 
-public class Input<T> implements IInput<T> {
-    private final Optional<T> value;
+/**
+ * Created by manuelcruz on 15/10/2016.
+ */
+public class EmptyInput<T> implements IInput<T> {
     private final Coordinate coordinate;
 
-    public Input(Optional<T> value, Coordinate coordinate) {
-        this.value = value;
+    public EmptyInput(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
     @Override
     public Optional<T> getValue() {
-        return value;
+        throw new SecurityException();
     }
 
     @Override
@@ -23,6 +24,6 @@ public class Input<T> implements IInput<T> {
 
     @Override
     public boolean isBlocked() {
-        return false;
+        return true;
     }
 }
