@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
+import ar.fiuba.tdd.grupo04.board.IInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.Optional;
@@ -15,7 +16,7 @@ public class SumCondition<R extends IValuedInputGroup<Integer, Integer>> impleme
      */
     public boolean check(R valuedInputGroup) {
         final Integer value = valuedInputGroup.getValue();
-        final Stream<Optional<Integer>> inputsStream = valuedInputGroup.getInputs().stream();
+        final Stream<Optional<Integer>> inputsStream = valuedInputGroup.getInputs().stream().map(IInput::getValue);
         if (inputsStream.allMatch(Optional::isPresent)) {
             return value.equals(inputsStream.map(Optional::get).mapToInt(Integer::intValue).sum());
         }

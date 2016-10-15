@@ -1,16 +1,20 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
+import ar.fiuba.tdd.grupo04.board.IInput;
 import ar.fiuba.tdd.grupo04.rule.IInputGroup;
+import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public class UniqueCondition implements ICondition {
+
     @Override
     public boolean check(IInputGroup inputGroup) {
-        final List<Optional> inputs = inputGroup.getInputs();
-        final Stream inputsStream = inputs.stream().filter(Optional::isPresent).map(Optional::get);
-        return inputsStream.distinct().count() == inputsStream.count();
+        final List<IInput> inputs = inputGroup.getInputs();
+        final long diffCount = inputs.stream().map(IInput::getValue).filter(Optional::isPresent).map(Optional::get).distinct().count();
+        final long count = inputs.stream().map(IInput::getValue).filter(Optional::isPresent).map(Optional::get).count();
+        return diffCount == count;
     }
 }

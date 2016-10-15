@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
+import ar.fiuba.tdd.grupo04.board.IInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class AllComparatorCondition<R extends IValuedInputGroup<Integer, Integer
 
     public boolean check(R valuedInputGroup) {
         final Integer value = valuedInputGroup.getValue();
-        final Stream<Optional<Integer>> inputsStream = valuedInputGroup.getInputs().stream();
+        final Stream<Optional<Integer>> inputsStream = valuedInputGroup.getInputs().stream().map(IInput::getValue);
         return inputsStream.filter(Optional::isPresent).map(Optional::get).allMatch(i -> comparator.apply(i, value));
     }
 }
