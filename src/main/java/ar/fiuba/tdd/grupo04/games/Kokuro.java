@@ -6,7 +6,11 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
+import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.SumCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
@@ -30,8 +34,8 @@ public class Kokuro {
         customGroupCollector = new CustomGroupCollector<>(board);
         game.addRule(new Rule<>(customGroupCollector, new UniqueCondition()));
         game.addRule(new Rule<>(customGroupCollector, new SumCondition()));
-//        game.addRule(new Rule<>(new AllCollector<>(board), new AllLesserThanCondition()));
-//        game.addRule(new Rule<>(new AllCollector<>(board), new AllGreaterThanCondition()));
+        game.addRule(new Rule<>(new AllFillableCollector<>(board, 10), new AllLesserThanCondition()));
+        game.addRule(new Rule<>(new AllFillableCollector<>(board, 0), new AllGreaterThanCondition()));
     }
 
     private void createBoard() {

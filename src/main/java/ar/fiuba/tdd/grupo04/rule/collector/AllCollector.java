@@ -2,7 +2,6 @@ package ar.fiuba.tdd.grupo04.rule.collector;
 
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.rule.InputGroup;
 import ar.fiuba.tdd.grupo04.rule.ValuedInputGroup;
 
 import java.util.ArrayList;
