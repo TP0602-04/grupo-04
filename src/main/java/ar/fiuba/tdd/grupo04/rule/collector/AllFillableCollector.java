@@ -1,8 +1,12 @@
 package ar.fiuba.tdd.grupo04.rule.collector;
 
 import ar.fiuba.tdd.grupo04.board.Board;
+import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AllFillableCollector<T> implements ICollector {
     private AllCollector<T> allCollector;
@@ -13,7 +17,11 @@ public class AllFillableCollector<T> implements ICollector {
 
     @Override
     public List getInputGroups() {
-        //filter blocked cells;
-        return allCollector.getInputGroups();
+        List newInputGroups = new ArrayList<>();
+        final List<IInputGroup> inputGroups = allCollector.getInputGroups();
+        inputGroups.forEach((IInputGroup inputGroup) -> {
+            final List<IInput> inputs = inputGroup.getInputs();
+            newInputGroups.add(inputs.stream().filter(IInput::isBlocked).collect(Collectors.toList()));});
+        return newInputGroups;
     }
 }
