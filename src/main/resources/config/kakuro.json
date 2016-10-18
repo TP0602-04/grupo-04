@@ -1,141 +1,20 @@
 {
-    "grid": {
+    "board": {
         "size": 6,
-        "cells": [
+        "defaultCellType": "empty",
+        "editable": false
+    },
+    "scenario": {
+        "groups": [
             {
                 "type": "number",
-                "editable": true,
-                "default": true
-            },
-            {
-                "type": "empty",
                 "editable": false,
-                "coordinates": [
-                    {
-                        "x": 0,
-                        "y": 0
-                    },
-                    {
-                        "x": 1,
-                        "y": 0
-                    },
-                    {
-                        "x": 4,
-                        "y": 0
-                    },
-                    {
-                        "x": 5,
-                        "y": 0
-                    },
-                    {
-                        "x": 0,
-                        "y": 1
-                    },
-                    {
-                        "x": 5,
-                        "y": 1
-                    },
-                    {
-                        "x": 0,
-                        "y": 4
-                    },
-                    {
-                        "x": 0,
-                        "y": 5
-                    },
-                    {
-                        "x": 1,
-                        "y": 5
-                    },
-                    {
-                        "x": 5,
-                        "y": 5
-                    }
-                ]
-            },
-            {
-                "type": "multivalued",
-                "editable": false,
-                "coordinates": [
-                    {
-                        "x": 2,
-                        "y": 0,
-                        "values": [
-                            0,
-                            18
-                        ]
-                    },
-                    {
-                        "x": 3,
-                        "y": 0,
-                        "values": [
-                            0,
-                            13
-                        ]
-                    },
+                "reference": 4,
+                "cells": [
                     {
                         "x": 1,
                         "y": 1,
-                        "values": [
-                            5,
-                            16
-                        ]
-                    },
-                    {
-                        "x": 4,
-                        "y": 1,
-                        "values": [
-                            0,
-                            11
-                        ]
-                    },
-                    {
-                        "x": 0,
-                        "y": 2,
-                        "values": [
-                            29,
-                            0
-                        ]
-                    },
-                    {
-                        "x": 5,
-                        "y": 2,
-                        "values": [
-                            0,
-                            3
-                        ]
-                    },
-                    {
-                        "x": 0,
-                        "y": 3,
-                        "values": [
-                            14,
-                            0
-                        ]
-                    },
-                    {
-                        "x": 3,
-                        "y": 3,
-                        "values": [
-                            4,
-                            14
-                        ]
-                    },
-                    {
-                        "x": 1,
-                        "y": 4,
-                        "values": [
-                            16,
-                            0
-                        ]
-                    },
-                    {
-                        "x": 2,
-                        "y": 5,
-                        "values": [
-                            7,
-                            0
-                        ]
+                        "value": 3
                     }
                 ]
             }
