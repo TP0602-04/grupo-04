@@ -11,6 +11,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@SuppressWarnings("CPD-START")
 public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implements ICondition<R> {
     private final Function<S, Boolean> isMarked;
     private final Function<S, Boolean> isNode;

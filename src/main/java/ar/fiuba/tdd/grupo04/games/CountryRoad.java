@@ -49,18 +49,11 @@ public class CountryRoad {
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
 
         customGroupCollector = new CustomGroupCollector<>(board);
-        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
         game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition(isMarked, isNode)));
-        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-
-        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked()
-                && GraphInputType.EDGE.equals(graphInput.getType());
         game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
         game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
-
-        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
         game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
 //        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
     }
