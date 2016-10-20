@@ -19,4 +19,3 @@ public class GraphInput {
     }
 }
 
-enum GraphInputType {EDGE, NODE, INVALID_ELEMENT}

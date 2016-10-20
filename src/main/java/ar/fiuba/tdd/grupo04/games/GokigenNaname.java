@@ -10,7 +10,6 @@ import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountBiCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
 
 import java.util.function.BiFunction;
 
@@ -27,17 +26,19 @@ public class GokigenNaname {
 
     private void createGame() {
         game = new Game();
-        // Esto se levanta del json de juego
-        // Si el campo esta en true significa que la diagonal va de abajo a la izquierda a arriba a la derecha,
-        // si es false de abajo a la derecha a arriba a la izquierda
-        // las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
-        // estar marcados true o false para estar completo el tablero)
-        // las dos coord pares son los puntos del borde de la celda (estan todos en true)
-        // los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
+        /*
+            Esto se levanta del json de juego
+            Si el campo esta en true significa que la diagonal va de abajo a la izquierda a arriba a la derecha,
+            si es false de abajo a la derecha a arriba a la izquierda
+            las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
+            estar marcados true o false para estar completo el tablero)
+            las dos coord pares son los puntos del borde de la celda (estan todos en true)
+            los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
+         */
         board = new Board<Boolean>(18, 18, Boolean.FALSE);
         for (int i = 1; i < 18; i = i + 2) {
             for (int j = 1; j < 18; j = j + 2) {
-                board.put(null,new Coordinate(i,j));
+                board.put(null, new Coordinate(i, j));
             }
         }
 

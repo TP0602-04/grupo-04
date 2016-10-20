@@ -28,11 +28,7 @@ public class Main {
         IGame game = null;
         try {
             game = GameJsonParser.parseLoad(jsonGame);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JsonInitGame jsonInitGame = gson.fromJson(json3, JsonInitGame.class);
-        try {
+            JsonInitGame jsonInitGame = gson.fromJson(json3, JsonInitGame.class);
             GameJsonParser.parseInit(game, jsonInitGame);
         } catch (Exception e) {
             e.printStackTrace();
