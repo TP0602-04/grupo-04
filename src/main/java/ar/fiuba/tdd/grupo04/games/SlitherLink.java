@@ -2,6 +2,7 @@ package ar.fiuba.tdd.grupo04.games;
 
 import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
+import ar.fiuba.tdd.grupo04.Utils;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -90,21 +91,7 @@ public class SlitherLink {
         System.out.print(game.checkRules());
         // Con esto se checkea si ya gano
 
-        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0 && (coordinate.row().intValue() & 1) == 0;
-
-        Function<Coordinate, Boolean> isSegment = (coordinate) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return true;
-                }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return true;
-                }
-            }
-            return false;
-        };
-        new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell, isSegment));
+        new Rule<>(new AllCollector<>(board), new OneLoopCondition(Utils.isCell(), Utils.isSegment()));
         while (game.checkRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
