@@ -29,4 +29,12 @@ public class Coordinate {
         }
         return Objects.equals(row, ((Coordinate) obj).row) && Objects.equals(column, ((Coordinate) obj).column);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = ((hash + row) << 5) - (hash + row);
+        hash = ((hash + column) << 5) - (hash + column);
+        return hash;
+    }
 }

@@ -87,15 +87,17 @@ public class Sudoku {
     public void playGame() throws IOException {
         IRule fullBoard = new Rule<>(new AllCollector<>(board), new AllFilledCondition());
         String input;
-        InputStreamReader isr = new InputStreamReader(System.in);
+        InputStreamReader isr = new InputStreamReader(System.in, "utf-8");
         BufferedReader br = new BufferedReader(isr);
         while (!fullBoard.check() && game.checkRules()) {
             System.out.println("ingrese fila,columna,valor");
             input = br.readLine();
-            Integer row = Integer.parseInt(input.substring(0, 1)) - 1;
-            Integer col = Integer.parseInt(input.substring(2, 3)) - 1;
-            Integer value = Integer.parseInt(input.substring(4));
-            game.fillCell(new Coordinate(row, col), value);
+            if(!"".equals(input)){
+                Integer row = Integer.parseInt(input.substring(0, 1)) - 1;
+                Integer col = Integer.parseInt(input.substring(2, 3)) - 1;
+                Integer value = Integer.parseInt(input.substring(4));
+                game.fillCell(new Coordinate(row, col), value);
+            }
         }
         if (game.checkRules()) {
             System.out.println("GANASTE");
