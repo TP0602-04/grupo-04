@@ -1,6 +1,6 @@
 {
     "board": {
-        "size": 4,
+        "size": 9,
         "cellType": "number"
     },
     "scenario": {

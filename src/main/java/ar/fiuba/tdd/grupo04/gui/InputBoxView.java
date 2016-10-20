@@ -2,10 +2,10 @@ package ar.fiuba.tdd.grupo04.gui;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.*;
 
 public class InputBoxView implements View {
     public interface SubmitListener {
@@ -64,7 +64,7 @@ public class InputBoxView implements View {
         return constraints;
     }
 
-    /**
+    /*
      * {@link View} implementation
      */
     @Override
@@ -77,7 +77,7 @@ public class InputBoxView implements View {
         return view;
     }
 
-    /**
+    /*
      * Public methods
      */
     public void select(Coordinate coordinate) {
@@ -89,7 +89,7 @@ public class InputBoxView implements View {
         listeners.add(listener);
     }
 
-    /**
+    /*
      * Private methods
      */
     private void submit() {

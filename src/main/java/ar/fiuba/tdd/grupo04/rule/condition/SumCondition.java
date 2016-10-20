@@ -15,9 +15,11 @@ public class SumCondition<R extends IValuedInputGroup<Integer, Integer>> impleme
      */
     public boolean check(R valuedInputGroup) {
         final Integer value = valuedInputGroup.getValue();
-        final boolean allMatch = valuedInputGroup.getInputs().stream().map(IInput::getValue).allMatch(Optional::isPresent);
+        final boolean allMatch =
+                            valuedInputGroup.getInputs().stream().map(IInput::getValue).allMatch(Optional::isPresent);
         if (allMatch) {
-            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue).map(Optional::get).mapToInt(Integer::intValue).sum());
+            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue).map(Optional::get)
+                                                                                    .mapToInt(Integer::intValue).sum());
         }
         return true;
     }

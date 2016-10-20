@@ -30,24 +30,18 @@ public class CountryRoad {
 
     private void createGame() {
         game = new Game();
-        // Esto se levanta del json de juego
-        // las dos coord pares son los centros de la celdas (marcado true si pasa por aca) (empieza en un centro)(i & 1) == 0 && (j & 1) == 0
-        // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca) (i & 1) != 0 && (j & 1) != 0)
-        // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
+        /*
+            Esto se levanta del json de juego
+            las dos coord pares son los centros de la celdas (marcado true si pasa por aca)
+            (empieza en un centro)(i & 1) == 0 && (j & 1) == 0
+            las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca)
+            (i & 1) != 0 && (j & 1) != 0)
+            los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
+        */
         board = new Board(18, 18);
-        for (int i = 0; i < 18; i++) {
-            for (int j = 0; j < 18; j++) {
-                GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
-                if ((i & 1) == 0 && (j & 1) == 0) {
-                    graphInput = new GraphInput(GraphInputType.NODE, false);
-                } else if ((i & 1) != 0 && (j & 1) != 0) {
-                    graphInput = new GraphInput(GraphInputType.INVALID_ELEMENT, false);
-                }
-                board.put(graphInput, new Coordinate(i, j));
-            }
-        }
-
+        initBoard();
         game.setBoard(board);
+        customGroupCollector = new CustomGroupCollector<>(board);
 
         Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
         Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
@@ -60,6 +54,14 @@ public class CountryRoad {
         game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
+
+        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked()
+                && GraphInputType.EDGE.equals(graphInput.getType());
+        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
+
+        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
 //        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
     }
 
@@ -86,6 +88,20 @@ public class CountryRoad {
                         .referencedValue(7)
                         .createReference()
         );
+    }
+
+    private void initBoard() {
+        for (int i = 0; i < 18; i++) {
+            for (int j = 0; j < 18; j++) {
+                GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
+                if ((i & 1) == 0 && (j & 1) == 0) {
+                    graphInput = new GraphInput(GraphInputType.NODE, false);
+                } else if ((i & 1) != 0 && (j & 1) != 0) {
+                    graphInput = new GraphInput(GraphInputType.INVALID_ELEMENT, false);
+                }
+                board.put(graphInput, new Coordinate(i, j));
+            }
+        }
     }
 
     public void playGame() {

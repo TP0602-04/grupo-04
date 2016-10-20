@@ -13,7 +13,8 @@ public class CountBiCondition<R extends IValuedInputGroup<?, ValuedCoordinate<In
     private final BiFunction<ValuedCoordinate, Coordinate, Boolean> countableValue;
     private final BiFunction<Integer, Integer, Boolean> comparator;
 
-    public CountBiCondition(BiFunction<ValuedCoordinate, Coordinate, Boolean> countableValue, BiFunction<Integer, Integer, Boolean> comparator) {
+    public CountBiCondition(BiFunction<ValuedCoordinate, Coordinate, Boolean> countableValue, BiFunction<Integer,
+                                Integer, Boolean> comparator) {
         this.countableValue = countableValue;
         this.comparator = comparator;
     }
@@ -23,7 +24,8 @@ public class CountBiCondition<R extends IValuedInputGroup<?, ValuedCoordinate<In
     public boolean check(R valuedInputGroup) {
         final Stream<? extends IInput<?>> stream = valuedInputGroup.getInputs().stream();
         final ValuedCoordinate<Integer> valuedCoordinate = valuedInputGroup.getValue();
-        final long countedInputs = stream.filter(i -> i.getValue().isPresent()).filter(i -> i.getValue().get().equals(countableValue.apply(valuedCoordinate, i.getCoordinate()))).count();
+        final long countedInputs = stream.filter(i -> i.getValue().isPresent()).filter(i ->
+                        i.getValue().get().equals(countableValue.apply(valuedCoordinate, i.getCoordinate()))).count();
         return comparator.apply(valuedCoordinate.getValue(), (int) countedInputs);
     }
 }

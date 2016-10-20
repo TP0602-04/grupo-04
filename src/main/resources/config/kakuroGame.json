@@ -1,0 +1,37 @@
+{
+    "board": {
+        "rows": 9,
+        "columns": 9,
+        "cellType": "Integer"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["UniqueCondition", "SumCondition"]
+        },{
+            "collector": {
+                "type": "AllCollector",
+                "params": [10]
+            },
+            "condition": ["AllLesserThanCondition"]
+        },{
+            "collector": {
+                "type": "AllCollector",
+                "params": [0]
+            },
+            "condition": ["AllGreaterThanCondition"]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["AllFilledCondition"]
+        }
+    ]
+}

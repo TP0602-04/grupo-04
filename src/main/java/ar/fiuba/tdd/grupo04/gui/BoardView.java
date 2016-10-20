@@ -6,15 +6,15 @@ import ar.fiuba.tdd.grupo04.gui.cell.CellView;
 import ar.fiuba.tdd.grupo04.gui.cell.CellViewFactory;
 import javafx.util.Pair;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.*;
 
-
-/**
+/*
  * N row N Board
  */
 public class BoardView implements View {
@@ -22,7 +22,7 @@ public class BoardView implements View {
         void onCellSelected(Coordinate coordinate);
     }
 
-    /**
+    /*
      * Builder
      */
     public static class Builder {
@@ -84,7 +84,7 @@ public class BoardView implements View {
         }
     }
 
-    /**
+    /*
      * {@link BoardView} implementation
      */
     private static final int CELL_GAP = 1;
@@ -111,7 +111,7 @@ public class BoardView implements View {
         }
     }
 
-    /**
+    /*
      * {@link View} implementation
      */
     @Override
@@ -124,7 +124,7 @@ public class BoardView implements View {
         return view;
     }
 
-    /**
+    /*
      * Public methods
      */
     public void setCellValue(Coordinate coordinate, String value) {
@@ -167,7 +167,7 @@ public class BoardView implements View {
         observers.add(observer);
     }
 
-    /**
+    /*
      * Private methods
      */
     private void onCellClicked(CellView cell) {
