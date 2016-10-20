@@ -13,9 +13,13 @@ public interface IGame<T, S> {
 
     void blockCell(final Coordinate coordinate);
 
-    boolean checkRules();
+    boolean checkWinRules();
 
-    void addRule(IRule rule);
+    boolean checkLoseRules();
+
+    void addWinRule(IRule rule);
+
+    void addLoseRule(IRule rule);
 
     void setBoard(IBoard board);
 }

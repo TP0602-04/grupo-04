@@ -18,13 +18,13 @@ public class EmptyInputTests {
     @Test
     public void testGetCoordinate() {
 
-        EmptyInput in = new EmptyInput(coordinateR5C10);
+        BlockedInput in = new BlockedInput(coordinateR5C10);
         assertTrue(in.getCoordinate().equals(new Coordinate(5, 10)));
     }
 
     @Test
     public void testisBlocked() {
-        EmptyInput in = new EmptyInput(coordinateR5C10);
+        BlockedInput in = new BlockedInput(coordinateR5C10);
         assertTrue(in.isBlocked());
     }
 

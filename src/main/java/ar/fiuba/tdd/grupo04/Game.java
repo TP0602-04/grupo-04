@@ -12,10 +12,12 @@ import java.util.List;
  */
 public class Game<T, S> implements IGame<T, S> {
     private IBoard<T> board;
-    private List<IRule> rules;
+    private List<IRule> winRules;
+    private List<IRule> loseRules;
 
     public Game() {
-        this.rules = new ArrayList<>();
+        this.winRules = new ArrayList<>();
+        this.loseRules = new ArrayList<>();
     }
 
     @Override
@@ -30,13 +32,23 @@ public class Game<T, S> implements IGame<T, S> {
     }
 
     @Override
-    public boolean checkRules() {
-        return rules.stream().allMatch(IRule::check);
+    public boolean checkWinRules() {
+        return loseRules.stream().allMatch(IRule::check);
     }
 
     @Override
-    public void addRule(IRule rule) {
-        rules.add(rule);
+    public boolean checkLoseRules() {
+        return !loseRules.stream().allMatch(IRule::check);
+    }
+
+    @Override
+    public void addWinRule(IRule rule) {
+        winRules.add(rule);
+    }
+
+    @Override
+    public void addLoseRule(IRule rule) {
+        loseRules.add(rule);
     }
 
     @Override
