@@ -15,35 +15,27 @@ import java.util.Optional;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class SumConditionTests {
-    private ICondition<IValuedInputGroup<Integer, Integer>> sumCondition;
+public class AllLesserThanConditionTests {
+    private ICondition<IValuedInputGroup<Integer, Integer>> allLesserThanCondition;
     private List<IInput<Integer>> inputs;
 
     @Before
     public void init() {
-        sumCondition = new SumCondition<>();
+        allLesserThanCondition = new AllLesserThanCondition<>();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(2), new Coordinate(0, 0)));
         inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
+        inputs.add(new Input<>(Optional.of(7), new Coordinate(0, 0)));
     }
 
     @Test
     public void testCheckTrue() {
-        IValuedInputGroup<Integer, Integer> valuedInputGroup = new ValuedInputGroup<>(5, inputs);
-        assertTrue(sumCondition.check(valuedInputGroup));
+        IValuedInputGroup<Integer, Integer> valuedInputGroup = new ValuedInputGroup<>(9, inputs);
+        assertTrue(allLesserThanCondition.check(valuedInputGroup));
     }
 
     @Test
     public void testCheckFalse() {
         IValuedInputGroup<Integer, Integer> valuedInputGroup = new ValuedInputGroup<>(6, inputs);
-        assertFalse(sumCondition.check(valuedInputGroup));
-    }
-
-    @Test
-    public void testCheckTrueIfGroupNotComplete() {
-        inputs.add(new Input<>(Optional.empty(), new Coordinate(0, 0)));
-        IValuedInputGroup<Integer, Integer> valuedInputGroup = new ValuedInputGroup<>(5, inputs);
-        assertTrue(sumCondition.check(valuedInputGroup));
+        assertFalse(allLesserThanCondition.check(valuedInputGroup));
     }
 }
-
