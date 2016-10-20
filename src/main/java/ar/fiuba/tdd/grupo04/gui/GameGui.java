@@ -14,9 +14,9 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
     private static final int WINDOW_WIDTH = 900;
     private static final int WINDOW_HEIGHT = 600;
 
-    private static JFrame frame;
-    private static BoardView boardView;
-    private static InputBoxView inputBoxView;
+    private JFrame frame;
+    private BoardView boardView;
+    private InputBoxView inputBoxView;
 
     public GameGui(String json) {
         // Game configuration
