@@ -9,9 +9,11 @@ import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @SuppressWarnings("CPD-START")
@@ -48,7 +50,10 @@ public class SlitherLink {
             }
             return false;
         };
-        game.addRule(new Rule<>(customGroupCollector, new CountCondition(isSegment)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isSegment, (expected, counted) -> expected == counted)));
+        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isSegment, bigger)));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
     }
 
     private void createBoard() {
@@ -88,11 +93,12 @@ public class SlitherLink {
         //caso generico en row
         // el jugador quieren unir punto1=(row,column) con punto2=(row+1,column)
         // entonces pone en true punto1=(2x,2y), punto2=(2(row+1),2y) son las celdas column (2x+1,2y) es la trama q las une
-        System.out.print(game.checkRules());
+
+
         // Con esto se checkea si ya gano
 
         new Rule<>(new AllCollector<>(board), new OneLoopCondition(Utils.isCell()));
-        while (game.checkRules()) {
+        while (game.checkWinRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
     }

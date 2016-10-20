@@ -4,7 +4,6 @@ import ar.fiuba.tdd.grupo04.board.IInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class SumCondition<R extends IValuedInputGroup<Integer, Integer>> implements ICondition<R> {
 

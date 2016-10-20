@@ -55,7 +55,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         // FIXME - THE CAST SHOULD BE HANDLED BY ANOTHER COMPONENT - NOT DECIDED YET!!!
         game.fillCell(coordinate, Integer.valueOf(input));
         boardView.setCellValue(coordinate, input);
-        if (game.checkRules()) {
+        if (game.checkWinRules()) {
             System.out.println("GANASTE");
         } else {
             System.out.println("PERDISTE");
@@ -72,8 +72,8 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         BoardView.Builder builder = new BoardView.Builder()
                 .setSize(board.getSize())
                 .setDefaultCellType(defaultCellType);
-        for (CellGroup cellGroup : scenario.getCellGroups()) {
-            CellType cellType = CellType.fromString(cellGroup.getType());
+        for (UiCellGroup cellGroup : scenario.getUtilCells()) {
+            CellType cellType = CellType.fromString(cellGroup.getCellType());
             java.util.List<Pair<Coordinate, String>> cellData = new ArrayList<>();
 
             for (Cell cell : cellGroup.getCells()) {

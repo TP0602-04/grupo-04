@@ -11,11 +11,13 @@ import ar.fiuba.tdd.grupo04.rule.IRule;
 public interface IGame<T, S> {
     void fillCell(final Coordinate coordinate, final T value);
 
-    void blockCell(final Coordinate coordinate);
+    boolean checkWinRules();
 
-    boolean checkRules();
+    boolean checkLoseRules();
 
-    void addRule(IRule rule);
+    void addWinRule(IRule rule);
+
+    void addLoseRule(IRule rule);
 
     void setBoard(IBoard board);
 }

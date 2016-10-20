@@ -1,28 +1,23 @@
 {
     "board": {
         "size": 4,
-        "defaultCellType": "number",
-        "editable": true
+        "cellType": "number"
     },
     "scenario": {
-        "cellGroups": [
+        "initialValues": [
             {
-                "type": "number",
-                "editable": false,
-                "cells": [
-                    {
-                        "x": 1,
-                        "y": 1,
-                        "value": 3
-                    },
-                    {
-                        "x": 0,
-                        "y": 0,
-                        "value": 1
-                    }
-                ]
+                "x": 1,
+                "y": 1,
+                "value": 3
+            },
+            {
+                "x": 0,
+                "y": 0,
+                "value": 1
             }
-        ]
+        ],
+        "ui": [],
+        "references": []
     },
     "rules": [
         {

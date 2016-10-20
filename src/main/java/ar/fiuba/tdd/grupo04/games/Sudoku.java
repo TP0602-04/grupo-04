@@ -4,7 +4,6 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.rule.IRule;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.BlocksCollector;
@@ -34,11 +33,12 @@ public class Sudoku {
         // Esto se levanta del json de juego
         board = new Board(9, 9);
         game.setBoard(board);
-        game.addRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
-        game.addRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
-        game.addRule(new Rule<>(new BlocksCollector<>(board, 3, 3), new UniqueCondition()));
-        game.addRule(new Rule<>(new AllCollector<>(board, 10), new AllLesserThanCondition()));
-        game.addRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addLoseRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new BlocksCollector<>(board, 3, 3), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector<>(board, 10), new AllLesserThanCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
     }
 
     private void setBoardNCSS1() {
@@ -91,11 +91,10 @@ public class Sudoku {
     }
 
     public void playGame() throws IOException {
-        IRule fullBoard = new Rule<>(new AllCollector<>(board), new AllFilledCondition());
         String input;
         InputStreamReader isr = new InputStreamReader(System.in, "utf-8");
         BufferedReader br = new BufferedReader(isr);
-        while (!fullBoard.check() && game.checkRules()) {
+        while (!game.checkWinRules() && !game.checkLoseRules()) {
             System.out.println("ingrese fila,columna,valor");
             input = br.readLine();
             if (!"".equals(input)) {
@@ -105,7 +104,7 @@ public class Sudoku {
                 game.fillCell(new Coordinate(row, col), value);
             }
         }
-        if (game.checkRules()) {
+        if (game.checkWinRules()) {
             System.out.println("GANASTE");
         } else {
             System.out.println("PERDISTE");

@@ -6,8 +6,9 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.SumCondition;
@@ -31,18 +32,20 @@ public class Kokuro {
         board = new Board(8, 8);
         game.setBoard(board);
         customGroupCollector = new CustomGroupCollector<>(board);
-        game.addRule(new Rule<>(customGroupCollector, new UniqueCondition()));
-        game.addRule(new Rule<>(customGroupCollector, new SumCondition()));
-        game.addRule(new Rule<>(new AllFillableCollector<>(board, 10), new AllLesserThanCondition()));
-        game.addRule(new Rule<>(new AllFillableCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addLoseRule(new Rule<>(customGroupCollector, new UniqueCondition()));
+        game.addLoseRule(new Rule<>(customGroupCollector, new SumCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector(board, 10), new AllLesserThanCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addWinRule(new Rule<>(customGroupCollector, new AllFilledCondition()));
     }
 
     private void createBoard() {
+        // Esto se levanta del json de escenario
+        // Aca va si hay valores iniciales
         game.fillCell(new Coordinate(1, 1), 1);
         game.fillCell(new Coordinate(3, 1), 2);
         game.fillCell(new Coordinate(5, 1), 4);
         // Aca van todos los grupos que suman numeros;
-        // Esto se levanta del json de escenario
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
         customGroupCollector.addReferencedGroup(
                 referenceBuilder
@@ -65,8 +68,7 @@ public class Kokuro {
     public void playGame() {
         // aca estaria el loop con el input
         // fillCell tendria q fijarse q no esta puesto ya o algo asi
-        System.out.print(game.checkRules());
-        while (game.checkRules()) {
+        while (game.checkWinRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
     }

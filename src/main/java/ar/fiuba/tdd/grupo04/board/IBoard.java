@@ -8,6 +8,4 @@ public interface IBoard<T> {
     Integer rowsLength();
 
     Integer columnsLength();
-
-    void blockCell(Coordinate coordinate);
 }

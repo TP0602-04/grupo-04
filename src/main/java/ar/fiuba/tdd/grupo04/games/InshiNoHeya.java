@@ -6,8 +6,12 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.MultiplyCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 @SuppressWarnings("CPD-START")
@@ -29,9 +33,10 @@ public class InshiNoHeya {
         board = new Board(5, 5);
         game.setBoard(board);
         customGroupCollector = new CustomGroupCollector<>(board);
-        game.addRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
-//        game.addRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
-//        game.addRule(new Rule<>(customGroupCollector, new MultiplyCondition()));
+        game.addLoseRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
+        game.addWinRule(new Rule<>(customGroupCollector, new MultiplyCondition()));
     }
 
     private void createBoard() {
@@ -62,8 +67,7 @@ public class InshiNoHeya {
     public void playGame() {
         // aca estaria el loop con el input
         // fillCell tendria q fijarse q no esta puesto ya o algo asi
-        System.out.print(game.checkRules());
-        while (game.checkRules()) {
+        while (game.checkWinRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
     }

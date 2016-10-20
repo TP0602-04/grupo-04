@@ -8,12 +8,11 @@ import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountBiCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @SuppressWarnings("CPD-START")
 public class GokigenNaname {
@@ -51,7 +50,10 @@ public class GokigenNaname {
             return kindOfDiagonal == 0;
         };
 
-        game.addRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal, (expected, counted) -> expected == counted)));
+        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal, bigger)));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
     }
 
     private void createBoard() {
@@ -82,8 +84,7 @@ public class GokigenNaname {
     public void playGame() {
         // aca estaria el loop con el input
         // fillCell seria un toogle q pone la diagonal para un lado o para el otro segun true o false
-        System.out.print(game.checkRules());
-        while (game.checkRules()) {
+        while (game.checkWinRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
     }
