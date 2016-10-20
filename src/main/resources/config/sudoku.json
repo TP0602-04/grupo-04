@@ -1,20 +1,24 @@
 {
-    "grid": {
+    "board": {
         "size": 9,
-        "cells": [
-            {
-                "type": "number",
-                "default": true,
-                "editable": true
-            },
+        "defaultCellType": "number",
+        "editable": true
+    },
+    "scenario": {
+        "cellGroups": [
             {
                 "type": "number",
                 "editable": false,
-                "coordinates": [
+                "cells": [
                     {
                         "x": 1,
                         "y": 1,
                         "value": 3
+                    },
+                    {
+                        "x": 3,
+                        "y": 4,
+                        "value": 5
                     }
                 ]
             }

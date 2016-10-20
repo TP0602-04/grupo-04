@@ -41,8 +41,7 @@ public class Sudoku {
         game.addRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
     }
 
-    private void createBoard() {
-        // Esto se levanta del json de escenario
+    private void setBoardNCSS1() {
         game.fillCell(new Coordinate(0, 3), 6);
         game.fillCell(new Coordinate(0, 4), 5);
 
@@ -64,7 +63,9 @@ public class Sudoku {
         game.fillCell(new Coordinate(4, 6), 5);
         game.fillCell(new Coordinate(4, 7), 9);
         game.fillCell(new Coordinate(4, 8), 3);
+    }
 
+    private void setBoardNCSS2() {
         game.fillCell(new Coordinate(5, 4), 1);
         game.fillCell(new Coordinate(5, 5), 7);
         game.fillCell(new Coordinate(5, 6), 6);
@@ -84,18 +85,25 @@ public class Sudoku {
         game.fillCell(new Coordinate(8, 6), 8);
     }
 
+    private void createBoard() {
+        setBoardNCSS1();
+        setBoardNCSS2();
+    }
+
     public void playGame() throws IOException {
         IRule fullBoard = new Rule<>(new AllCollector<>(board), new AllFilledCondition());
         String input;
-        InputStreamReader isr = new InputStreamReader(System.in);
+        InputStreamReader isr = new InputStreamReader(System.in, "utf-8");
         BufferedReader br = new BufferedReader(isr);
         while (!fullBoard.check() && game.checkRules()) {
             System.out.println("ingrese fila,columna,valor");
             input = br.readLine();
-            Integer row = Integer.parseInt(input.substring(0, 1)) - 1;
-            Integer col = Integer.parseInt(input.substring(2, 3)) - 1;
-            Integer value = Integer.parseInt(input.substring(4));
-            game.fillCell(new Coordinate(row, col), value);
+            if (!"".equals(input)) {
+                Integer row = Integer.parseInt(input.substring(0, 1)) - 1;
+                Integer col = Integer.parseInt(input.substring(2, 3)) - 1;
+                Integer value = Integer.parseInt(input.substring(4));
+                game.fillCell(new Coordinate(row, col), value);
+            }
         }
         if (game.checkRules()) {
             System.out.println("GANASTE");

@@ -6,7 +6,6 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
