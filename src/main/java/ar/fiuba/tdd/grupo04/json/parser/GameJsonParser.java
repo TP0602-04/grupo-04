@@ -28,13 +28,15 @@ public class GameJsonParser {
     }
 
     private static List<Rule> parseRules(List<JsonRules> jsonRules, Board board) throws Exception{
-        List<Rule> loseRules = new ArrayList<>();
+        List<Rule> rules = new ArrayList<>();
         for (JsonRules rule : jsonRules) {
             ICollector collector = CollectorJsonParser.parse(rule.getCollector(), board);
-            ICondition condition = ConditionJsonParser.parse(rule.getCondition());
-            loseRules.add(new Rule<>(collector, condition));
+            List<ICondition> conditions = ConditionJsonParser.parse(rule.getCondition());
+            for(ICondition condition : conditions) {
+                rules.add(new Rule<>(collector, condition));
+            }
         }
-        return loseRules;
+        return rules;
     }
 
     public static void parseInit(IGame game, JsonInitGame jsonInitGame) {

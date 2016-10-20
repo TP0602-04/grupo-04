@@ -7,22 +7,10 @@
     "loseRules": [
         {
             "collector": {
-                "type": "ColumnsCollector",
+                "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["UniqueCondition"]
-        },{
-            "collector": {
-                "type": "RowsCollector",
-                "params": []
-            },
-            "condition": ["UniqueCondition"]
-        },{
-            "collector": {
-                "type": "BlocksCollector",
-                "params": [3, 3]
-            },
-            "condition": ["UniqueCondition"]
+            "condition": ["UniqueCondition", "SumCondition"]
         },{
             "collector": {
                 "type": "AllCollector",
@@ -40,7 +28,7 @@
     "winRules": [
         {
             "collector": {
-                "type": "AllCollector",
+                "type": "CustomGroupCollector",
                 "params": []
             },
             "condition": ["AllFilledCondition"]
