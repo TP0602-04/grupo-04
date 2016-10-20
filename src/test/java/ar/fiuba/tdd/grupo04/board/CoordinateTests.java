@@ -38,4 +38,23 @@ public class CoordinateTests {
         assertFalse(coordinateR5C10.equals(coordinateR10C5));
     }
 
+    @Test
+    public void testEqualsIsFalseWhenValuedToNull() {
+        assertFalse(coordinateR5C10.equals(null));
+    }
+
+    @Test
+    public void testEqualsIsFalseWhenValuedToNonCoordinateObject() {
+        assertFalse(coordinateR5C10.equals(new Object()));
+    }
+
+    @Test
+    public void testHashcode() {
+        assertEquals(coordinateR5C10.hashCode(), 21452);
+    }
+
+    @Test
+    public void testMinus() {
+        assertEquals(coordinateR5C10.minus(new Coordinate(1, 2)), new Coordinate(4, 8));
+    }
 }

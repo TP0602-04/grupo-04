@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui;
 
+import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.model.*;
@@ -14,11 +15,13 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
     private static final int WINDOW_WIDTH = 900;
     private static final int WINDOW_HEIGHT = 600;
 
+    private IGame game;
     private JFrame frame;
     private BoardView boardView;
     private InputBoxView inputBoxView;
 
-    public GameGui(String json) {
+    public GameGui(String json, IGame game) {
+        this.game = game;
         // Game configuration
         Gson gson = new Gson();
         Game config = gson.fromJson(json, Game.class);
@@ -49,16 +52,14 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
      */
     @Override
     public void onSubmit(Coordinate coordinate, String input) {
+        // FIXME - THE CAST SHOULD BE HANDLED BY ANOTHER COMPONENT - NOT DECIDED YET!!!
+        game.fillCell(coordinate, Integer.valueOf(input));
         boardView.setCellValue(coordinate, input);
-    }
-
-    /**
-     * Public methods
-     */
-    // FIXME - Show be private and reimplement
-    public void onInput(String input) {
-        boardView.setCellValue(new Coordinate(1, 1), String.valueOf(input));
-        boardView.draw();
+        if (game.checkRules()) {
+            System.out.println("GANASTE");
+        } else {
+            System.out.println("PERDISTE");
+        }
     }
 
     /**

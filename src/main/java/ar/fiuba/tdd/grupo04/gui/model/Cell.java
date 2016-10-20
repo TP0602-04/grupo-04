@@ -3,9 +3,9 @@ package ar.fiuba.tdd.grupo04.gui.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Cell {
-    @SerializedName("row")
+    @SerializedName("x")
     private int row;
-    @SerializedName("column")
+    @SerializedName("y")
     private int column;
     @SerializedName("value")
     private String value;
