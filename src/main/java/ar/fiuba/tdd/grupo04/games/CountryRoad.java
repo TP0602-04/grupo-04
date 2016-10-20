@@ -11,7 +11,7 @@ import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllMarkedContiguousCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.HasOneCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.EmptyContiguousInGroupCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
 
 import java.util.function.BiFunction;
@@ -45,17 +45,15 @@ public class CountryRoad {
 
         Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
         Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
-        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked() && GraphInputType.EDGE.equals(graphInput.getType());
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
 
         customGroupCollector = new CustomGroupCollector<>(board);
         game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition(isMarked, isNode)));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
         game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
         game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
-//        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
+        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition(isMarked, isNode, board)));
     }
 
     private void createBoard() {
@@ -65,22 +63,20 @@ public class CountryRoad {
         // Aca van todos los grupos que suman numeros;
         // Esto se levanta del json de escenario
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
-        customGroupCollector.addReferencedGroup(
-                referenceBuilder
-                        .rowOffset(1)
-                        .columnOffset(1)
-                        .columnLarge(2)
-                        .referencedValue(3)
-                        .createReference()
-        );
-        customGroupCollector.addReferencedGroup(
-                referenceBuilder
-                        .rowOffset(1)
-                        .columnOffset(1)
-                        .rowLarge(3)
-                        .referencedValue(7)
-                        .createReference()
-        );
+
+        customGroupCollector.addReferencedGroup(referenceBuilder
+                .rowOffset(1)
+                .columnOffset(1)
+                .columnLarge(2)
+                .referencedValue(3)
+                .createReference());
+
+        customGroupCollector.addReferencedGroup(referenceBuilder
+                .rowOffset(1)
+                .columnOffset(1)
+                .rowLarge(3)
+                .referencedValue(7)
+                .createReference());
     }
 
     private void initBoard() {
