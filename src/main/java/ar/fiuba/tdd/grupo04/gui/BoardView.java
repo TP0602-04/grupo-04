@@ -4,20 +4,27 @@ import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.cell.CellView;
 import ar.fiuba.tdd.grupo04.gui.cell.CellViewFactory;
-import com.sun.tools.javac.util.Pair;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
- * N x N Board
+ * N row N Board
  */
 public class BoardView implements View {
+    public interface Observer {
+        void onCellSelected(Coordinate coordinate);
+    }
+
     private List<List<CellView>> cells;
     private JPanel view;
+    private Set<Observer> observers;
 
     public static class Builder {
         private int size = 3;
@@ -39,7 +46,8 @@ public class BoardView implements View {
             for (int i = 0; i < size; i++) {
                 List<CellView> row = cells.get(i);
                 for (int j = 0; j < size; j++) {
-                    CellView cell = CellViewFactory.create(defaultCellType);
+                    Coordinate coordinate = new Coordinate(i, j);
+                    CellView cell = CellViewFactory.create(defaultCellType, coordinate);
                     row.add(cell);
                 }
             }
@@ -48,10 +56,10 @@ public class BoardView implements View {
 
         public Builder setCellType(CellType cellType, List<Pair<Coordinate, String>> cellsData) {
             for (Pair<Coordinate, String> data : cellsData) {
-                Coordinate coordinate = data.fst;
-                String value = data.snd;
+                Coordinate coordinate = data.getKey();
+                String value = data.getValue();
                 // Create view
-                CellView cellView = CellViewFactory.create(cellType);
+                CellView cellView = CellViewFactory.create(cellType, data.getKey());
                 cellView.setValue(value);
 
                 List<CellView> row = cells.get(coordinate.row());
@@ -66,6 +74,7 @@ public class BoardView implements View {
     }
 
     private BoardView(int size, List<List<CellView>> cells) {
+        observers = new HashSet<>();
         // Main container
         view = new JPanel();
         view.setLayout(new GridLayout(size, size));
@@ -74,13 +83,17 @@ public class BoardView implements View {
         for (int i = 0; i < size; i++) {
             List<CellView> row = cells.get(i);
             for (int j = 0; j < size; j++) {
-                CellView cellView = row.get(j);
+                final CellView cellView = row.get(j);
+                cellView.addOnClickListener(v -> onCellClicked(cellView));
                 view.add(cellView.getContent());
             }
             cells.add(row);
         }
     }
 
+    /**
+     * {@link View} implementation
+     */
     @Override
     public void draw() {
         view.updateUI();
@@ -91,10 +104,28 @@ public class BoardView implements View {
         return view;
     }
 
+    /**
+     * Public methods
+     */
     public void setCellValue(Coordinate coordinate, String value) {
         List<CellView> row = cells.get(coordinate.row());
         CellView view = row.get(coordinate.column());
         view.setValue(value);
+    }
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    /**
+     * Private methods
+     */
+    private void onCellClicked(CellView cell) {
+        if (!observers.isEmpty()) {
+            for (Observer observer : observers) {
+                observer.onCellSelected(cell.getCoordinate());
+            }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui.cell;
 
+import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
 import javax.swing.*;
@@ -10,7 +11,8 @@ public class NumberCellView extends CellView {
 
     private JLabel label;
 
-    public NumberCellView() {
+    public NumberCellView(Coordinate coordinate) {
+        super(coordinate);
         view.setBorder(BorderFactory.createDashedBorder(Color.BLACK));
         label = new JLabel();
         view.add(label);
@@ -24,7 +26,7 @@ public class NumberCellView extends CellView {
         } catch (NumberFormatException e) {
             throw new IllegalInputException(ILLEGAL_INPUT_ERROR_MSG);
         }
-        if (intValue < 0 && intValue > 9) {
+        if (intValue < 0 || intValue > 9) {
             throw new IllegalInputException(ILLEGAL_INPUT_ERROR_MSG);
         }
         label.setText(value);

@@ -2,10 +2,8 @@ package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.IInput;
-import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
 

@@ -3,7 +3,6 @@ package ar.fiuba.tdd.grupo04.rule;
 import ar.fiuba.tdd.grupo04.board.IInput;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ValuedInputGroup<T, S> implements IValuedInputGroup<T, S> {
     private final S value;

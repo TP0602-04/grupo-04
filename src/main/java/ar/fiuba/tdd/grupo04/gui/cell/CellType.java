@@ -11,8 +11,8 @@ public enum CellType {
     DYNAMIC_HORIZONTAL_CONNECTOR,
     DYNAMIC_DIAGONAL_CONNECTOR;
 
-    public static CellType fromString(final String s) {
-        switch (s) {
+    public static CellType fromString(final String string) {
+        switch (string) {
             case "number":
                 return DYNAMIC_NUMBER;
             default:

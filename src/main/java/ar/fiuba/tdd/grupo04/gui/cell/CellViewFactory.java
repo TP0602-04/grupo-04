@@ -1,22 +1,18 @@
 package ar.fiuba.tdd.grupo04.gui.cell;
 
-public class CellViewFactory {
-//    private static final String URL = ;
-//    private static final String URL = ;
-//    private static final String URL = ;
-//    private static final String URL = ;
-//    private static final String URL = ;
+import ar.fiuba.tdd.grupo04.board.Coordinate;
 
-    public static CellView create(CellType type) {
-        // FIXME - Initialize correctly
-        CellView cell = new NumberCellView();
+public class CellViewFactory {
+
+    public static CellView create(CellType type, Coordinate coordinate) {
+        CellView cell = new NumberCellView(coordinate);
         switch (type) {
             case STATIC_EMPTY:
                 break;
             case STATIC_MULTIVALUED:
                 break;
             case DYNAMIC_NUMBER:
-                cell = new NumberCellView();
+                cell = new NumberCellView(coordinate);
                 break;
             case DYNAMIC_VERTICAL_CONNECTOR:
                 break;
