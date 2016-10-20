@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+@SuppressWarnings("CPD-START")
 public class CountBiCondition<R extends IValuedInputGroup<?, ValuedCoordinate<Integer>>> implements ICondition<R> {
     private final BiFunction<ValuedCoordinate, Coordinate, Boolean> countableValue;
 

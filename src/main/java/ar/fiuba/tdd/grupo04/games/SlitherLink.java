@@ -91,7 +91,7 @@ public class SlitherLink {
         System.out.print(game.checkRules());
         // Con esto se checkea si ya gano
 
-        new Rule<>(new AllCollector<>(board), new OneLoopCondition(Utils.isCell(), Utils.isSegment()));
+        new Rule<>(new AllCollector<>(board), new OneLoopCondition(Utils.isCell()));
         while (game.checkRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
