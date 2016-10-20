@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName;
 public class Board {
     @SerializedName("size")
     private int size;
-    @SerializedName("defaultCellType")
+    @SerializedName("cellType")
     private String defaultCellType;
+    @SerializedName("referenceType")
+    private String referenceType;
 
     public int getSize() {
         return size;

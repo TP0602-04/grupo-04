@@ -15,8 +15,12 @@ public enum CellType {
         switch (string) {
             case "number":
                 return DYNAMIC_NUMBER;
-            default:
+            case "multivalued":
+                return STATIC_MULTIVALUED;
+            case "empty":
                 return STATIC_EMPTY;
+            default:
+                throw new RuntimeException("INVALID CELL TYPE!!!");
         }
     }
 }

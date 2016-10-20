@@ -1,22 +1,110 @@
 {
     "board": {
-        "size": 6,
-        "defaultCellType": "empty",
-        "editable": false
+        "size": 4,
+        "cellType": "number",
+        "referenceType": "number"
     },
     "scenario": {
-        "groups": [
+        "initialValues": [],
+        "ui": [
             {
-                "type": "number",
-                "editable": false,
-                "reference": 4,
-                "cells": [
-                    {
-                        "x": 1,
-                        "y": 1,
-                        "value": 3
-                    }
-                ]
+                "type": "empty",
+                "group": {
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "deltaY": 1,
+                    "deltaX": 1
+                }
+            },
+            {
+                "type": "multivalued",
+                "value": "4 \\ 4",
+                "group": {
+                    "offsetX": 1,
+                    "offsetY": 1
+                }
+            },
+            {
+                "type": "multivalued",
+                "value": "7",
+                "group": {
+                    "offsetX": 0,
+                    "offsetY": 2
+                }
+            },
+            {
+                "type": "multivalued",
+                "value": "6",
+                "group": {
+                    "offsetX": 0,
+                    "offsetY": 3
+                }
+            },
+            {
+                "type": "multivalued",
+                "value": "7",
+                "group": {
+                    "offsetX": 2,
+                    "offsetY": 0
+                }
+            },
+            {
+                "type": "multivalued",
+                "value": "6",
+                "group": {
+                    "offsetX": 3,
+                    "offsetY": 0
+                }
+            }
+        ],
+        "references": [
+            {
+                "value": 4,
+                "group": {
+                    "offsetX": 1,
+                    "offsetY": 2,
+                    "deltaY": 2
+                }
+            },
+            {
+                "value": 7,
+                "group": {
+                    "offsetX": 2,
+                    "offsetY": 1,
+                    "deltaY": 3
+                }
+            },
+            {
+                "value": 6,
+                "group": {
+                    "offsetX": 3,
+                    "offsetY": 1,
+                    "deltaY": 3
+                }
+            },
+            {
+                "value": 4,
+                "group": {
+                    "offsetX": 2,
+                    "offsetY": 1,
+                    "deltaX": 2
+                }
+            },
+            {
+                "value": 7,
+                "group": {
+                    "offsetX": 1,
+                    "offsetY": 2,
+                    "deltaX": 3
+                }
+            },
+            {
+                "value": 6,
+                "group": {
+                    "offsetX": 1,
+                    "offsetY": 3,
+                    "deltaX": 3
+                }
             }
         ]
     },
@@ -26,26 +114,12 @@
                 {
                     "filters": [
                         {
-                            "type": "row"
-                        },
-                        {
-                            "type": "cell",
-                            "param": "number"
+                            "type": "group"
                         }
-                    ],
-                    "operation": "sum"
-                },
-                {
-                    "filters": [
-                        {
-                            "type": "cell",
-                            "param": "multivalued"
-                        }
-                    ],
-                    "operation": "first"
+                    ]
                 }
             ],
-            "condition": "equals"
+            "condition": "unique"
         },
         {
             "groups": [
@@ -53,24 +127,11 @@
                     "filters": [
                         {
                             "type": "column"
-                        },
-                        {
-                            "type": "cell",
-                            "param": "number"
                         }
-                    ],
-                    "operation": "sum"
-                },
-                {
-                    "filters": [
-                        {
-                            "type": "cell",
-                            "param": "multivalued"
-                        }
-                    ],
-                    "operation": "second"
+                    ]
                 }
             ],
+            "op": "sum",
             "condition": "equals"
         }
     ]

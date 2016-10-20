@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui.model;
 
+import ar.fiuba.tdd.grupo04.board.Coordinate;
 import com.google.gson.annotations.SerializedName;
 
 public class Cell {
@@ -10,12 +11,21 @@ public class Cell {
     @SerializedName("value")
     private String value;
 
+    public Cell(Coordinate coordinate) {
+        row = coordinate.row();
+        column = coordinate.column();
+    }
+
     public int row() {
         return row;
     }
 
     public int column() {
         return column;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getValue() {

@@ -60,7 +60,9 @@ public class BoardView implements View {
                 String value = data.getValue();
                 // Create view
                 CellView cellView = CellViewFactory.create(cellType, coordinate);
-                cellView.setValue(value);
+                if (value != null) {
+                    cellView.setValue(value);
+                }
 
                 List<CellView> row = cells.get(coordinate.row());
                 row.set(coordinate.column(), cellView);

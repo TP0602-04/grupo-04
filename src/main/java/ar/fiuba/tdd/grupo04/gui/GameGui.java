@@ -72,8 +72,8 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         BoardView.Builder builder = new BoardView.Builder()
                 .setSize(board.getSize())
                 .setDefaultCellType(defaultCellType);
-        for (CellGroup cellGroup : scenario.getCellGroups()) {
-            CellType cellType = CellType.fromString(cellGroup.getType());
+        for (UiCellGroup cellGroup : scenario.getUtilCells()) {
+            CellType cellType = CellType.fromString(cellGroup.getCellType());
             java.util.List<Pair<Coordinate, String>> cellData = new ArrayList<>();
 
             for (Cell cell : cellGroup.getCells()) {
