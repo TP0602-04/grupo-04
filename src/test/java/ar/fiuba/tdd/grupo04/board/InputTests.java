@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.grupo04.board;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Optional;
 

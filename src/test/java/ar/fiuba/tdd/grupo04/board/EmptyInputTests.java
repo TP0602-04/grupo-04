@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.grupo04.board;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -27,7 +27,7 @@ public class EmptyInputTests {
         assertTrue(in.isBlocked());
     }
 
-    @Test(expected=SecurityException.class)
+    @Test(expected = SecurityException.class)
     public void testGetValueThrowsException() {
         EmptyInput in = new EmptyInput(coordinateR5C10);
         in.getValue();
