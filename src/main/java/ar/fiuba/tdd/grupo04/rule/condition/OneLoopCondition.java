@@ -10,121 +10,100 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class OneLoopCondition<R extends IInputGroup<Boolean>> implements ICondition<R> {
-    private final Function<Coordinate, Boolean> isCell;
+public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition<R> {
+    private final Function<S, Boolean> isNode;
+    private final Function<S, Boolean> isConsidered;
 
-    public OneLoopCondition(Function<Coordinate, Boolean> isCell) {
-        this.isCell = isCell;
+    public OneLoopCondition(Function<S, Boolean> isNode, Function<S, Boolean> isConsidered) {
+        this.isNode = isNode;
+        this.isConsidered = isConsidered;
     }
 
     @Override
     public boolean check(R inputGroup) {
-        final List<IInput<Boolean>> inputs = inputGroup.getInputs();
-        final List<Coordinate> markedInputs = inputs.stream().filter(i -> i.getValue().isPresent()).filter(i -> i.getValue().get()).map(IInput::getCoordinate).collect(Collectors.toList());
+        final List<IInput<S>> inputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i -> isConsidered.apply(i.getValue().get())).collect(Collectors.toList());
+        final List<Coordinate> coordinates = inputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
 
         List<Coordinate> path = new ArrayList<>();
-        Optional<Coordinate> firstCell = getFirstCell(markedInputs);
-        Optional<Coordinate> actualCell = firstCell;
+        Optional<IInput<S>> firstNodeInput = getFirstNode(inputs);
 
-        if (!actualCell.isPresent()) {
+        if (!firstNodeInput.isPresent()) {
             return false;
         }
-        path.add(actualCell.get());
+        Coordinate firstNode = firstNodeInput.get().getCoordinate();
+        path.add(firstNode);
+        Optional<Coordinate> actualNode = Optional.of(firstNode);
 
-        Optional<Coordinate> actualSegment = getNextSegment(markedInputs, actualCell.get());
-        if (!actualSegment.isPresent()) {
+        Optional<Coordinate> actualEdge = getNextEdge(coordinates, firstNode);
+        if (!actualEdge.isPresent()) {
             return false;
         }
-        path.add(actualSegment.get());
+        path.add(actualEdge.get());
 
         boolean findNextStep = true;
         while (findNextStep) {
-            actualCell = getNextCell(actualSegment.get(), actualCell.get());
-            if (!actualCell.isPresent()) {
+            actualNode = getNextNode(actualEdge.get(), actualNode.get());
+            if (!actualNode.isPresent()) {
                 return false;
-            } else if (firstCell.equals(actualCell.get()) ) {
+            } else if (firstNode.equals(actualNode.get()) ) {
                 // End of the loop
                 findNextStep = false;
-            } else if (path.contains(actualCell.get())) {
+            } else if (path.contains(actualNode.get())) {
                 // There is not only one loop
                 return false;
             } else {
-                path.add(actualCell.get());
+                path.add(actualNode.get());
 
-                actualSegment = getNextSegment(markedInputs, actualCell.get(), actualSegment.get());
-                if (!actualSegment.isPresent()) {
+                actualEdge = getNextEdge(coordinates, actualNode.get(), actualEdge.get());
+                if (!actualEdge.isPresent()) {
                     return false;
                 }
-                path.add(actualSegment.get());
+                path.add(actualEdge.get());
             }
 
         }
         // Check if there is only one loop all inputs are in path
-        return path.size() == markedInputs.size();
+        return path.size() == coordinates.size();
     }
 
-    private Optional<Coordinate> getNextCell(Coordinate actualSegment, Coordinate actualCell) {
-        Integer newColumn = 2 * actualSegment.column() - actualCell.column();
-        Integer newRow = 2 * actualSegment.row() - actualCell.row();
+    private Optional<IInput<S>> getFirstNode(List<IInput<S>> graphElements) {
+        return graphElements.stream().filter(i -> isNode.apply(i.getValue().get())).findFirst();
+    }
+
+    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode) {
+        return edgeSearcher(coordinates, actualNode, null, new Coordinate(1, 0));
+    }
+
+    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge) {
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(1, 0));
+    }
+
+    // Busca las cuatro variaciones posibles empezando con (1,0)
+    //
+    // (1,0)->(0,1)->(-1,0)->(0,-1) esas transiciones la hace esta linea:
+    // Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row())
+    // y la condicion de corte es el ultimo estado (columna -1)
+    private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge, Coordinate coordinateDiff) {
+        final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
+        if (coordinates.contains(newCoordinate)  && !newCoordinate.equals(actualEdge)) {
+            return Optional.of(newCoordinate);
+        }
+        if (newCoordinate.column() == -1) {
+            Optional.empty();
+        }
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row()));
+    }
+
+    // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo
+    // La posicion de la arista menos el nodo te da la direccion hacia donde esta el proximo nodo
+    // le sumas esa direccion a la arista actual y te da el proximo nodo.
+    // nNodo = arista + (arista-nodo) = 2arista -nodo
+    private Optional<Coordinate> getNextNode(Coordinate actualEdge, Coordinate actualNode) {
+        Integer newColumn = 2 * actualEdge.column() - actualNode.column();
+        Integer newRow = 2 * actualEdge.row() - actualNode.row();
         if (newRow < 0 || newColumn < 0) {
             return Optional.empty();
         }
         return Optional.of(new Coordinate(newRow, newColumn));
-    }
-
-    private Optional<Coordinate> getNextSegment(List<Coordinate> coordinates, Coordinate actualCell) {
-        Coordinate nextCoordinate = new Coordinate(actualCell.row() + 1,actualCell.column());
-        if (coordinates.contains(nextCoordinate)) {
-            return Optional.of(nextCoordinate);
-        } else {
-            nextCoordinate = new Coordinate(actualCell.row() - 1,actualCell.column());
-            if (coordinates.contains(nextCoordinate)) {
-                return Optional.of(nextCoordinate);
-            } else {
-                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() + 1);
-                if (coordinates.contains(nextCoordinate)) {
-                    return Optional.of(nextCoordinate);
-                } else {
-                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() - 1);
-                    if (coordinates.contains(nextCoordinate)) {
-                        return Optional.of(nextCoordinate);
-                    }
-                }
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<Coordinate> getNextSegment(List<Coordinate> coordinates, Coordinate actualCell, Coordinate actualSegment) {
-        Coordinate nextCoordinate = new Coordinate(actualCell.row() + 1,actualCell.column());
-        if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
-            return Optional.of(nextCoordinate);
-        } else {
-            nextCoordinate = new Coordinate(actualCell.row() - 1,actualCell.column());
-            if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
-                return Optional.of(nextCoordinate);
-            } else {
-                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() + 1);
-                if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
-                    return Optional.of(nextCoordinate);
-                } else {
-                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() - 1);
-                    if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
-                        return Optional.of(nextCoordinate);
-                    }
-                }
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<Coordinate> getFirstCell(List<Coordinate> coordinates) {
-        Optional firstCell = Optional.empty();
-        for (Coordinate coordinate : coordinates) {
-            if (isCell.apply(coordinate)) {
-                firstCell = Optional.of(coordinate);
-            }
-        }
-        return firstCell;
     }
 }

@@ -42,4 +42,7 @@ public class Coordinate {
         return new Coordinate(this.row - subtrahend.row, this.column - subtrahend.column);
     }
 
+    public Coordinate plus(Coordinate summand) {
+        return new Coordinate(this.row + summand.row, this.column + summand.column);
+    }
 }

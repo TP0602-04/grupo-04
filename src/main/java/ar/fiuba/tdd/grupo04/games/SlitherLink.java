@@ -2,7 +2,6 @@ package ar.fiuba.tdd.grupo04.games;
 
 import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.Utils;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -19,7 +18,7 @@ import java.util.function.Function;
 @SuppressWarnings("CPD-START")
 public class SlitherLink {
     IGame game;
-    private Board<Boolean> board;
+    private Board<GraphInput> board;
     private CustomGroupCollector customGroupCollector;
 
     public SlitherLink() {
@@ -30,30 +29,34 @@ public class SlitherLink {
     private void createGame() {
         game = new Game();
         // Esto se levanta del json de juego
-        // las dos coord pares son los centros de la celdas (marcado true si pasa por aca)
-        // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca)
+        // las dos coord pares son los nodos (marcado true si pasa por aca)
+        // las dos coord impares son los lugares dnd estan las condiciones o no hay nada(en el dibujito) (no se puede pasar por aca)
         // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
-        board = new Board<Boolean>(18, 18, Boolean.FALSE);
-        game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector<>(board);
-
-        // Only counts segments (one coordinate is odd and the other even)
-        Function<Coordinate, Boolean> isSegment = (coordinate) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return true;
+        board = new Board(18, 18);
+        for (int i = 0; i < 18; i++) {
+            for (int j = 0; j < 18; j++) {
+                GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
+                if ((i & 1) == 0 && (j & 1) == 0) {
+                    graphInput = new GraphInput(GraphInputType.NODE, false);
+                } else if ((i & 1) != 0 && (j & 1) != 0) {
+                    graphInput = new GraphInput(GraphInputType.INVALID_ELEMENT, false);
                 }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return true;
-                }
+                board.put(graphInput, new Coordinate(i, j));
             }
-            return false;
-        };
-        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isSegment, (expected, counted) -> expected == counted)));
+        }
+
+        game.setBoard(board);
+
+        Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
+        Function<GraphInput, Boolean> isEdge = GraphInputType.EDGE::equals;
+        Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
-        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isSegment, bigger)));
+
+        customGroupCollector = new CustomGroupCollector<>(board);
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isEdge, bigger)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isEdge, (expected, counted) -> expected == counted)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
     }
 
     private void createBoard() {
@@ -97,7 +100,6 @@ public class SlitherLink {
 
         // Con esto se checkea si ya gano
 
-        new Rule<>(new AllCollector<>(board), new OneLoopCondition(Utils.isCell()));
         while (game.checkWinRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }

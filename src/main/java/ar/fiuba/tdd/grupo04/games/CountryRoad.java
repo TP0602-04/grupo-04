@@ -2,7 +2,6 @@ package ar.fiuba.tdd.grupo04.games;
 
 import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.Utils;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -20,7 +19,7 @@ import java.util.function.Function;
 @SuppressWarnings("CPD-START")
 public class CountryRoad {
     IGame game;
-    private Board<Boolean> board;
+    private Board<GraphInput> board;
     private CustomGroupCollector customGroupCollector;
 
     public CountryRoad() {
@@ -31,25 +30,35 @@ public class CountryRoad {
     private void createGame() {
         game = new Game();
         // Esto se levanta del json de juego
-        // las dos coord pares son los centros de la celdas (marcado true si pasa por aca)
-        // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca)
+        // las dos coord pares son los centros de la celdas (marcado true si pasa por aca) (empieza en un centro)(i & 1) == 0 && (j & 1) == 0
+        // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca) (i & 1) != 0 && (j & 1) != 0)
         // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
-        board = new Board<Boolean>(18, 18, Boolean.FALSE);
+        board = new Board(18, 18);
+        for (int i = 0; i < 18; i++) {
+            for (int j = 0; j < 18; j++) {
+                GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
+                if ((i & 1) == 0 && (j & 1) == 0) {
+                    graphInput = new GraphInput(GraphInputType.NODE, false);
+                } else if ((i & 1) != 0 && (j & 1) != 0) {
+                    graphInput = new GraphInput(GraphInputType.INVALID_ELEMENT, false);
+                }
+                board.put(graphInput, new Coordinate(i, j));
+            }
+        }
+
         game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector<>(board);
 
-        // Its a segment (because one coordinate is odd and the other even) and its marked because the value is true
-        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(Utils.isMarkedSegment())));
-        // Only counts the cells (both coordinates are even)
-        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0
-                                                                && (coordinate.row().intValue() & 1) == 0;
-
-
-        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isCell, (expected, counted) -> expected == counted)));
+        Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
+        Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
+        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked() && GraphInputType.EDGE.equals(graphInput.getType());
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
-        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isCell, bigger)));
-        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isCell)));
-        game.addWinRule(new Rule<>(customGroupCollector, new AllFilledCondition()));
+
+        customGroupCollector = new CustomGroupCollector<>(board);
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
+        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
+        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
 //        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
     }
 
