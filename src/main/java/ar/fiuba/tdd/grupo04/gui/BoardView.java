@@ -6,12 +6,12 @@ import ar.fiuba.tdd.grupo04.gui.cell.CellView;
 import ar.fiuba.tdd.grupo04.gui.cell.CellViewFactory;
 import javafx.util.Pair;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.*;
 
 
 /**
