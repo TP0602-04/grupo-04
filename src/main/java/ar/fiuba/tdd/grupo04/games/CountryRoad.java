@@ -2,7 +2,6 @@ package ar.fiuba.tdd.grupo04.games;
 
 import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.Utils;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -36,7 +35,7 @@ public class CountryRoad {
         // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
         board = new Board(18, 18);
         for (int i = 0; i < 18; i++) {
-            for (int j = 0; j < 18; i++) {
+            for (int j = 0; j < 18; j++) {
                 GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
                 if ((i & 1) == 0 && (j & 1) == 0) {
                     graphInput = new GraphInput(GraphInputType.NODE, false);
@@ -51,11 +50,12 @@ public class CountryRoad {
 
         Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
         Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
+        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked() && GraphInputType.EDGE.equals(graphInput.getType());
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
 
         customGroupCollector = new CustomGroupCollector<>(board);
         game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
-        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(Utils.isMarkedSegment())));
+        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
         game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));

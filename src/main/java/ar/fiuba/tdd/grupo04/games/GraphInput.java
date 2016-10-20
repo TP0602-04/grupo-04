@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.games;
 
+@SuppressWarnings("CPD-START")
 public class GraphInput {
     private final GraphInputType type;
     private final Boolean marked;
