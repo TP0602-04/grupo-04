@@ -1,17 +1,15 @@
 package ar.fiuba.tdd.grupo04.gui;
 
+import com.google.gson.Gson;
+
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.model.*;
-
-import com.google.gson.Gson;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-
-
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener {
@@ -42,7 +40,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         frame.setVisible(true);
     }
 
-    /**
+    /*
      * {@link BoardView.Observer} implementation
      */
     @Override

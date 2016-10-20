@@ -5,12 +5,13 @@ import ar.fiuba.tdd.grupo04.gui.OnClickListener;
 import ar.fiuba.tdd.grupo04.gui.View;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.event.MouseInputListener;
 
 public abstract class CellView implements View {
     private static final int BORDER_WIDTH_PX = 1;
@@ -69,7 +70,7 @@ public abstract class CellView implements View {
         });
     }
 
-    /**
+    /*
      * {@link View} implementation
      */
     @Override
@@ -82,7 +83,7 @@ public abstract class CellView implements View {
         return view;
     }
 
-    /**
+    /*
      * Public methods
      */
     public Coordinate getCoordinate() {
@@ -101,7 +102,7 @@ public abstract class CellView implements View {
         view.setBorder(BorderFactory.createMatteBorder(borderTop, borderLeft, borderBottom, borderRight, Color.BLACK));
     }
 
-    /**
+    /*
      * Abstract methods
      */
     abstract public void setValue(String value) throws IllegalInputException;
