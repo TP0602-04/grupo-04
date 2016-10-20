@@ -28,11 +28,11 @@ public class Main {
         // Esto se levanta del json de juego
         Board board = new Board(4, 4);
         game.setBoard(board);
-        game.addRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
-        game.addRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
-        game.addRule(new Rule<>(new BlocksCollector<>(board, 2, 2), new UniqueCondition()));
-        game.addRule(new Rule<>(new AllCollector<>(board, 5), new AllLesserThanCondition()));
-        game.addRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addWinRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
+        game.addWinRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
+        game.addWinRule(new Rule<>(new BlocksCollector<>(board, 2, 2), new UniqueCondition()));
+        game.addWinRule(new Rule<>(new AllCollector<>(board, 5), new AllLesserThanCondition()));
+        game.addWinRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
 
         new GameGui(json, game);
     }
