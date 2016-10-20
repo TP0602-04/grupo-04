@@ -2,11 +2,22 @@ package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class Utils {
     public static Function<Coordinate, Boolean> isSegment() {
         return (coordinate) -> ((coordinate.column().intValue() & 1) == 0) != ((coordinate.row().intValue() & 1) == 0);
+    }
+
+    public static BiFunction<Coordinate, Boolean, Boolean> isMarkedSegment() {
+        return (coordinate, value) -> {
+            if (((coordinate.column().intValue() & 1) == 0) != ((coordinate.row().intValue() & 1) == 0)) {
+                return value;
+            } else {
+                return false;
+            }
+        };
     }
 
     public static Function<Coordinate, Boolean> isCell() {

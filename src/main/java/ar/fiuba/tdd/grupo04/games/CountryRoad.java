@@ -2,6 +2,7 @@ package ar.fiuba.tdd.grupo04.games;
 
 import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
+import ar.fiuba.tdd.grupo04.Utils;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -38,19 +39,7 @@ public class CountryRoad {
         customGroupCollector = new CustomGroupCollector<>(board);
 
         // Its a segment (because one coordinate is odd and the other even) and its marked because the value is true
-        BiFunction<Coordinate, Boolean, Boolean> isMarkedSegment = (coordinate, value) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return value;
-                }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return value;
-                }
-            }
-            return false;
-        };
-        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedSegment)));
+        game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(Utils.isMarkedSegment())));
         // Only counts the cells (both coordinates are even)
         Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0
                                                                 && (coordinate.row().intValue() & 1) == 0;
