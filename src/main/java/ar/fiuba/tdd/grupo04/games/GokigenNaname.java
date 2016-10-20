@@ -8,20 +8,20 @@ import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.rule.condition.CountBiCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.HasOneCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @SuppressWarnings("CPD-START")
-public class SlitherLink {
+public class GokigenNaname {
     IGame game;
     private Board<Boolean> board;
     private CustomGroupCollector customGroupCollector;
 
-    public SlitherLink() {
+    public GokigenNaname() {
         createGame();
         createBoard();
     }
@@ -29,27 +29,29 @@ public class SlitherLink {
     private void createGame() {
         game = new Game();
         // Esto se levanta del json de juego
-        // las dos coord pares son los centros de la celdas (marcado true si pasa por aca)
-        // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca)
-        // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
+        // Si el campo esta en true significa que la diagonal va de abajo a la izquierda a arriba a la derecha, si es false de abajo a la derecha a arriba a la izquierda
+        // las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que estar marcados true o false para estar completo el tablero)
+        // las dos coord pares son los puntos del borde de la celda (estan todos en true)
+        // los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
         board = new Board<Boolean>(18, 18, Boolean.FALSE);
+        for (int i = 1; i < 18; i = i + 2) {
+            for (int j = 1; j < 18; j = j + 2) {
+                board.put(null,new Coordinate(i,j));
+            }
+        }
+
         game.setBoard(board);
         customGroupCollector = new CustomGroupCollector<>(board);
 
-        // Only counts segments (one coordinate is odd and the other even)
-        Function<Coordinate, Boolean> isSegment = (coordinate) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return true;
-                }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return true;
-                }
-            }
-            return false;
+        // Dice si tiene si la diagonal tiene que ir de abajo a la izquierda a arriba a la derecha o viceversa segun las coordenadas
+        BiFunction<ValuedCoordinate, Coordinate, Boolean> whichDiagonal = (valuedCoordinate, coordinate) -> {
+            final Coordinate difference = valuedCoordinate.getCoordinate().minus(coordinate);
+            final int kindOfDiagonal = difference.column() + difference.row();
+            // Si la diagonal va de abajo a la izquierda a arriba a la derecha la suma de las coordenadas de la diferencia da cero
+            return kindOfDiagonal == 0;
         };
-        game.addRule(new Rule<>(customGroupCollector, new CountCondition(isSegment)));
+
+        game.addRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal)));
     }
 
     private void createBoard() {
@@ -79,34 +81,8 @@ public class SlitherLink {
 
     public void playGame() {
         // aca estaria el loop con el input
-        // fillCell tendria q fijarse q no esta puesto ya o algo asi
-        //caso1
-        // el jugador quieren unir (0,0) con (0,1)
-        // entonces pone en true (0,0), (0,1) y (0,2)
-        //caso2
-        // el jugador quieren unir (7,3) con (6,3)
-        // entonces pone en true (14,6), (13,6) y (12,6)
-        //caso generico en x
-        // el jugador quieren unir punto1=(x,y) con punto2=(x+1,y)
-        // entonces pone en true punto1=(2x,2y), punto2=(2(x+1),2y) son las celdas y (2x+1,2y) es la trama q las une
+        // fillCell seria un toogle q pone la diagonal para un lado o para el otro segun true o false
         System.out.print(game.checkRules());
-        // Con esto se checkea si ya gano
-
-        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0 && (coordinate.row().intValue() & 1) == 0;
-
-        Function<Coordinate, Boolean> isSegment = (coordinate) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return true;
-                }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return true;
-                }
-            }
-            return false;
-        };
-        new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell, isSegment));
         while (game.checkRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }
