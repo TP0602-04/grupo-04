@@ -28,8 +28,10 @@ public class GokigenNaname {
     private void createGame() {
         game = new Game();
         // Esto se levanta del json de juego
-        // Si el campo esta en true significa que la diagonal va de abajo a la izquierda a arriba a la derecha, si es false de abajo a la derecha a arriba a la izquierda
-        // las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que estar marcados true o false para estar completo el tablero)
+        // Si el campo esta en true significa que la diagonal va de abajo a la izquierda a arriba a la derecha,
+        // si es false de abajo a la derecha a arriba a la izquierda
+        // las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
+        // estar marcados true o false para estar completo el tablero)
         // las dos coord pares son los puntos del borde de la celda (estan todos en true)
         // los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
         board = new Board<Boolean>(18, 18, Boolean.FALSE);
@@ -42,11 +44,14 @@ public class GokigenNaname {
         game.setBoard(board);
         customGroupCollector = new CustomGroupCollector<>(board);
 
-        // Dice si tiene si la diagonal tiene que ir de abajo a la izquierda a arriba a la derecha o viceversa segun las coordenadas
+        // Dice si tiene si la diagonal tiene que ir de abajo a la izquierda a arriba a la derecha o viceversa segun
+        // las coordenadas
         BiFunction<ValuedCoordinate, Coordinate, Boolean> whichDiagonal = (valuedCoordinate, coordinate) -> {
+            //TODO: No se porque checkstyle me tira que estas lineas deben estar una indentacion mas
             final Coordinate difference = valuedCoordinate.getCoordinate().minus(coordinate);
             final int kindOfDiagonal = difference.column() + difference.row();
-            // Si la diagonal va de abajo a la izquierda a arriba a la derecha la suma de las coordenadas de la diferencia da cero
+            // Si la diagonal va de abajo a la izquierda a arriba a la derecha la suma de las coordenadas
+            // de la diferencia da cero
             return kindOfDiagonal == 0;
         };
 

@@ -30,7 +30,8 @@ public class SlitherLink {
         game = new Game();
         // Esto se levanta del json de juego
         // las dos coord pares son los nodos (marcado true si pasa por aca)
-        // las dos coord impares son los lugares dnd estan las condiciones o no hay nada(en el dibujito) (no se puede pasar por aca)
+        // las dos coord impares son los lugares dnd estan las condiciones o no hay nada(en el dibujito)
+        // (no se puede pasar por aca)
         // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
         board = new Board(18, 18);
         for (int i = 0; i < 18; i++) {
