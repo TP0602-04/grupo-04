@@ -67,8 +67,8 @@ public class OneLoopCondition<R extends IInputGroup<Boolean>> implements ICondit
     }
 
     private Optional<Coordinate> getNextCell(Coordinate actualSegment, Coordinate actualCell) {
-        Integer newColumn = 2*actualSegment.column() - actualCell.column();
-        Integer newRow = 2*actualSegment.row() - actualCell.row();
+        Integer newColumn = 2 * actualSegment.column() - actualCell.column();
+        Integer newRow = 2 * actualSegment.row() - actualCell.row();
         if (newRow < 0 || newColumn < 0) {
             return Optional.empty();
         }
@@ -76,19 +76,19 @@ public class OneLoopCondition<R extends IInputGroup<Boolean>> implements ICondit
     }
 
     private Optional<Coordinate> getNextSegment(List<Coordinate> coordinates, Coordinate actualCell) {
-        Coordinate nextCoordinate = new Coordinate(actualCell.row()+1,actualCell.column());
+        Coordinate nextCoordinate = new Coordinate(actualCell.row() + 1,actualCell.column());
         if (coordinates.contains(nextCoordinate)) {
             return Optional.of(nextCoordinate);
         } else {
-            nextCoordinate = new Coordinate(actualCell.row()-1,actualCell.column());
+            nextCoordinate = new Coordinate(actualCell.row() - 1,actualCell.column());
             if (coordinates.contains(nextCoordinate)) {
                 return Optional.of(nextCoordinate);
             } else {
-                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column()+1);
+                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() + 1);
                 if (coordinates.contains(nextCoordinate)) {
                     return Optional.of(nextCoordinate);
                 } else {
-                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column()-1);
+                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() - 1);
                     if (coordinates.contains(nextCoordinate)) {
                         return Optional.of(nextCoordinate);
                     }
@@ -99,19 +99,19 @@ public class OneLoopCondition<R extends IInputGroup<Boolean>> implements ICondit
     }
 
     private Optional<Coordinate> getNextSegment(List<Coordinate> coordinates, Coordinate actualCell, Coordinate actualSegment) {
-        Coordinate nextCoordinate = new Coordinate(actualCell.row()+1,actualCell.column());
+        Coordinate nextCoordinate = new Coordinate(actualCell.row() + 1,actualCell.column());
         if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
             return Optional.of(nextCoordinate);
         } else {
-            nextCoordinate = new Coordinate(actualCell.row()-1,actualCell.column());
+            nextCoordinate = new Coordinate(actualCell.row() - 1,actualCell.column());
             if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
                 return Optional.of(nextCoordinate);
             } else {
-                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column()+1);
+                nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() + 1);
                 if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
                     return Optional.of(nextCoordinate);
                 } else {
-                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column()-1);
+                    nextCoordinate = new Coordinate(actualCell.row(),actualCell.column() - 1);
                     if (coordinates.contains(nextCoordinate) && !nextCoordinate.equals(actualSegment)) {
                         return Optional.of(nextCoordinate);
                     }

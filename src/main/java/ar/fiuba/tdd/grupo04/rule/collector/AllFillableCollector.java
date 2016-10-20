@@ -20,8 +20,8 @@ public class AllFillableCollector<T> implements ICollector {
         List newInputGroups = new ArrayList<>();
         final List<IInputGroup> inputGroups = allCollector.getInputGroups();
         inputGroups.forEach((IInputGroup inputGroup) -> {
-            final List<IInput> inputs = inputGroup.getInputs();
-            newInputGroups.add(inputs.stream().filter(IInput::isBlocked).collect(Collectors.toList()));});
+           final List<IInput> inputs = inputGroup.getInputs();
+           newInputGroups.add(inputs.stream().filter(IInput::isBlocked).collect(Collectors.toList())); });
         return newInputGroups;
     }
 }

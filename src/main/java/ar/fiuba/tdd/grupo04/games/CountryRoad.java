@@ -52,7 +52,10 @@ public class CountryRoad {
         };
         game.addRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedSegment)));
         // Only counts the cells (both coordinates are even)
-        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0 && (coordinate.row().intValue() & 1) == 0;
+        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0
+                                                                && (coordinate.row().intValue() & 1) == 0;
+
+
         game.addRule(new Rule<>(customGroupCollector, new CountCondition(isCell)));
 
 //        game.addRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
@@ -98,7 +101,8 @@ public class CountryRoad {
         System.out.print(game.checkRules());
         // Con esto se checkea si ya gano
 
-        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0 && (coordinate.row().intValue() & 1) == 0;
+        Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0
+                                                                && (coordinate.row().intValue() & 1) == 0;
 
         Function<Coordinate, Boolean> isSegment = (coordinate) -> {
             if ((coordinate.column().intValue() & 1) != 0) {
@@ -110,7 +114,7 @@ public class CountryRoad {
                     return true;
                 }
             }
-            return false;
+           return false;
         };
         new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell, isSegment));
         while (game.checkRules()) {
