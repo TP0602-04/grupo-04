@@ -2,10 +2,10 @@ package ar.fiuba.tdd.grupo04.board;
 
 import java.util.Optional;
 
-public class EmptyInput<T> implements IInput<T> {
+public class BlockedInput<T> implements IInput<T> {
     private final Coordinate coordinate;
 
-    public EmptyInput(Coordinate coordinate) {
+    public BlockedInput(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 

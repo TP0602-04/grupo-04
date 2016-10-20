@@ -51,6 +51,6 @@ public class Board<T> implements IBoard<T> {
 
     @Override
     public void blockCell(Coordinate coordinate) {
-        cells.get(coordinate.row()).set(coordinate.column(), new EmptyInput(coordinate));
+        cells.get(coordinate.row()).set(coordinate.column(), new BlockedInput(coordinate));
     }
 }

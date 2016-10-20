@@ -15,6 +15,10 @@ public class AllFillableCollector<T> implements ICollector {
         allCollector = new AllCollector<T>(board, value);
     }
 
+    public AllFillableCollector(Board<T> board) {
+        allCollector = new AllCollector<T>(board);
+    }
+
     @Override
     public List getInputGroups() {
         List newInputGroups = new ArrayList<>();
