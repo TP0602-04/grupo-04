@@ -7,13 +7,9 @@ public class BoardJsonParser {
     public static Board parse(JsonBoard jsonBoard) {
         Integer rows = jsonBoard.getRows();
         Integer columns = jsonBoard.getColumns();
-        String cellType = jsonBoard.getCellType();
-        Board<?> board;
-        if(cellType.equals("Integer")) {
-            board = new Board<Integer>(rows, columns);
-        } else {
-            board = new Board<String>(rows, columns);
-        }
+//        String cellType = jsonBoard.getCellType();
+        Board<Integer> board = new Board<>(rows, columns);
+        //if(cellType.equals("Integer")) {
         return board;
     }
 }
