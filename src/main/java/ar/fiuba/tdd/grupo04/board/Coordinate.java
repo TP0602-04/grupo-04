@@ -29,4 +29,5 @@ public class Coordinate {
         }
         return Objects.equals(row, ((Coordinate) obj).row) && Objects.equals(column, ((Coordinate) obj).column);
     }
+
 }

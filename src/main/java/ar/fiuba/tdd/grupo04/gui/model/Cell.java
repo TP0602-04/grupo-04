@@ -3,19 +3,19 @@ package ar.fiuba.tdd.grupo04.gui.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Cell {
-    @SerializedName("x")
-    private int x;
-    @SerializedName("y")
-    private int y;
+    @SerializedName("row")
+    private int row;
+    @SerializedName("column")
+    private int column;
     @SerializedName("value")
     private String value;
 
-    public int x() {
-        return x;
+    public int row() {
+        return row;
     }
 
-    public int y() {
-        return y;
+    public int column() {
+        return column;
     }
 
     public String getValue() {

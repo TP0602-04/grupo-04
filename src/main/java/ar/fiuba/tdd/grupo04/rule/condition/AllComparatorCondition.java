@@ -7,9 +7,6 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
-/**
- * Created by manuelcruz on 15/10/2016.
- */
 public class AllComparatorCondition<R extends IValuedInputGroup<Integer, Integer>> implements ICondition<R> {
     private final BiFunction<Integer, Integer, Boolean> comparator;
 

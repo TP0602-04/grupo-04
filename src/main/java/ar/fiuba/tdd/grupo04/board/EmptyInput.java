@@ -2,9 +2,6 @@ package ar.fiuba.tdd.grupo04.board;
 
 import java.util.Optional;
 
-/**
- * Created by manuelcruz on 15/10/2016.
- */
 public class EmptyInput<T> implements IInput<T> {
     private final Coordinate coordinate;
 
