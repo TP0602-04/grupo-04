@@ -1,6 +1,6 @@
 {
     "board": {
-        "size": 9,
+        "size": 4,
         "defaultCellType": "number",
         "editable": true
     },
@@ -16,9 +16,9 @@
                         "value": 3
                     },
                     {
-                        "x": 3,
-                        "y": 4,
-                        "value": 5
+                        "x": 0,
+                        "y": 0,
+                        "value": 1
                     }
                 ]
             }
