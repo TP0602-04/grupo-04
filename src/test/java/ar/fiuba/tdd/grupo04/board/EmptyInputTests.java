@@ -1,27 +1,30 @@
 package ar.fiuba.tdd.grupo04.board;
 
 import org.junit.Test;
+import org.junit.Before;
 
 import static org.junit.Assert.assertTrue;
 
 public class EmptyInputTests {
 
+    Coordinate coordinateR5C10;
+    Coordinate coordinateR10C5;
+
+    @Before
+    public void init() {
+        coordinateR5C10 = new Coordinate(5,10);
+    }
+
     @Test
     public void testGetCoordinate() {
-        Integer col = 10;
-        Integer row = 5;
-        Coordinate newCoordinate = new Coordinate(row,col);
-        Coordinate newCoordinate2 = new Coordinate(row,col);
-        EmptyInput in = new EmptyInput(newCoordinate);
-        assertTrue(in.getCoordinate().equals(newCoordinate2));
+
+        EmptyInput in = new EmptyInput(coordinateR5C10);
+        assertTrue(in.getCoordinate().equals(new Coordinate(5, 10)));
     }
 
     @Test
     public void testisBlocked() {
-        Integer col = 10;
-        Integer row = 5;
-        Coordinate newCoordinate = new Coordinate(row,col);
-        EmptyInput in = new EmptyInput(newCoordinate);
+        EmptyInput in = new EmptyInput(coordinateR5C10);
         assertTrue(in.isBlocked());
     }
 
