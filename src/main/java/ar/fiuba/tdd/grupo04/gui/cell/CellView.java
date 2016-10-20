@@ -7,14 +7,21 @@ import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class CellView implements View {
+    private static final int BORDER_WIDTH_PX = 1;
+
     private Coordinate coordinate;
     protected JPanel view;
     protected Set<OnClickListener> listeners;
+    private int borderTop;
+    private int borderBottom;
+    private int borderLeft;
+    private int borderRight;
 
     public CellView(Coordinate coordinate) {
         this.coordinate = coordinate;
@@ -84,6 +91,14 @@ public abstract class CellView implements View {
 
     public void addOnClickListener(OnClickListener listener) {
         listeners.add(listener);
+    }
+
+    public void addBorders(boolean top, boolean bottom, boolean left, boolean right) {
+        borderTop = top ? BORDER_WIDTH_PX : borderTop;
+        borderBottom = bottom ? BORDER_WIDTH_PX : borderBottom;
+        borderLeft = left ? BORDER_WIDTH_PX : borderLeft;
+        borderRight = right ? BORDER_WIDTH_PX : borderRight;
+        view.setBorder(BorderFactory.createMatteBorder(borderTop, borderLeft, borderBottom, borderRight, Color.BLACK));
     }
 
     /**

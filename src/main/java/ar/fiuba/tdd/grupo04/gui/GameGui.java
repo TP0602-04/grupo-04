@@ -69,9 +69,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         final CellType defaultCellType = CellType.fromString(board.getDefaultCellType());
 
         // BoardView creation
-        BoardView.Builder builder = new BoardView.Builder()
-                .setSize(board.getSize())
-                .setDefaultCellType(defaultCellType);
+        BoardView.Builder builder = new BoardView.Builder(board.getSize(), defaultCellType);
         for (UiCellGroup cellGroup : scenario.getUtilCells()) {
             CellType cellType = CellType.fromString(cellGroup.getCellType());
             java.util.List<Pair<Coordinate, String>> cellData = new ArrayList<>();
@@ -83,6 +81,17 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
             }
 
             builder.setCellType(cellType, cellData);
+        }
+        for (Reference reference : scenario.getReferences()) {
+            java.util.List<Coordinate> coordinateList = new ArrayList<>();
+            java.util.List<Cell> cells = reference.getCells();
+
+            for (Cell cell : cells) {
+                Coordinate coordinate = new Coordinate(cell.row(), cell.column());
+                coordinateList.add(coordinate);
+            }
+
+            builder.addPerimeter(coordinateList);
         }
         boardView = builder.build();
 

@@ -4,7 +4,6 @@ import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class NumberCellView extends CellView {
     private static final String ILLEGAL_INPUT_ERROR_MSG = "Number between 0 and 9 expected";
@@ -13,7 +12,6 @@ public class NumberCellView extends CellView {
 
     public NumberCellView(Coordinate coordinate) {
         super(coordinate);
-        view.setBorder(BorderFactory.createDashedBorder(Color.BLACK));
         label = new JLabel();
         view.add(label);
     }

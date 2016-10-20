@@ -22,13 +22,13 @@ public class CellGroup {
         Coordinate offset = new Coordinate(offsetX, offsetY);
         list.add(new Cell(offset));
 
-        for (int i = 1; i <= deltaX; i++) {
+        for (int i = 1; i < deltaX; i++) {
             Coordinate coordinate = new Coordinate(offsetX + i, offsetY);
             Cell cell = new Cell(coordinate);
             list.add(cell);
         }
 
-        for (int i = 1; i <= deltaY; i++) {
+        for (int i = 1; i < deltaY; i++) {
             Coordinate coordinate = new Coordinate(offsetX, offsetY + i);
             Cell cell = new Cell(coordinate);
             list.add(cell);

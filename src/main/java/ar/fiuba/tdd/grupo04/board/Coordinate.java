@@ -11,22 +11,6 @@ public class Coordinate {
         this.column = column;
     }
 
-    public Integer column() {
-        return column;
-    }
-
-    public Integer row() {
-        return row;
-    }
-
-    public Coordinate minus(Coordinate subtrahend) {
-        return new Coordinate(this.row - subtrahend.row, this.column - subtrahend.column);
-    }
-
-    public Coordinate plus(Coordinate summand) {
-        return new Coordinate(this.row + summand.row, this.column + summand.column);
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -44,5 +28,21 @@ public class Coordinate {
         hash = ((hash + row) << 5) - (hash + row);
         hash = ((hash + column) << 5) - (hash + column);
         return hash;
+    }
+
+    public Integer column() {
+        return column;
+    }
+
+    public Integer row() {
+        return row;
+    }
+
+    public Coordinate minus(Coordinate subtrahend) {
+        return new Coordinate(this.row - subtrahend.row, this.column - subtrahend.column);
+    }
+
+    public Coordinate plus(Coordinate summand) {
+        return new Coordinate(this.row + summand.row, this.column + summand.column);
     }
 }
