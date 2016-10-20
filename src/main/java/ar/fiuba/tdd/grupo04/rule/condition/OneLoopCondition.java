@@ -11,13 +11,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class OneLoopCondition<R extends IInputGroup<Boolean>> implements ICondition<R> {
-
-    private final Function<Coordinate, Boolean> isSegment;
     private final Function<Coordinate, Boolean> isCell;
 
-    public OneLoopCondition(Function<Coordinate, Boolean> isCell, Function<Coordinate, Boolean> isSegment) {
+    public OneLoopCondition(Function<Coordinate, Boolean> isCell) {
         this.isCell = isCell;
-        this.isSegment = isSegment;
     }
 
     @Override

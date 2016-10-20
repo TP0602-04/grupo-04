@@ -18,7 +18,7 @@ import java.util.function.Function;
 @SuppressWarnings("CPD-START")
 public class CountryRoad {
     IGame game;
-    private Board board;
+    private Board<Boolean> board;
     private CustomGroupCollector customGroupCollector;
 
     public CountryRoad() {
@@ -31,8 +31,8 @@ public class CountryRoad {
         // Esto se levanta del json de juego
         // las dos coord pares son los centros de la celdas (marcado true si pasa por aca)
         // las dos coord impares son los puntos de interseccion entre cuatro celdas (no se puede pasar por aca)
-        // los que tienen una coorc impar column una par son los segmentos que puede unir (uniendo dos pares de coord pares)
-        board = new Board(18, 18, Boolean.valueOf(false));
+        // los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
+        board = new Board<Boolean>(18, 18, Boolean.FALSE);
         game.setBoard(board);
         customGroupCollector = new CustomGroupCollector<>(board);
 
@@ -103,19 +103,8 @@ public class CountryRoad {
         Function<Coordinate, Boolean> isCell = (coordinate) -> (coordinate.column().intValue() & 1) == 0
                                                                 && (coordinate.row().intValue() & 1) == 0;
 
-        Function<Coordinate, Boolean> isSegment = (coordinate) -> {
-            if ((coordinate.column().intValue() & 1) != 0) {
-                if ((coordinate.row().intValue() & 1) == 0) {
-                    return true;
-                }
-            } else {
-                if ((coordinate.row().intValue() & 1) != 0) {
-                    return true;
-                }
-            }
-           return false;
-        };
-        new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell, isSegment));
+        new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell));
+        new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell));
         while (game.checkRules()) {
             game.fillCell(new Coordinate(2, 7), 8);
         }

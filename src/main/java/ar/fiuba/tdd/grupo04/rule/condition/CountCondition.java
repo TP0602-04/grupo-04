@@ -18,6 +18,6 @@ public class CountCondition<R extends IValuedInputGroup<?, Integer>> implements 
     public boolean check(R valuedInputGroup) {
         final Stream<? extends IInput<?>> stream = valuedInputGroup.getInputs().stream();
         final long countedInputs = stream.filter(i -> i.getValue().isPresent()).filter(i -> isCountable.apply(i.getCoordinate())).count();
-        return valuedInputGroup.getValue() > countedInputs;
+        return valuedInputGroup.getValue() == countedInputs;
     }
 }

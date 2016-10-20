@@ -19,6 +19,10 @@ public class Coordinate {
         return row;
     }
 
+    public Coordinate minus(Coordinate subtrahend) {
+        return new Coordinate(this.row - subtrahend.row, this.column - subtrahend.column);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
