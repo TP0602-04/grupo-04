@@ -52,4 +52,9 @@ public class CoordinateTests {
     public void testHashcode() {
         assertEquals(coordinateR5C10.hashCode(), 21452);
     }
+
+    @Test
+    public void testMinus() {
+        assertEquals(coordinateR5C10.minus(new Coordinate(1, 2)), new Coordinate(4, 8));
+    }
 }

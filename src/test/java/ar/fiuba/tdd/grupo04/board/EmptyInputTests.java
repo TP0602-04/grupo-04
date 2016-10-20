@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 public class EmptyInputTests {
 
     Coordinate coordinateR5C10;
-    Coordinate coordinateR10C5;
 
     @Before
     public void init() {
@@ -23,9 +22,15 @@ public class EmptyInputTests {
     }
 
     @Test
-    public void testisBlocked() {
+    public void testIsBlocked() {
         EmptyInput in = new EmptyInput(coordinateR5C10);
         assertTrue(in.isBlocked());
+    }
+
+    @Test(expected=SecurityException.class)
+    public void testGetValueThrowsException() {
+        EmptyInput in = new EmptyInput(coordinateR5C10);
+        in.getValue();
     }
 
 }

@@ -24,27 +24,27 @@ public class BoardTests {
     }
 
     @Test
-    public void getCorrectValueFromCoordinate() {
+    public void testGetCorrectValueFromCoordinate() {
         assertEquals(board3x3.get(new Coordinate(1, 2)).getValue().get(), (Integer)5);
     }
 
     @Test
-    public void getCorrectColumnLength() {
+    public void testGetCorrectColumnLength() {
         assertEquals(board3x3.columnsLength(), (Integer)3);
     }
 
     @Test
-    public void getCorrectRowLength() {
+    public void testGetCorrectRowLength() {
         assertEquals(board3x3.rowsLength(), (Integer)3);
     }
 
     @Test
-    public void getBlockedCell() {
+    public void testGetBlockedCell() {
         assertTrue(board3x3.get(new Coordinate(2, 1)).isBlocked());
     }
 
     @Test
-    public void getCellInDefaultValuedBoard() {
+    public void testGetCellInDefaultValuedBoard() {
         IBoard<Integer> board2x2 = new Board<>(2, 2, 3);
         assertEquals(board2x2.get(new Coordinate(0, 1)).getValue().get(), (Integer)3);
     }
