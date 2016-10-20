@@ -1,40 +1,50 @@
 package ar.fiuba.tdd.grupo04;
 
-import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.gui.GameGui;
-import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.BlocksCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
-import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
+import ar.fiuba.tdd.grupo04.json.model.JsonGame;
+import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
+import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.util.FileUtils;
+import com.google.gson.Gson;
 
 public class Main {
-    //    private static final String SUDOKU_PATH = "./src/main/resources/config/sudoku.json";
-    private static final String KAKURO_PATH = "./src/main/resources/config/kakuro.json";
+    private static final String SUDOKU_PATH = "./src/main/resources/config/sudoku.json";
+    private static final String SUDOKU_MODEL_PATH = "./src/main/resources/config/sudokuGame.json";
+    private static final String SUDOKU_INIT_PATH = "./src/main/resources/config/sudoku1.json";
 
     public static void main(String[] args) {
-        String json = FileUtils.readFile(KAKURO_PATH);
-        if (json == null) {
+        String json1 = FileUtils.readFile(SUDOKU_PATH);
+        if (json1 == null) {
+            System.out.println("CONFIGURATION FILE DOESN'T EXISTS!");
+            return;
+        }
+        String json2 = FileUtils.readFile(SUDOKU_MODEL_PATH);
+        if (json2 == null) {
+            System.out.println("CONFIGURATION FILE DOESN'T EXISTS!");
+            return;
+        }
+        String json3 = FileUtils.readFile(SUDOKU_INIT_PATH);
+        if (json3 == null) {
             System.out.println("CONFIGURATION FILE DOESN'T EXISTS!");
             return;
         }
 
-        //FIXME - HARDCODE - ONLY FOR TESTING PURPOSES
-        IGame game = new Game();
-        // Esto se levanta del json de juego
-        Board board = new Board(4, 4);
-        game.setBoard(board);
-        game.addWinRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
-        game.addWinRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
-        game.addWinRule(new Rule<>(new BlocksCollector<>(board, 2, 2), new UniqueCondition()));
-        game.addWinRule(new Rule<>(new AllCollector<>(board, 5), new AllLesserThanCondition()));
-        game.addWinRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        Gson gson = new Gson();
+        JsonGame jsonGame = gson.fromJson(json2, JsonGame.class);
+        IGame game = null;
+        try {
+            game = GameJsonParser.parseLoad(jsonGame);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonInitGame jsonInitGame = gson.fromJson(json3, JsonInitGame.class);
+        try {
+            GameJsonParser.parseInit(game, jsonInitGame);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        new GameGui(json, game);
+        new GameGui(json1, game);
     }
 
 }
