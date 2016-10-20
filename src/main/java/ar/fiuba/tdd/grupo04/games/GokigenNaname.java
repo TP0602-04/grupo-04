@@ -54,7 +54,7 @@ public class GokigenNaname {
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
         game.addLoseRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal, bigger)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-//        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopLoco()));
+//        game.addWinRule(new Rule<>(new AllCollector(board), new AnyLoop()));
     }
 
     private void createBoard() {
