@@ -9,6 +9,7 @@ import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.AllMarkedContiguousCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.HasOneCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
@@ -44,15 +45,15 @@ public class CountryRoad {
 
         Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
         Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
+        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked() && GraphInputType.EDGE.equals(graphInput.getType());
+        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
+
+        customGroupCollector = new CustomGroupCollector<>(board);
+        game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition(isMarked, isNode)));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-
-        Function<GraphInput, Boolean> isMarkedEdge = (graphInput) -> graphInput.getMarked()
-                && GraphInputType.EDGE.equals(graphInput.getType());
         game.addWinRule(new Rule<>(customGroupCollector, new HasOneCondition(isMarkedEdge)));
         game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
-
-        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
         game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
 //        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
     }

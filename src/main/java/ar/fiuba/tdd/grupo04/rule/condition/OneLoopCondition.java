@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("CPD-START")
 public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition<R> {
     private final Function<S, Boolean> isNode;
     private final Function<S, Boolean> isConsidered;
