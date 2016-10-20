@@ -4,12 +4,15 @@ import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.model.*;
+
 import com.google.gson.Gson;
 import javafx.util.Pair;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
+
+
+import java.awt.*;
+import javax.swing.*;
 
 public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener {
     private static final int WINDOW_WIDTH = 900;
@@ -47,7 +50,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         inputBoxView.select(coordinate);
     }
 
-    /**
+    /*
      * {@link InputBoxView.SubmitListener} implementation
      */
     @Override
@@ -62,7 +65,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
         }
     }
 
-    /**
+    /*
      * Private methods
      */
     private void initBoard(Board board, Scenario scenario) {

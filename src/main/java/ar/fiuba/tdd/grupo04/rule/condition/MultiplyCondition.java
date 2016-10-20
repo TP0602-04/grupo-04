@@ -12,7 +12,9 @@ public class MultiplyCondition<R extends IValuedInputGroup<Integer, Integer>> im
         final Integer value = valuedInputGroup.getValue();
         final boolean allMatch = valuedInputGroup.getInputs().stream().map(IInput::getValue).allMatch(Optional::isPresent);
         if (allMatch) {
-            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue).map(Optional::get).reduce(1, (a, b) -> a * b));
+            //TODO: Arreglar esa negrada de aaA y bbB con nombres reales
+            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue)
+                                        .map(Optional::get).reduce(1, (foo, bar) -> foo * bar));
         }
         return true;
     }

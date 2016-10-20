@@ -19,27 +19,8 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
         this.isConsidered = isConsidered;
     }
 
-    @Override
-    public boolean check(R inputGroup) {
-        final List<IInput<S>> inputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i -> isConsidered.apply(i.getValue().get())).collect(Collectors.toList());
-        final List<Coordinate> coordinates = inputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
-
-        List<Coordinate> path = new ArrayList<>();
-        Optional<IInput<S>> firstNodeInput = getFirstNode(inputs);
-
-        if (!firstNodeInput.isPresent()) {
-            return false;
-        }
-        Coordinate firstNode = firstNodeInput.get().getCoordinate();
-        path.add(firstNode);
-        Optional<Coordinate> actualNode = Optional.of(firstNode);
-
-        Optional<Coordinate> actualEdge = getNextEdge(coordinates, firstNode);
-        if (!actualEdge.isPresent()) {
-            return false;
-        }
-        path.add(actualEdge.get());
-
+    private boolean isOneLoop(Optional<Coordinate> actualEdge, Optional<Coordinate> actualNode,
+                              Coordinate firstNode, List<Coordinate> path, List<Coordinate> coordinates) {
         boolean findNextStep = true;
         while (findNextStep) {
             actualNode = getNextNode(actualEdge.get(), actualNode.get());
@@ -62,8 +43,34 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
             }
 
         }
+        return true;
+    }
+
+    @Override
+    public boolean check(R inputGroup) {
+        final List<IInput<S>> inputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i ->
+                                                   isConsidered.apply(i.getValue().get())).collect(Collectors.toList());
+        final List<Coordinate> coordinates = inputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
+
+        List<Coordinate> path = new ArrayList<>();
+        Optional<IInput<S>> firstNodeInput = getFirstNode(inputs);
+
+        if (!firstNodeInput.isPresent()) {
+            return false;
+        }
+        Coordinate firstNode = firstNodeInput.get().getCoordinate();
+        path.add(firstNode);
+        Optional<Coordinate> actualNode = Optional.of(firstNode);
+
+        Optional<Coordinate> actualEdge = getNextEdge(coordinates, firstNode);
+        if (!actualEdge.isPresent()) {
+            return false;
+        }
+        path.add(actualEdge.get());
+
+        boolean isOneLoop = isOneLoop(actualEdge, actualNode, firstNode, path, coordinates);
         // Check if there is only one loop all inputs are in path
-        return path.size() == coordinates.size();
+        return isOneLoop && path.size() == coordinates.size();
     }
 
     private Optional<IInput<S>> getFirstNode(List<IInput<S>> graphElements) {
@@ -74,7 +81,7 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
         return edgeSearcher(coordinates, actualNode, null, new Coordinate(1, 0));
     }
 
-    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge) {
+    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates,Coordinate actualNode,Coordinate actualEdge) {
         return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(1, 0));
     }
 
@@ -83,7 +90,8 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
     // (1,0)->(0,1)->(-1,0)->(0,-1) esas transiciones la hace esta linea:
     // Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row())
     // y la condicion de corte es el ultimo estado (columna -1)
-    private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge, Coordinate coordinateDiff) {
+    private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode,
+                                                        Coordinate actualEdge, Coordinate coordinateDiff) {
         final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
         if (coordinates.contains(newCoordinate)  && !newCoordinate.equals(actualEdge)) {
             return Optional.of(newCoordinate);
@@ -91,7 +99,8 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
         if (newCoordinate.column() == -1) {
             Optional.empty();
         }
-        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row()));
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1),
+                                                                                                 coordinateDiff.row()));
     }
 
     // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo

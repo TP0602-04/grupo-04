@@ -9,7 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class CollectorJsonParser {
-    public static ICollector parse(JsonCollector jsonCollector, Board board) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static ICollector parse(JsonCollector jsonCollector, Board board) throws ClassNotFoundException,
+                      NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         ICollector collector;
         List<Integer> params = jsonCollector.getParams();
         Class<?> cl = Class.forName("ar.fiuba.tdd.grupo04.rule.collector." + jsonCollector.getType());

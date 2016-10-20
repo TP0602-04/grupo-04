@@ -27,12 +27,12 @@ public class GameJsonParser {
         return game;
     }
 
-    private static List<Rule> parseRules(List<JsonRules> jsonRules, Board board) throws Exception{
+    private static List<Rule> parseRules(List<JsonRules> jsonRules, Board board) throws Exception {
         List<Rule> rules = new ArrayList<>();
         for (JsonRules rule : jsonRules) {
             ICollector collector = CollectorJsonParser.parse(rule.getCollector(), board);
             List<ICondition> conditions = ConditionJsonParser.parse(rule.getCondition());
-            for(ICondition condition : conditions) {
+            for (ICondition condition : conditions) {
                 rules.add(new Rule<>(collector, condition));
             }
         }
@@ -41,7 +41,7 @@ public class GameJsonParser {
 
     public static void parseInit(IGame game, JsonInitGame jsonInitGame) {
         List<JsonInitValue> jsonInitialValues = jsonInitGame.getInitialValues();
-        for(JsonInitValue jsonInitValue : jsonInitialValues) {
+        for (JsonInitValue jsonInitValue : jsonInitialValues) {
             game.fillCell(new Coordinate(jsonInitValue.getRow(), jsonInitValue.getColumn()), jsonInitValue.getValue());
         }
     }
