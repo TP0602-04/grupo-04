@@ -11,6 +11,7 @@ import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.MultiplyCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 @SuppressWarnings("CPD-START")
@@ -35,7 +36,7 @@ public class InshiNoHeya {
         game.addLoseRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
         game.addLoseRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-//        game.addWinRule(new Rule<>(customGroupCollector, new MultiplyCondition()));
+        game.addWinRule(new Rule<>(customGroupCollector, new MultiplyCondition()));
     }
 
     private void createBoard() {
