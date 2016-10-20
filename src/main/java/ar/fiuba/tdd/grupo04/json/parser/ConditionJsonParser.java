@@ -23,6 +23,9 @@ public class ConditionJsonParser {
                 case "AllFilledCondition":
                     conditions.add(new AllFilledCondition());
                     break;
+                case "MultiplyCondition":
+                    conditions.add(new MultiplyCondition());
+                    break;
                 default:
                     break;
             }
