@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
@@ -34,9 +34,9 @@ public class Kokuro {
         customGroupCollector = new CustomGroupCollector<>(board);
         game.addLoseRule(new Rule<>(customGroupCollector, new UniqueCondition()));
         game.addLoseRule(new Rule<>(customGroupCollector, new SumCondition()));
-        game.addLoseRule(new Rule<>(new AllFillableCollector<>(board, 10), new AllLesserThanCondition()));
-        game.addLoseRule(new Rule<>(new AllFillableCollector<>(board, 0), new AllGreaterThanCondition()));
-        game.addWinRule(new Rule<>(new AllFillableCollector(board), new AllFilledCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector(board, 10), new AllLesserThanCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addWinRule(new Rule<>(customGroupCollector, new AllFilledCondition()));
     }
 
     private void createBoard() {
@@ -45,9 +45,6 @@ public class Kokuro {
         game.fillCell(new Coordinate(1, 1), 1);
         game.fillCell(new Coordinate(3, 1), 2);
         game.fillCell(new Coordinate(5, 1), 4);
-        // Aca van todas las celdas que no se usan
-        game.blockCell(new Coordinate(5, 2));
-        game.blockCell(new Coordinate(3, 7));
         // Aca van todos los grupos que suman numeros;
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
         customGroupCollector.addReferencedGroup(

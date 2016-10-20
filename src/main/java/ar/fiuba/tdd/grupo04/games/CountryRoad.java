@@ -7,7 +7,6 @@ import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
@@ -57,9 +56,11 @@ public class CountryRoad {
                                                                 && (coordinate.row().intValue() & 1) == 0;
 
 
-        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isCell)));
-        game.addWinRule(new Rule<>(new AllCollector<>(board), new OneLoopCondition(isCell)));
-        game.addWinRule(new Rule<>(new AllFillableCollector(board), new AllFilledCondition()));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isCell, (expected, counted) -> expected == counted)));
+        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isCell, bigger)));
+        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isCell)));
+        game.addWinRule(new Rule<>(customGroupCollector, new AllFilledCondition()));
 //        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition()));
     }
 

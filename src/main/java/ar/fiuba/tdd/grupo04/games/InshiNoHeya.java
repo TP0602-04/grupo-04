@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
 import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllFillableCollector;
+import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
@@ -34,7 +34,7 @@ public class InshiNoHeya {
         customGroupCollector = new CustomGroupCollector<>(board);
         game.addLoseRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
         game.addLoseRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
-        game.addWinRule(new Rule<>(new AllFillableCollector(board), new AllFilledCondition()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
 //        game.addWinRule(new Rule<>(customGroupCollector, new MultiplyCondition()));
     }
 

@@ -11,8 +11,6 @@ import ar.fiuba.tdd.grupo04.rule.IRule;
 public interface IGame<T, S> {
     void fillCell(final Coordinate coordinate, final T value);
 
-    void blockCell(final Coordinate coordinate);
-
     boolean checkWinRules();
 
     boolean checkLoseRules();

@@ -48,9 +48,4 @@ public class Board<T> implements IBoard<T> {
     public Integer columnsLength() {
         return this.cells.get(0).size();
     }
-
-    @Override
-    public void blockCell(Coordinate coordinate) {
-        cells.get(coordinate.row()).set(coordinate.column(), new BlockedInput(coordinate));
-    }
 }

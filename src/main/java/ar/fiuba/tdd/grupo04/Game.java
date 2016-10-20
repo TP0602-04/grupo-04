@@ -27,11 +27,6 @@ public class Game<T, S> implements IGame<T, S> {
     }
 
     @Override
-    public void blockCell(Coordinate coordinate) {
-        board.blockCell(coordinate);
-    }
-
-    @Override
     public boolean checkWinRules() {
         return loseRules.stream().allMatch(IRule::check);
     }
