@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SmallReferenceCellView extends CellView {
-    private JLabel input;
-
     public SmallReferenceCellView(Coordinate coordinate, String referenceValue) {
         super(coordinate);
         JLabel input = new JLabel();

@@ -2,6 +2,7 @@ package ar.fiuba.tdd.grupo04.json.model;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("CPD-START")
 public class JsonCellGroup {
     @SerializedName("offsetX")
     private Integer offsetX;

@@ -3,25 +3,15 @@ package ar.fiuba.tdd.grupo04;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.json.model.JsonGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
+import ar.fiuba.tdd.grupo04.json.model.JsonMove;
+import ar.fiuba.tdd.grupo04.json.model.JsonMoves;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.util.FileUtils;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-
 public class Main {
-
-    public class Inputs {
-        public List<MyInput> inputs;
-    }
-
-    public class MyInput {
-        public Integer x;
-        public Integer y;
-        public Integer value;
-    }
-
     //    private static final String SUDOKU_PATH = "./src/main/resources/config/sudoku.json";
     private static final String MODEL_PATH = "./src/main/resources/config/inshinoheya.json";
     private static final String INIT_PATH = "./src/main/resources/test/InshiNoHeya-Init-1.json";
@@ -48,9 +38,9 @@ public class Main {
         }
 
         System.out.println("+++++++++++++++START GAME++++++++++++++++");
-        Inputs inputs = gson.fromJson(json1, Inputs.class);
+        JsonMoves inputs = gson.fromJson(json1, JsonMoves.class);
         int i = 0;
-        for (MyInput input : inputs.inputs) {
+        for (JsonMove input : inputs.inputs) {
             Coordinate coordinate = new Coordinate(input.x, input.y);
             System.out.println("JUGADA NUMERO: " + i++);
             game.fillCell(coordinate, input.value);
