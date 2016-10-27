@@ -1,0 +1,70 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "value": 13,
+            "group": {
+                "offsetX": 1,
+                "offsetY": 2,
+                "deltaX": 1,
+                "deltaY": 2
+            }
+        },{
+            "value": 29,
+            "group": {
+                "offsetX": 2,
+                "offsetY": 1,
+                "deltaX": 1,
+                "deltaY": 4
+            }
+        },{
+            "value": 17,
+            "group": {
+                "offsetX": 3,
+                "offsetY": 1,
+                "deltaX": 1,
+                "deltaY": 4
+            }
+        },{
+            "value": 4,
+            "group": {
+                "offsetX": 4,
+                "offsetY": 2,
+                "deltaX": 1,
+                "deltaY": 2
+            }
+        },{
+            "value": 7,
+            "group": {
+                "offsetX": 2,
+                "offsetY": 1,
+                "deltaX": 2,
+                "deltaY": 1
+            }
+        },{
+            "value": 20,
+            "group": {
+                "offsetX": 1,
+                "offsetY": 2,
+                "deltaX": 4,
+                "deltaY": 1
+            }
+        },{
+            "value": 27,
+            "group": {
+                "offsetX": 1,
+                "offsetY": 3,
+                "deltaX": 4,
+                "deltaY": 1
+            }
+        },{
+            "value": 9,
+            "group": {
+                "offsetX": 2,
+                "offsetY": 4,
+                "deltaX": 2,
+                "deltaY": 1
+            }
+        }
+    ]
+}
