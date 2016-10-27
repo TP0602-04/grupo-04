@@ -23,9 +23,9 @@ public class AllFilledConditionTests {
     public void init() {
         allFilledCondition = new AllFilledCondition();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(1), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(2), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
+        inputs.add(new Input<Integer>(1, new Coordinate(0, 0)));
+        inputs.add(new Input<Integer>(2, new Coordinate(0, 0)));
+        inputs.add(new Input<Integer>(3, new Coordinate(0, 0)));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AllFilledConditionTests {
 
     @Test
     public void testCheckFalse() {
-        inputs.add(new Input<>(Optional.empty(), new Coordinate(0, 0)));
+        inputs.add(new Input<>(null, new Coordinate(0, 0)));
         IInputGroup inputGroup = new InputGroup<>(inputs);
         assertFalse(allFilledCondition.check(inputGroup));
     }
