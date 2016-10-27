@@ -28,7 +28,7 @@ public class Game<T, S> implements IGame<T, S> {
 
     @Override
     public boolean checkWinRules() {
-        return loseRules.stream().allMatch(IRule::check);
+        return winRules.stream().allMatch(IRule::check);
     }
 
     @Override
