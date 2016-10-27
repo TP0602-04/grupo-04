@@ -10,6 +10,7 @@ import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.CountBiCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.NoLoopsCondition;
 
 import java.util.function.BiFunction;
 
@@ -60,7 +61,7 @@ public class GokigenNaname {
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
         game.addLoseRule(new Rule<>(customGroupCollector, new CountBiCondition(whichDiagonal, bigger)));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-//        game.addWinRule(new Rule<>(new AllCollector(board), new AnyLoop()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new NoLoopsCondition()));
     }
 
     private void createBoard() {

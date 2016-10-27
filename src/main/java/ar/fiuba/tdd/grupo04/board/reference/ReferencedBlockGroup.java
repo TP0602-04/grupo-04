@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReferencedBlockGroup<S> implements IReferencedGroup<S> {
-    final Integer rowOffset;
-    final Integer columnOffset;
-    final Integer rowLarge;
-    final Integer columnLarge;
-    final S referencedValue;
+    private final Integer rowOffset;
+    private final Integer columnOffset;
+    private final Integer rowLarge;
+    private final Integer columnLarge;
+    private final S referencedValue;
 
     public ReferencedBlockGroup(Integer rowOffset, Integer columnOffset, Integer rowLarge, Integer columnLarge, S referencedValue) {
         this.rowOffset = rowOffset;
@@ -27,7 +27,7 @@ public class ReferencedBlockGroup<S> implements IReferencedGroup<S> {
 
     @Override
     public List<Coordinate> getCoordinates() {
-        final List coordinates = new ArrayList<>();
+        final List<Coordinate> coordinates = new ArrayList<>();
         for (int i = rowOffset; i < (rowOffset + rowLarge); i++) {
             for (int j = columnOffset; j < (columnOffset + columnLarge); j++) {
                 coordinates.add(new Coordinate(i, j));
