@@ -41,9 +41,8 @@ public class Main {
         JsonMoves inputs = gson.fromJson(json1, JsonMoves.class);
         int i = 0;
         for (JsonMove input : inputs.inputs) {
-            Coordinate coordinate = new Coordinate(input.x, input.y);
             System.out.println("JUGADA NUMERO: " + i++);
-            game.fillCell(coordinate, input.value);
+            game.fillCell(input.getCoordinate(), input.getValue());
             if (game.checkLoseRules()) {
                 System.out.println("PERDISTE");
             } else {

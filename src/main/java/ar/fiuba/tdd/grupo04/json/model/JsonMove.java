@@ -1,14 +1,24 @@
 package ar.fiuba.tdd.grupo04.json.model;
 
+import ar.fiuba.tdd.grupo04.board.Coordinate;
+
 import com.google.gson.annotations.SerializedName;
 
 public class JsonMove {
-    @SerializedName("x")
-    public Integer x;
+    @SerializedName("row")
+    private Integer row;
 
-    @SerializedName("y")
-    public Integer y;
+    @SerializedName("column")
+    private Integer column;
 
     @SerializedName("value")
-    public Integer value;
+    private Integer value;
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public Coordinate getCoordinate() {
+        return new Coordinate(row, column);
+    }
 }

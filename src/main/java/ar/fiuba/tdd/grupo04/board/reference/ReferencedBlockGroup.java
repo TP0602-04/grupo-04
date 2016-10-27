@@ -28,8 +28,8 @@ public class ReferencedBlockGroup<S> implements IReferencedGroup<S> {
     @Override
     public List<Coordinate> getCoordinates() {
         final List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = rowOffset; i < (rowOffset + rowLarge); i++) {
-            for (int j = columnOffset; j < (columnOffset + columnLarge); j++) {
+        for (int i = rowOffset; i < (rowOffset + columnLarge); i++) {
+            for (int j = columnOffset; j < (columnOffset + rowLarge); j++) {
                 coordinates.add(new Coordinate(i, j));
             }
         }

@@ -45,8 +45,7 @@ public class KakuroTests {
         }
         JsonMoves moves = gson.fromJson(inputJson, JsonMoves.class);
         for (JsonMove move : moves.inputs) {
-            Coordinate coordinate = new Coordinate(move.x, move.y);
-            game.fillCell(coordinate, move.value);
+            game.fillCell(move.getCoordinate(), move.getValue());
             assertFalse(game.checkLoseRules());
         }
         assertTrue(game.checkWinRules());
