@@ -22,7 +22,7 @@ public class ValuedInputGroupTests {
 
     @Before
     public void init() {
-        Input<Integer> input = new Input<Integer>(Optional.of(2) , new Coordinate(2,2));
+        Input<Integer> input = new Input<Integer>(2 , new Coordinate(2,2));
         List<IInput<Integer>> inputs = new ArrayList<>();
         inputs.add(input);
         valuedInput = new ValuedInputGroup<Integer, Integer>(2,inputs);

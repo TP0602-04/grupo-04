@@ -20,19 +20,19 @@ public class InputTests {
 
     @Test
     public void testGetValue() {
-        Input<Integer> in = new Input<Integer>(Optional.of(2) , coordinateR5C10);
+        Input<Integer> in = new Input<Integer>(2 , coordinateR5C10);
         assertEquals(in.getValue().get(),(Integer)2);
     }
 
     @Test
     public void testGetCoordinate() {
-        Input<Integer> in = new Input<Integer>(Optional.of(5) , coordinateR5C10);
+        Input<Integer> in = new Input<Integer>(5 , coordinateR5C10);
         assertTrue(in.getCoordinate().equals(new Coordinate(5, 10)));
     }
 
     @Test
     public void testisNotBlocked() {
-        Input<Integer> in = new Input<Integer>(Optional.of(1) , coordinateR5C10);
+        Input<Integer> in = new Input<Integer>(1 , coordinateR5C10);
         assertFalse(in.isBlocked());
     }
 

@@ -23,8 +23,8 @@ public class AllLesserThanConditionTests {
     public void init() {
         allLesserThanCondition = new AllLesserThanCondition<>();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(7), new Coordinate(0, 0)));
+        inputs.add(new Input<Integer>(3, new Coordinate(0, 0)));
+        inputs.add(new Input<Integer>(7, new Coordinate(0, 0)));
     }
 
     @Test

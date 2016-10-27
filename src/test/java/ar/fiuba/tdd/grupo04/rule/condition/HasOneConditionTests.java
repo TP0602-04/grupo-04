@@ -37,8 +37,8 @@ public class HasOneConditionTests {
         when(condition.apply(anyInt())).thenReturn(true);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.of(1), coordinate),
-                new Input<>(Optional.of(3), coordinate), new Input<>(Optional.of(2), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(1, coordinate),
+                new Input<>(3, coordinate), new Input<>(2, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertTrue(hasOneCondition.check(inputGroup));
@@ -50,8 +50,8 @@ public class HasOneConditionTests {
         when(condition.apply(anyInt())).thenReturn(false);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.of(1), coordinate),
-                new Input<>(Optional.of(3), coordinate), new Input<>(Optional.of(2), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(1, coordinate),
+                new Input<>(3, coordinate), new Input<>(2, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertFalse(hasOneCondition.check(inputGroup));
@@ -64,8 +64,8 @@ public class HasOneConditionTests {
         when(condition.apply(1)).thenReturn(false);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.of(1), coordinate),
-                new Input<>(Optional.of(3), coordinate), new Input<>(Optional.of(1), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(1, coordinate),
+                new Input<>(3, coordinate), new Input<>(1, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertTrue(hasOneCondition.check(inputGroup));
@@ -80,8 +80,8 @@ public class HasOneConditionTests {
         when(condition.apply(2)).thenReturn(false);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.of(4), coordinate),
-                new Input<>(Optional.of(4), coordinate), new Input<>(Optional.of(2), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(4, coordinate),
+                new Input<>(4, coordinate), new Input<>(2, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertTrue(hasOneCondition.check(inputGroup));
@@ -95,8 +95,8 @@ public class HasOneConditionTests {
         when(condition.apply(anyInt())).thenReturn(false);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.empty(), coordinate),
-                new Input<>(Optional.of(3), coordinate), new Input<>(Optional.of(2), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(null, coordinate),
+                new Input<>(3, coordinate), new Input<>(2, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertFalse(hasOneCondition.check(inputGroup));
@@ -108,8 +108,8 @@ public class HasOneConditionTests {
         when(condition.apply(anyInt())).thenReturn(true);
 
         HasOneCondition<Integer, IInputGroup<Integer>> hasOneCondition = new HasOneCondition<>(condition);
-        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(Optional.empty(), coordinate),
-                new Input<>(Optional.of(3), coordinate), new Input<>(Optional.of(2), coordinate));
+        final List<IInput<Integer>> inputs = Arrays.asList(new Input<>(null, coordinate),
+                new Input<>(3, coordinate), new Input<>(2, coordinate));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
 
         assertTrue(hasOneCondition.check(inputGroup));

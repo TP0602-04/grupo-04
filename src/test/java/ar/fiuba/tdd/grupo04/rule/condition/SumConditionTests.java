@@ -23,8 +23,8 @@ public class SumConditionTests {
     public void init() {
         sumCondition = new SumCondition<>();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(2), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
+        inputs.add(new Input<>(2, new Coordinate(0, 0)));
+        inputs.add(new Input<>(3, new Coordinate(0, 0)));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class SumConditionTests {
 
     @Test
     public void testCheckTrueIfGroupNotComplete() {
-        inputs.add(new Input<>(Optional.empty(), new Coordinate(0, 0)));
+        inputs.add(new Input<>(null, new Coordinate(0, 0)));
         IValuedInputGroup<Integer, Integer> valuedInputGroup = new ValuedInputGroup<>(5, inputs);
         assertTrue(sumCondition.check(valuedInputGroup));
     }

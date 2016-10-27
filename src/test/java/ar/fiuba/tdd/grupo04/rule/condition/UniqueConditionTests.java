@@ -23,9 +23,9 @@ public class UniqueConditionTests {
     public void init() {
         uniqueCondition = new UniqueCondition();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(1), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(2), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
+        inputs.add(new Input<>(1, new Coordinate(0, 0)));
+        inputs.add(new Input<>(2, new Coordinate(0, 0)));
+        inputs.add(new Input<>(3, new Coordinate(0, 0)));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class UniqueConditionTests {
 
     @Test
     public void testCheckFalse() {
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
+        inputs.add(new Input<>(3, new Coordinate(0, 0)));
         IInputGroup<Integer> inputGroup = new InputGroup<>(inputs);
         assertFalse(uniqueCondition.check(inputGroup));
     }

@@ -23,8 +23,8 @@ public class AllGreaterThanConditionTests {
     public void init() {
         allGreaterThanCondition = new AllGreaterThanCondition<>();
         inputs = new ArrayList<>();
-        inputs.add(new Input<>(Optional.of(3), new Coordinate(0, 0)));
-        inputs.add(new Input<>(Optional.of(7), new Coordinate(0, 0)));
+        inputs.add(new Input<>(3, new Coordinate(0, 0)));
+        inputs.add(new Input<>(7, new Coordinate(0, 0)));
     }
 
     @Test
