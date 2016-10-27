@@ -42,27 +42,28 @@ public class NoLoopsCondition<R extends IInputGroup<Boolean>> implements ICondit
         path.add(position);
         inputs.remove(position);
 
-        final Optional<IInput<Boolean>> up = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,0)))).findFirst();
-        final Optional<IInput<Boolean>> down = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,0)))).findFirst();
+        final Boolean actualDirection = position.getValue().get();
+        final Optional<IInput<Boolean>> up = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,0))) && !actualDirection.equals(i.getValue().get())).findFirst();
+        final Optional<IInput<Boolean>> down = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,0))) && !actualDirection.equals(i.getValue().get())).findFirst();
 
         if (comesFromLeft) {
-            final Optional<IInput<Boolean>> right = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(0,2)))).findFirst();
+            final Optional<IInput<Boolean>> right = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(0,2))) && !actualDirection.equals(i.getValue().get())).findFirst();
             //la diagonal va de abajo a la izquierda a arriba a la derecha
-            if (position.getValue().get()) {
-                final Optional<IInput<Boolean>> upRight = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,2)))).findFirst();
+            if (actualDirection) {
+                final Optional<IInput<Boolean>> upRight = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,2))) && !actualDirection.equals(i.getValue().get())).findFirst();
                 return searchLoop(right, path, true) || searchLoop(up, path, false) || searchLoop(upRight, path, true);
             } else {
-                final Optional<IInput<Boolean>> downRight = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,2)))).findFirst();
+                final Optional<IInput<Boolean>> downRight = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,2))) && !actualDirection.equals(i.getValue().get())).findFirst();
                 return searchLoop(right, path, true) || searchLoop(down, path, false) || searchLoop(downRight, path, true);
             }
         }
-        final Optional<IInput<Boolean>> left = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(0,-2)))).findFirst();
+        final Optional<IInput<Boolean>> left = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(0,-2))) && !actualDirection.equals(i.getValue().get())).findFirst();
         //la diagonal va de abajo a la izquierda a arriba a la derecha
-        if (position.getValue().get()) {
-            final Optional<IInput<Boolean>> downLeft = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,-2)))).findFirst();
+        if (actualDirection) {
+            final Optional<IInput<Boolean>> downLeft = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(2,-2))) && !actualDirection.equals(i.getValue().get())).findFirst();
             return searchLoop(left, path, false) || searchLoop(down, path, true) || searchLoop(downLeft, path, false);
         }
-        final Optional<IInput<Boolean>> upLeft = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,-2)))).findFirst();
+        final Optional<IInput<Boolean>> upLeft = inputs.stream().filter(i -> i.getCoordinate().equals(position.getCoordinate().plus(new Coordinate(-2,-2))) && !actualDirection.equals(i.getValue().get())).findFirst();
         return searchLoop(left, path, false) || searchLoop(up, path, true) || searchLoop(upLeft, path, false);
     }
 }
