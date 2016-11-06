@@ -11,6 +11,7 @@ public class ConditionMapper {
     public static final String FILLED = "Filled";
     public static final String EQUALS_SUM = "EqualsSum";
     public static final String EQUALS_MULTIPLY = "EqualsMultiply";
+    public static final String LOOP = "Loop";
 
     @SerializedName("type")
     private String type;

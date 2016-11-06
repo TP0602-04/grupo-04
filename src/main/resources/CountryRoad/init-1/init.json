@@ -1,0 +1,81 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "values": [0, 1],
+            "group": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 0,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [0, 5],
+            "group": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 1,
+                    "columnOffset": 0,
+                    "rowLarge": 2,
+                    "columnLarge": 2
+                }
+            ]
+        },{
+            "values": [1, 1],
+            "group": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 2,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                    ]
+                }
+        },{
+            "values": [0, 3],
+            "group": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 2,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 3,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [0, 3],
+            "group": [
+                {
+                    "rowOffset": 2,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                },{
+                    "rowOffset": 3,
+                    "columnOffset": 3,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [2, 2],
+            "group": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 0,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        }
+    ]
+}

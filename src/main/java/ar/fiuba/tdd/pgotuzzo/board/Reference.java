@@ -5,19 +5,19 @@ import java.util.List;
 
 public class Reference {
     private List<Cell> cells;
-    private Integer referenceValue;
+    private List<Integer> referenceValues;
 
-    public Reference(List<Cell> cells, Integer referenceValue) {
+    public Reference(List<Cell> cells, List<Integer> referenceValues) {
         this.cells = new ArrayList<>();
         this.cells.addAll(cells);
-        this.referenceValue = referenceValue;
+        this.referenceValues = referenceValues;
     }
 
     public List<Cell> getCells() {
         return cells;
     }
 
-    public Integer getReferenceValue() {
-        return referenceValue;
+    public List<Integer> getReferenceValues() {
+        return referenceValues;
     }
 }

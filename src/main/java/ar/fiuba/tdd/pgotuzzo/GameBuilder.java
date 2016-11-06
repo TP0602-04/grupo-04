@@ -97,6 +97,9 @@ public class GameBuilder {
                 return new BlockCollector(blockSize);
             case CUSTOM:
                 return new CustomCollector();
+            case VALUED:
+                int filterValue = collectorMapper.getParams().get(0);
+                return new ValuedCollector(filterValue);
             default:
                 throw new RuntimeException("Parsing error! Check collectors' name. " + type + " NOT VALID!");
         }
@@ -119,6 +122,8 @@ public class GameBuilder {
                 return new EqualsSumCondition();
             case EQUALS_MULTIPLY:
                 return new EqualsMultiplyCondition();
+            case LOOP:
+                return new LoopCondition();
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }
@@ -136,7 +141,7 @@ public class GameBuilder {
     private static Slot createSlot(SlotMapper slotMapper) {
         return new Slot(
                 slotMapper.getCoordinates(),
-                slotMapper.getValue()
+                slotMapper.getValues()
         );
     }
 

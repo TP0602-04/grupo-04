@@ -6,7 +6,7 @@ import ar.fiuba.tdd.pgotuzzo.rule.ReferencedCellGroup;
 public class EqualsMultiplyCondition implements ICondition<ReferencedCellGroup> {
     @Override
     public boolean check(ReferencedCellGroup referencedCellGroup) {
-        Integer expected = referencedCellGroup.getRefrencedValue();
+        Integer expected = referencedCellGroup.getReferencedValues().get(0);
         Integer real = referencedCellGroup
                 .getFilledCells()
                 .stream()

@@ -3,20 +3,26 @@ package ar.fiuba.tdd.pgotuzzo.json.scenario;
 import ar.fiuba.tdd.pgotuzzo.Coordinate;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SlotMapper {
-    @SerializedName("value")
-    private int value;
-    @SerializedName("group")
-    private GroupMapper group;
+    @SerializedName("values")
+    private List<Integer> values;
+    @SerializedName("groups")
+    private List<GroupMapper> groups;
 
-    public int getValue() {
-        return value;
+    public List<Integer> getValues() {
+        return values;
     }
 
     public List<Coordinate> getCoordinates() {
-        return group.getCoordinates();
+        List<Coordinate> coordinates = new ArrayList<>();
+        groups.forEach(groupMapper -> {
+            List<Coordinate> coordinateList = groupMapper.getCoordinates();
+            coordinates.addAll(coordinateList);
+        });
+        return coordinates;
     }
 }
 

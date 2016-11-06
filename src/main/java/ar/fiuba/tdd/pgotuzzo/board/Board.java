@@ -117,6 +117,6 @@ public class Board implements IBoard {
                 .stream()
                 .map(this::getCell)
                 .collect(Collectors.toList());
-        return new Reference(cellList, slot.getValue());
+        return new Reference(cellList, slot.getValues());
     }
 }

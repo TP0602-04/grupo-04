@@ -15,7 +15,6 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class InshiNoHeyaTests {
-
     private static final String FILE_GAME = "./src/main/resources/InshiNoHeya/InshiNoHeya.json";
     private static final String FILE_SCENARIO = "./src/main/resources/InshiNoHeya/init-1/init.json";
     private static final String FILE_MOVES = "./src/main/resources/InshiNoHeya/init-1/input-1.json";

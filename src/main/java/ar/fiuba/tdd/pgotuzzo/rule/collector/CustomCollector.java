@@ -20,7 +20,7 @@ public class CustomCollector implements ICollector<ReferencedCellGroup> {
 
     private ReferencedCellGroup getReferenceCellGroup(Reference reference) {
         List<Cell> cells = reference.getCells();
-        Integer value = reference.getReferenceValue();
-        return new ReferencedCellGroup(cells, value);
+        List<Integer> values = reference.getReferenceValues();
+        return new ReferencedCellGroup(cells, values);
     }
 }

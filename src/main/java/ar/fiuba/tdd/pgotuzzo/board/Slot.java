@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Slot {
     private List<Coordinate> coordinates;
-    private Integer value;
+    private List<Integer> values;
 
-    public Slot(List<Coordinate> coordinates, Integer value) {
+    public Slot(List<Coordinate> coordinates, List<Integer> values) {
         this.coordinates = new ArrayList<>();
         this.coordinates.addAll(coordinates);
-        this.value = value;
+        this.values = values;
     }
 
-    public Integer getValue() {
-        return value;
+    public List<Integer> getValues() {
+        return values;
     }
 
     public List<Coordinate> getCoordinates() {

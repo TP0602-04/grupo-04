@@ -2,101 +2,125 @@
     "initialValues": [],
     "references": [
         {
-            "value": 18,
-            "group": {
-                "rowOffset": 1,
-                "columnOffset": 2,
-                "rowLarge": 1,
-                "columnLarge": 4
-            }
+            "values": [18],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 4
+                }
+            ]
         },{
-            "value": 13,
-            "group": {
-                "rowOffset": 1,
-                "columnOffset": 3,
-                "rowLarge": 1,
-                "columnLarge": 2
-            }
+            "values": [13],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 3,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
         },{
-            "value": 5,
-            "group": {
-                "rowOffset": 1,
-                "columnOffset": 2,
-                "rowLarge": 2,
-                "columnLarge": 1
-            }
+            "values": [5],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 2,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
         },{
-            "value": 16,
-            "group": {
-                "rowOffset": 2,
-                "columnOffset": 1,
-                "rowLarge": 1,
-                "columnLarge": 2
-            }
+            "values": [16],
+            "groups": [
+                {
+                    "rowOffset": 2,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
         },{
-            "value": 11,
-            "group": {
-                "rowOffset": 2,
-                "columnOffset": 4,
-                "rowLarge": 1,
-                "columnLarge": 4
-            }
+            "values": [11],
+            "groups": [
+                {
+                    "rowOffset": 2,
+                    "columnOffset": 4,
+                    "rowLarge": 1,
+                    "columnLarge": 4
+                }
+            ]
         },{
-            "value": 29,
-            "group": {
-                "rowOffset": 2,
-                "columnOffset": 1,
-                "rowLarge": 4,
-                "columnLarge": 1
-            }
+            "values": [29],
+            "groups": [
+                {
+                    "rowOffset": 2,
+                    "columnOffset": 1,
+                    "rowLarge": 4,
+                    "columnLarge": 1
+                }
+            ]
         },{
-            "value": 3,
-            "group": {
-                "rowOffset": 3,
-                "columnOffset": 5,
-                "rowLarge": 1,
-                "columnLarge": 2
-            }
+            "values": [3],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 5,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
         },{
-            "value": 14,
-            "group": {
-                "rowOffset": 3,
-                "columnOffset": 1,
-                "rowLarge": 2,
-                "columnLarge": 1
-            }
+            "values": [14],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 1,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
         },{
-            "value": 14,
-            "group": {
-                "rowOffset": 4,
-                "columnOffset": 3,
-                "rowLarge": 1,
-                "columnLarge": 2
-            }
+            "values": [14],
+            "groups": [
+                {
+                    "rowOffset": 4,
+                    "columnOffset": 3,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
         },{
-            "value": 4,
-            "group": {
-                "rowOffset": 3,
-                "columnOffset": 4,
-                "rowLarge": 2,
-                "columnLarge": 1
-            }
+            "values": [4],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 4,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
         },{
-            "value": 16,
-            "group": {
-                "rowOffset": 4,
-                "columnOffset": 2,
-                "rowLarge": 4,
-                "columnLarge": 1
-            }
+            "values": [16],
+            "groups": [
+                {
+                    "rowOffset": 4,
+                    "columnOffset": 2,
+                    "rowLarge": 4,
+                    "columnLarge": 1
+                }
+            ]
         },{
-            "value": 7,
-            "group": {
-                "rowOffset": 5,
-                "columnOffset": 3,
-                "rowLarge": 2,
-                "columnLarge": 1
-            }
+            "values": [7],
+            "groups": [
+                {
+                    "rowOffset": 5,
+                    "columnOffset": 3,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
         }
     ]
 }

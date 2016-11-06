@@ -5,15 +5,15 @@ import ar.fiuba.tdd.pgotuzzo.board.Cell;
 import java.util.List;
 
 public class ReferencedCellGroup extends CellGroup {
-    private Integer refrencedValue;
+    private List<Integer> referencedValues;
 
-    public ReferencedCellGroup(List<Cell> cells, Integer value) {
+    public ReferencedCellGroup(List<Cell> cells, List<Integer> values) {
         super(cells);
-        refrencedValue = value;
+        referencedValues = values;
     }
 
-    public Integer getRefrencedValue() {
-        return refrencedValue;
+    public List<Integer> getReferencedValues() {
+        return referencedValues;
     }
 
 }
