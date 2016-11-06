@@ -9,4 +9,16 @@ public class CellMapper {
     private int row;
     @SerializedName("value")
     private int value;
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

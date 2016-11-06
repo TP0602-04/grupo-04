@@ -12,4 +12,8 @@ public interface IBoard {
 
     List<Cell> getCells();
 
+    void fill(Input input);
+
+    void lockCell(Coordinate coordinate);
+
 }

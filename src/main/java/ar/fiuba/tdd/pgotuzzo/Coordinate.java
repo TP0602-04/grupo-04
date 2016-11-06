@@ -24,4 +24,9 @@ public class Coordinate {
         }
         return super.equals(obj);
     }
+
+    @Override
+    public String toString() {
+        return "(" + row + ", " + column + ")";
+    }
 }

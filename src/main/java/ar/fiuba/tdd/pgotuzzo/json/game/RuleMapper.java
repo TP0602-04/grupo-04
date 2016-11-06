@@ -8,5 +8,13 @@ public class RuleMapper {
     @SerializedName("collector")
     private CollectorMapper collector;
     @SerializedName("conditions")
-    private List<String> conditions;
+    private List<ConditionMapper> conditions;
+
+    public CollectorMapper getCollector() {
+        return collector;
+    }
+
+    public List<ConditionMapper> getConditions() {
+        return conditions;
+    }
 }

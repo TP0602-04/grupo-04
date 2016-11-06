@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CollectorMapper {
-    public static final String ALL = "All";
-    public static final String ROWS = "Rows";
-    public static final String COLUMNS = "Columns";
-    public static final String BLOCKS = "Blocks";
+public class ConditionMapper {
+    public static final String UNIQUE = "Unique";
+    public static final String GREATER_THAN = "GreaterThan";
+    public static final String LESSER_THAN = "LesserThan";
+    public static final String FILLED = "Filled";
 
     @SerializedName("type")
     private String type;

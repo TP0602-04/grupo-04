@@ -4,20 +4,33 @@ import ar.fiuba.tdd.pgotuzzo.IBoard;
 import ar.fiuba.tdd.pgotuzzo.rule.collector.ICollector;
 import ar.fiuba.tdd.pgotuzzo.rule.condition.ICondition;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
-public abstract class Rule<T> implements IRule {
+public class Rule<T> implements IRule {
+    private ICollector<T> collector;
+    private List<ICondition<T>> conditions;
 
-    abstract protected ICondition<T> getCondition();
-
-    abstract protected ICollector<T> getCollector();
+    public Rule(ICollector<T> collector, List<ICondition<T>> conditions) {
+        this.collector = collector;
+        this.conditions = new ArrayList<>();
+        this.conditions.addAll(conditions);
+    }
 
     @Override
     public boolean check(IBoard board) {
-        Stream<T> collections = getCollector().collect(board).stream();
+        Stream<T> collections = collector.collect(board).stream();
         return collections
-                .map(cellGroup -> getCondition().check(cellGroup))
-                .reduce((res1, res2) -> res1 && res2)
-                .get();
+                .map(this::check)
+                .reduce(true, (res1, res2) -> res1 && res2);
     }
+
+    public boolean check(T predicate) {
+        return conditions
+                .stream()
+                .map(condition -> condition.check(predicate))
+                .reduce(true, (b1, b2) -> b1 && b2);
+    }
+
 }

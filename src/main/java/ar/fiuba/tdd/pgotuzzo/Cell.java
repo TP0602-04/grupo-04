@@ -1,17 +1,17 @@
 package ar.fiuba.tdd.pgotuzzo;
 
-public class Cell {
-    public static final int DEFAULT_VALUE = 0;
+import com.sun.istack.internal.Nullable;
 
+public class Cell {
     private Coordinate coordinate;
-    private int value;
+    private Integer value;
     private boolean isEditable;
 
     public Cell(Coordinate coordinate) {
-        this(coordinate, DEFAULT_VALUE);
+        this(coordinate, null);
     }
 
-    public Cell(Coordinate coordinate, int value) {
+    public Cell(Coordinate coordinate, Integer value) {
         this.coordinate = coordinate;
         this.value = value;
         this.isEditable = true;
@@ -21,11 +21,12 @@ public class Cell {
         return coordinate;
     }
 
-    public int getValue() {
+    @Nullable
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         if (isEditable) {
             this.value = value;
         }

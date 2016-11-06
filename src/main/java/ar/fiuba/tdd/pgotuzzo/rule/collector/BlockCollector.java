@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BlockCollector implements ICollector {
+public class BlockCollector implements ICollector<CellGroup> {
     private int size;
 
     public BlockCollector(int size) {

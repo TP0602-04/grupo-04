@@ -9,4 +9,12 @@ public class ScenarioMapper {
     private List<CellMapper> initialValues;
     @SerializedName("references")
     private List<ReferenceMapper> references;
+
+    public List<CellMapper> getInitialValues() {
+        return initialValues;
+    }
+
+    public List<ReferenceMapper> getReferences() {
+        return references;
+    }
 }

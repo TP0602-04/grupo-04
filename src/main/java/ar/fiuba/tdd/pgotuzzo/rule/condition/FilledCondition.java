@@ -2,21 +2,13 @@ package ar.fiuba.tdd.pgotuzzo.rule.condition;
 
 import ar.fiuba.tdd.pgotuzzo.rule.CellGroup;
 
-public class GreaterThanCondition implements ICondition<CellGroup> {
-
-    private int min;
-
-    public GreaterThanCondition(int min) {
-        this.min = min;
-    }
-
+public class FilledCondition implements ICondition<CellGroup> {
     @Override
     public boolean check(CellGroup cellGroup) {
         return cellGroup
-                .getFilledCells()
+                .getCells()
                 .stream()
-                .map(cell -> cell.getValue() > min)
+                .map(cell -> cell.getValue() != null)
                 .reduce(true, (b1, b2) -> b1 && b2);
     }
-
 }

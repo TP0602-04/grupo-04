@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class CellTests {
     private static Random random;
@@ -30,7 +31,7 @@ public class CellTests {
 
     @Test
     public void testDefaultState_1() {
-        assertEquals(Cell.DEFAULT_VALUE, cell.getValue());
+        assertNull(cell.getValue());
     }
 
     @Test
@@ -40,21 +41,21 @@ public class CellTests {
 
     @Test
     public void testGetValue() {
-        int value = random.nextInt();
+        Integer value = random.nextInt();
         Cell cell = new Cell(coordinate, value);
         assertEquals(value, cell.getValue());
     }
 
     @Test
     public void testSetValue_1() {
-        int value = random.nextInt();
+        Integer value = random.nextInt();
         cell.setValue(value);
         assertEquals(value, cell.getValue());
     }
 
     @Test
     public void testSetValue_2() {
-        int value = random.nextInt();
+        Integer value = random.nextInt();
         cell.setValue(1);
         cell.setValue(2);
         cell.setValue(3);
@@ -75,8 +76,8 @@ public class CellTests {
 
     @Test
     public void testCellNotEditable() {
-        final int initValue = 10;
-        final int newValue = 5;
+        final Integer initValue = 10;
+        final Integer newValue = 5;
         Cell cell = new Cell(coordinate, 10);
         cell.edit(false);
         cell.setValue(newValue);
