@@ -1,7 +1,5 @@
 package ar.fiuba.tdd.pgotuzzo;
 
-import com.sun.istack.internal.Nullable;
-
 public class Cell {
     private Coordinate coordinate;
     private Integer value;
@@ -21,7 +19,6 @@ public class Cell {
         return coordinate;
     }
 
-    @Nullable
     public Integer getValue() {
         return value;
     }
