@@ -1,21 +1,17 @@
 package ar.fiuba.tdd.grupo04.games;
 
-import com.google.gson.Gson;
-
 import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.json.model.JsonGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonMove;
 import ar.fiuba.tdd.grupo04.json.model.JsonMoves;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
-import ar.fiuba.tdd.grupo04.util.FileUtils;
+import ar.fiuba.tdd.pgotuzzo.util.FileUtils;
+import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class InshiNoHeyaTests {
     private IGame game;

@@ -2,36 +2,36 @@
     "board": {
         "rows": 5,
         "columns": 5,
-        "cellType": "Integer"
+        "cellType": "Number"
     },
     "loseRules": [
         {
             "collector": {
-                "type": "CustomGroupCollector",
+                "type": "CustomGroup",
                 "params": []
             },
-            "condition": ["UniqueCondition", "SumCondition"]
+            "condition": ["Unique"]
         },{
             "collector": {
-                "type": "AllCollector",
+                "type": "All",
                 "params": [10]
             },
-            "condition": ["AllLesserThanCondition"]
+            "condition": ["AllLesserThan"]
         },{
             "collector": {
-                "type": "AllCollector",
+                "type": "All",
                 "params": [0]
             },
-            "condition": ["AllGreaterThanCondition"]
+            "condition": ["AllGreaterThan"]
         }
     ],
     "winRules": [
         {
             "collector": {
-                "type": "CustomGroupCollector",
+                "type": "CustomGroup",
                 "params": []
             },
-            "condition": ["AllFilledCondition"]
+            "condition": ["AllFilled"]
         }
     ]
 }

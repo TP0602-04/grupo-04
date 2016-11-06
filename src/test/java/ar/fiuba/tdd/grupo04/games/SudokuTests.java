@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.games;
 
+import ar.fiuba.tdd.pgotuzzo.util.FileUtils;
 import com.google.gson.Gson;
 
 import ar.fiuba.tdd.grupo04.IGame;
@@ -9,7 +10,6 @@ import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonMove;
 import ar.fiuba.tdd.grupo04.json.model.JsonMoves;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
-import ar.fiuba.tdd.grupo04.util.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
