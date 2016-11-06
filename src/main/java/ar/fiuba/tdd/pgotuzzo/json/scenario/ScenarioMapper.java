@@ -8,13 +8,13 @@ public class ScenarioMapper {
     @SerializedName("initialValues")
     private List<CellMapper> initialValues;
     @SerializedName("references")
-    private List<ReferenceMapper> references;
+    private List<SlotMapper> references;
 
     public List<CellMapper> getInitialValues() {
         return initialValues;
     }
 
-    public List<ReferenceMapper> getReferences() {
+    public List<SlotMapper> getReferences() {
         return references;
     }
 }

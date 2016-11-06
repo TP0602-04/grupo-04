@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.pgotuzzo.rule;
 
-import ar.fiuba.tdd.pgotuzzo.Cell;
+import ar.fiuba.tdd.pgotuzzo.board.Cell;
 
 import java.util.ArrayList;
 import java.util.List;

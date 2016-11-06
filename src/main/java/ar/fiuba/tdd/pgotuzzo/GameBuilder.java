@@ -1,8 +1,12 @@
 package ar.fiuba.tdd.pgotuzzo;
 
+import ar.fiuba.tdd.pgotuzzo.board.Board;
+import ar.fiuba.tdd.pgotuzzo.board.IBoard;
+import ar.fiuba.tdd.pgotuzzo.board.Slot;
 import ar.fiuba.tdd.pgotuzzo.json.game.*;
 import ar.fiuba.tdd.pgotuzzo.json.scenario.CellMapper;
 import ar.fiuba.tdd.pgotuzzo.json.scenario.ScenarioMapper;
+import ar.fiuba.tdd.pgotuzzo.json.scenario.SlotMapper;
 import ar.fiuba.tdd.pgotuzzo.rule.IRule;
 import ar.fiuba.tdd.pgotuzzo.rule.Rule;
 import ar.fiuba.tdd.pgotuzzo.rule.collector.*;
@@ -48,13 +52,21 @@ public class GameBuilder {
         IGame game = new Game(board, winRules, loseRules);
 
         // Load Scenario
+        //      Initial values
         List<CellMapper> cellMappers = scenarioMapper.getInitialValues();
         List<Input> inputs =
                 cellMappers
                         .stream()
                         .map(GameBuilder::createInput)
                         .collect(Collectors.toList());
-        game.loadScenario(inputs);
+        //      Slots
+        List<SlotMapper> slotMappers = scenarioMapper.getReferences();
+        List<Slot> slots =
+                slotMappers
+                        .stream()
+                        .map(GameBuilder::createSlot)
+                        .collect(Collectors.toList());
+        game.loadScenario(inputs, slots);
 
         return game;
     }
@@ -83,6 +95,8 @@ public class GameBuilder {
             case BLOCKS:
                 int blockSize = collectorMapper.getParams().get(0);
                 return new BlockCollector(blockSize);
+            case CUSTOM:
+                return new CustomCollector();
             default:
                 throw new RuntimeException("Parsing error! Check collectors' name. " + type + " NOT VALID!");
         }
@@ -101,6 +115,8 @@ public class GameBuilder {
                 return new LesserThanCondition(maxValue);
             case FILLED:
                 return new FilledCondition();
+            case EQUALS_SUM:
+                return new EqualsSumCondition();
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }
@@ -113,6 +129,13 @@ public class GameBuilder {
         );
         Integer value = cellMapper.getValue();
         return new Input(coordinate, value);
+    }
+
+    private static Slot createSlot(SlotMapper slotMapper) {
+        return new Slot(
+                slotMapper.getCoordinates(),
+                slotMapper.getValue()
+        );
     }
 
 }

@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.pgotuzzo.rule.collector;
 
-import ar.fiuba.tdd.pgotuzzo.Cell;
-import ar.fiuba.tdd.pgotuzzo.IBoard;
+import ar.fiuba.tdd.pgotuzzo.board.Cell;
+import ar.fiuba.tdd.pgotuzzo.board.IBoard;
 import ar.fiuba.tdd.pgotuzzo.rule.CellGroup;
 
 import java.util.ArrayList;

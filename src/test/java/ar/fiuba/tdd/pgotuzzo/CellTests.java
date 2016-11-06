@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.pgotuzzo;
 
+import ar.fiuba.tdd.pgotuzzo.board.Cell;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

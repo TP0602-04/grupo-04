@@ -9,6 +9,7 @@ public class ConditionMapper {
     public static final String GREATER_THAN = "GreaterThan";
     public static final String LESSER_THAN = "LesserThan";
     public static final String FILLED = "Filled";
+    public static final String EQUALS_SUM = "EqualsSum";
 
     @SerializedName("type")
     private String type;

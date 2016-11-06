@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.pgotuzzo.rule;
 
-import ar.fiuba.tdd.pgotuzzo.IBoard;
+import ar.fiuba.tdd.pgotuzzo.board.IBoard;
 
 public interface IRule {
 

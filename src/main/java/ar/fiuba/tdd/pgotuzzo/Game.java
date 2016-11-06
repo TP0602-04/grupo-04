@@ -1,5 +1,7 @@
 package ar.fiuba.tdd.pgotuzzo;
 
+import ar.fiuba.tdd.pgotuzzo.board.IBoard;
+import ar.fiuba.tdd.pgotuzzo.board.Slot;
 import ar.fiuba.tdd.pgotuzzo.rule.IRule;
 
 import java.util.List;
@@ -16,10 +18,13 @@ public class Game implements IGame {
     }
 
     @Override
-    public void loadScenario(List<Input> initialValues) {
+    public void loadScenario(List<Input> initialValues, List<Slot> slots) {
         for (Input input : initialValues) {
             board.fill(input);
             board.lockCell(input.getCoordinate());
+        }
+        for (Slot slot : slots) {
+            board.addReference(slot);
         }
     }
 

@@ -1,4 +1,6 @@
-package ar.fiuba.tdd.pgotuzzo;
+package ar.fiuba.tdd.pgotuzzo.board;
+
+import ar.fiuba.tdd.pgotuzzo.Coordinate;
 
 public class Cell {
     private Coordinate coordinate;

@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.pgotuzzo.rule.condition;
 
-import ar.fiuba.tdd.pgotuzzo.Cell;
+import ar.fiuba.tdd.pgotuzzo.board.Cell;
 import ar.fiuba.tdd.pgotuzzo.Coordinate;
 import ar.fiuba.tdd.pgotuzzo.rule.CellGroup;
 import org.junit.Before;

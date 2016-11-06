@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.pgotuzzo.rule.collector;
 
-import ar.fiuba.tdd.pgotuzzo.Board;
-import ar.fiuba.tdd.pgotuzzo.IBoard;
+import ar.fiuba.tdd.pgotuzzo.board.Board;
+import ar.fiuba.tdd.pgotuzzo.board.IBoard;
 import ar.fiuba.tdd.pgotuzzo.rule.CellGroup;
 import org.junit.Before;
 import org.junit.BeforeClass;

@@ -1,4 +1,7 @@
-package ar.fiuba.tdd.pgotuzzo;
+package ar.fiuba.tdd.pgotuzzo.board;
+
+import ar.fiuba.tdd.pgotuzzo.Coordinate;
+import ar.fiuba.tdd.pgotuzzo.Input;
 
 import java.util.List;
 
@@ -15,5 +18,9 @@ public interface IBoard {
     void fill(Input input);
 
     void lockCell(Coordinate coordinate);
+
+    List<Reference> getReferences();
+
+    void addReference(Slot slot);
 
 }

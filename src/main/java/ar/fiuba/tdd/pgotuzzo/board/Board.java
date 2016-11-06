@@ -1,12 +1,17 @@
-package ar.fiuba.tdd.pgotuzzo;
+package ar.fiuba.tdd.pgotuzzo.board;
+
+import ar.fiuba.tdd.pgotuzzo.Coordinate;
+import ar.fiuba.tdd.pgotuzzo.Input;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board implements IBoard {
     private int rowSize;
     private int columnSize;
     private List<Cell> cells;
+    private List<Slot> slots;
 
     public Board(int rowSize, int columnSize) {
         this.rowSize = rowSize;
@@ -19,6 +24,7 @@ public class Board implements IBoard {
                 cells.add(cell);
             }
         }
+        slots = new ArrayList<>();
     }
 
     @Override
@@ -71,10 +77,16 @@ public class Board implements IBoard {
                 .forEach(cell -> cell.edit(false));
     }
 
-    private boolean checkBounds(Coordinate coordinate) {
-        int row = coordinate.row();
-        int column = coordinate.column();
-        return row >= 0 && row < rowSize && column >= 0 && column < columnSize;
+    @Override
+    public List<Reference> getReferences() {
+        return slots.stream()
+                .map(this::referenceFromSlot)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addReference(Slot slot) {
+        this.slots.add(slot);
     }
 
     @Override
@@ -84,11 +96,27 @@ public class Board implements IBoard {
             boardToString = boardToString + "\t==========================================================================\n";
             for (int j = 0; j < columnSize; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
-                boardToString = boardToString + "\t|\t" + getCell(coordinate).getValue();
+                Integer value = getCell(coordinate).getValue();
+                String stringValue = value == null ? "" : value.toString();
+                boardToString = boardToString + "\t|\t" + stringValue;
             }
             boardToString = boardToString + "\t|\t\n";
         }
         boardToString = boardToString + "\t==========================================================================";
         return boardToString;
+    }
+
+    private boolean checkBounds(Coordinate coordinate) {
+        int row = coordinate.row();
+        int column = coordinate.column();
+        return row >= 0 && row < rowSize && column >= 0 && column < columnSize;
+    }
+
+    private Reference referenceFromSlot(Slot slot) {
+        List<Cell> cellList = slot.getCoordinates()
+                .stream()
+                .map(this::getCell)
+                .collect(Collectors.toList());
+        return new Reference(cellList, slot.getValue());
     }
 }
