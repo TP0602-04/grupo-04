@@ -3,8 +3,8 @@ package ar.fiuba.tdd.grupo04.gui.cell;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class SmallReferenceCellView extends CellView {
     public SmallReferenceCellView(Coordinate coordinate, String referenceValue) {

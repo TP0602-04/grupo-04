@@ -25,7 +25,8 @@ public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implement
 
     @Override
     public boolean check(R inputGroup) {
-        final List<IInput<S>> markedInputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i -> isMarked.apply(i.getValue().get())).collect(Collectors.toList());
+        final List<IInput<S>> markedInputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent())
+                .filter(i -> isMarked.apply(i.getValue().get())).collect(Collectors.toList());
         final List<Coordinate> coordinates = markedInputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
 
         if (markedInputs.isEmpty()) {
@@ -116,7 +117,7 @@ public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implement
     // Busca las cuatro variaciones posibles empezando con (1,0)
     //
     // (1,0)->(0,1)->(-1,0)->(0,-1) esas transiciones la hace esta linea:
-    // Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row())
+    // Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row())
     // y la condicion de corte es el ultimo estado (columna -1)
     private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge, Coordinate coordinateDiff) {
         final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
@@ -126,7 +127,7 @@ public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implement
         if (newCoordinate.column() == -1) {
             Optional.empty();
         }
-        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row()));
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row()));
     }
 
     // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo

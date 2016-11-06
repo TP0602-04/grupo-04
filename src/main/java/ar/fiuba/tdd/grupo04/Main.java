@@ -1,15 +1,14 @@
 package ar.fiuba.tdd.grupo04;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.json.model.JsonGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonMove;
 import ar.fiuba.tdd.grupo04.json.model.JsonMoves;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.util.FileUtils;
+
 import com.google.gson.Gson;
 
-import java.util.List;
 
 public class Main {
     //    private static final String SUDOKU_PATH = "./src/main/resources/config/sudoku.json";
@@ -39,9 +38,9 @@ public class Main {
 
         System.out.println("+++++++++++++++START GAME++++++++++++++++");
         JsonMoves inputs = gson.fromJson(json1, JsonMoves.class);
-        int i = 0;
+        int count = 0;
         for (JsonMove input : inputs.inputs) {
-            System.out.println("JUGADA NUMERO: " + i++);
+            System.out.println("JUGADA NUMERO: " + count++);
             game.fillCell(input.getCoordinate(), input.getValue());
             if (game.checkLoseRules()) {
                 System.out.println("PERDISTE");

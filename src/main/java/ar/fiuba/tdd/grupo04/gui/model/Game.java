@@ -2,7 +2,7 @@ package ar.fiuba.tdd.grupo04.gui.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
+/*
  * Json mapper for GUI configuration
  */
 public class Game {
