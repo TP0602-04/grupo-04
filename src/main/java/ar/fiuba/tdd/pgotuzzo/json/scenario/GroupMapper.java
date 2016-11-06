@@ -19,9 +19,9 @@ public class GroupMapper {
     public List<Coordinate> getCoordinates() {
         List<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < rowLarge; i++) {
-            for(int j = 0; j < columnLarge; j++) {
-                int row = rowOffset + i;
-                int column = columnOffset + j;
+            for (int j = 0; j < columnLarge; j++) {
+                int row = rowOffset + j;
+                int column = columnOffset + i;
                 Coordinate coordinate = new Coordinate(row, column);
                 coordinates.add(coordinate);
             }

@@ -117,6 +117,8 @@ public class GameBuilder {
                 return new FilledCondition();
             case EQUALS_SUM:
                 return new EqualsSumCondition();
+            case EQUALS_MULTIPLY:
+                return new EqualsMultiplyCondition();
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }

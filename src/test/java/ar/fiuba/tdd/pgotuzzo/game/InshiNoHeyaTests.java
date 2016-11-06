@@ -14,10 +14,11 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class KakuroTests {
-    private static final String FILE_GAME = "./src/main/resources/Kakuro/Kakuro.json";
-    private static final String FILE_SCENARIO = "./src/main/resources/Kakuro/init-1/init.json";
-    private static final String FILE_MOVES = "./src/main/resources/Kakuro/init-1/input-1.json";
+public class InshiNoHeyaTests {
+
+    private static final String FILE_GAME = "./src/main/resources/InshiNoHeya/InshiNoHeya.json";
+    private static final String FILE_SCENARIO = "./src/main/resources/InshiNoHeya/init-1/init.json";
+    private static final String FILE_MOVES = "./src/main/resources/InshiNoHeya/init-1/input-1.json";
 
     private static Gson gson;
 
@@ -31,7 +32,7 @@ public class KakuroTests {
 
     @Before
     public void init() {
-        // Game creation - Kakuro
+        // Game creation - InshiNoHeya
         game = GameBuilder.createGame(FILE_GAME, FILE_SCENARIO);
 
         // Inputs

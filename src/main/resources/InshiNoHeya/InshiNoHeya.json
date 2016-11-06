@@ -7,31 +7,53 @@
     "loseRules": [
         {
             "collector": {
-                "type": "RowsCollector",
+                "type": "Rows",
                 "params": []
             },
-            "condition": ["UniqueCondition"]
-        },{
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                }
+            ]
+        },
+        {
             "collector": {
-                "type": "ColumnsCollector",
+                "type": "Columns",
                 "params": []
             },
-            "condition": ["UniqueCondition"]
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                }
+            ]
         }
     ],
     "winRules": [
         {
             "collector": {
-                "type": "CustomGroupCollector",
+                "type": "Custom",
                 "params": []
             },
-            "condition": ["MultiplyCondition"]
-        },{
+            "conditions": [
+                {
+                    "type": "EqualsMultiply",
+                    "params": []
+                }
+            ]
+        },
+        {
             "collector": {
-                "type": "AllCollector",
+                "type": "All",
                 "params": []
             },
-            "condition": ["AllFilledCondition"]
+            "conditions": [
+                {
+                    "type": "Filled",
+                    "params": []
+                }
+            ]
         }
     ]
 }
