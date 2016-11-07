@@ -3,7 +3,7 @@
     "references": [
         {
             "values": [0, 1],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 0,
                     "columnOffset": 0,
@@ -13,7 +13,7 @@
             ]
         },{
             "values": [0, 5],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 0,
                     "columnOffset": 1,
@@ -28,17 +28,17 @@
             ]
         },{
             "values": [1, 1],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 0,
                     "columnOffset": 2,
                     "rowLarge": 2,
                     "columnLarge": 1
-                    ]
                 }
+            ]
         },{
             "values": [0, 3],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 1,
                     "columnOffset": 2,
@@ -53,7 +53,7 @@
             ]
         },{
             "values": [0, 3],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 2,
                     "columnOffset": 2,
@@ -68,7 +68,7 @@
             ]
         },{
             "values": [2, 2],
-            "group": [
+            "groups": [
                 {
                     "rowOffset": 3,
                     "columnOffset": 0,

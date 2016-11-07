@@ -18,13 +18,16 @@ public class ValuedCollector implements ICollector<CellGroup> {
     @Override
     public List<CellGroup> collect(IBoard board) {
         List<CellGroup> cellGroups = new ArrayList<>();
-        List<Cell> cells = board
-                .getCells()
+        cellGroups.add(collect(board.getCells()));
+        return cellGroups;
+    }
+
+    public CellGroup collect(List<Cell> source) {
+        List<Cell> cells = source
                 .stream()
                 .filter(cell -> cell.getValue() != null)
                 .filter(cell -> cell.getValue().equals(filterValue))
                 .collect(Collectors.toList());
-        cellGroups.add(new CellGroup(cells));
-        return cellGroups;
+        return new CellGroup(cells);
     }
 }

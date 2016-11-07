@@ -85,6 +85,7 @@ public class GameBuilder {
 
     private static ICollector createCollector(CollectorMapper collectorMapper) {
         final String type = collectorMapper.getType();
+        int filterValue;
         switch (type) {
             case ALL:
                 return new AllCollector();
@@ -95,11 +96,14 @@ public class GameBuilder {
             case BLOCKS:
                 int blockSize = collectorMapper.getParams().get(0);
                 return new BlockCollector(blockSize);
+            case VALUED:
+                filterValue = collectorMapper.getParams().get(0);
+                return new ValuedCollector(filterValue);
             case CUSTOM:
                 return new CustomCollector();
-            case VALUED:
-                int filterValue = collectorMapper.getParams().get(0);
-                return new ValuedCollector(filterValue);
+            case CUSTOM_VALUED:
+                filterValue = collectorMapper.getParams().get(0);
+                return new CustomValuedCollector(filterValue);
             default:
                 throw new RuntimeException("Parsing error! Check collectors' name. " + type + " NOT VALID!");
         }
@@ -124,6 +128,8 @@ public class GameBuilder {
                 return new EqualsMultiplyCondition();
             case LOOP:
                 return new LoopCondition();
+            case COUNT_WITHIN_RANGE:
+                return new CountWithinRange();
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }

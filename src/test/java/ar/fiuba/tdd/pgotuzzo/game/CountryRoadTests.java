@@ -29,26 +29,29 @@ public class CountryRoadTests {
         gson = new Gson();
     }
 
-    // FIXME - Continue HERE
-//    @Before
-//    public void init() {
-//        // Game creation - CountryRoad
-//        game = GameBuilder.createGame(FILE_GAME, FILE_SCENARIO);
-//
-//        // Inputs
-//        String json = FileUtils.readFile(FILE_MOVES);
-//        InputsMapper inputsMapper = gson.fromJson(json, InputsMapper.class);
-//        inputs = inputsMapper.getInputs();
-//    }
-//
-//    @Test
-//    public void testWinGame() {
-//        for (Input input : inputs) {
-//            System.out.println(game.printBoard());
-//            game.play(input);
-//        }
-//        System.out.println(game.printBoard());
-//        assertTrue(game.hasWin());
-//    }
+    @Before
+    public void init() {
+        // Game creation - CountryRoad
+        game = GameBuilder.createGame(FILE_GAME, FILE_SCENARIO);
+
+        // Inputs
+        String json = FileUtils.readFile(FILE_MOVES);
+        InputsMapper inputsMapper = gson.fromJson(json, InputsMapper.class);
+        inputs = inputsMapper.getInputs();
+    }
+
+    @Test
+    public void testWinGame() {
+        System.out.println("======================== INIT ==============================");
+        System.out.println(game.printBoard());
+        for (Input input : inputs) {
+            System.out.println("======================== MOVE ==============================");
+            game.play(input);
+            System.out.println(game.printBoard());
+            game.hasWin();
+            System.out.println("============================================================");
+        }
+        assertTrue(game.hasWin());
+    }
 
 }

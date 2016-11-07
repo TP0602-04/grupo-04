@@ -44,8 +44,8 @@ public class BoardTests {
     @Test
     public void testGetExistingCell() {
         Coordinate coordinate = new Coordinate(
-                random.nextInt(rowSize - 1),
-                random.nextInt(columnSize - 1)
+                random.ints(MIN_BOARD_SIZE, rowSize).iterator().nextInt(),
+                random.ints(MIN_BOARD_SIZE, columnSize).iterator().nextInt()
         );
         assertNotNull(board.getCell(coordinate));
     }

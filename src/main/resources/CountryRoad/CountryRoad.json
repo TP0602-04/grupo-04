@@ -1,7 +1,7 @@
 {
     "board": {
-        "rows": 5,
-        "columns": 5,
+        "rows": 4,
+        "columns": 4,
         "cellType": "Integer"
     },
     "loseRules": [

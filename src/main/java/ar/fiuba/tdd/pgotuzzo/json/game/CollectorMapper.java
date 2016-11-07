@@ -9,8 +9,9 @@ public class CollectorMapper {
     public static final String ROWS = "Rows";
     public static final String COLUMNS = "Columns";
     public static final String BLOCKS = "Blocks";
-    public static final String CUSTOM = "Custom";
     public static final String VALUED = "Valued";
+    public static final String CUSTOM = "Custom";
+    public static final String CUSTOM_VALUED = "CustomValued";
 
     @SerializedName("type")
     private String type;

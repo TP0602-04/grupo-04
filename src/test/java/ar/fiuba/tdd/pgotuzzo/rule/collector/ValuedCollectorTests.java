@@ -34,15 +34,14 @@ public class ValuedCollectorTests {
     public void initTest() {
         rowSize = random.nextInt(MAX_SIZE);
         columnSize = random.nextInt(MAX_SIZE);
-        valuedAmount = random.nextInt(MAX_SIZE);
+        valuedAmount = (rowSize / 2) * (columnSize / 2);
         board = new Board(rowSize, columnSize);
-        for (int i = 0; i < valuedAmount; i++) {
-            Coordinate coordinate = new Coordinate(
-                    random.nextInt(rowSize),
-                    random.nextInt(columnSize)
-            );
-            Input input = new Input(coordinate, VALUE);
-            board.fill(input);
+        for (int i = 0; i < rowSize / 2; i++) {
+            for (int j = 0; j < columnSize / 2; j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                Input input = new Input(coordinate, VALUE);
+                board.fill(input);
+            }
         }
         collector = new ValuedCollector(VALUE);
     }
@@ -51,13 +50,13 @@ public class ValuedCollectorTests {
     public void testCollect_1() {
         assertEquals(1, collector.collect(board).size());
     }
-// FIXME - Continue HERE!!
-//    @Test
-//    public void testCollect_2() {
-//        List<CellGroup> groups = collector.collect(board);
-//        for (CellGroup group : groups) {
-//            assertEquals(valuedAmount, group.getCells().size());
-//        }
-//    }
+
+    @Test
+    public void testCollect_2() {
+        List<CellGroup> groups = collector.collect(board);
+        for (CellGroup group : groups) {
+            assertEquals(valuedAmount, group.getCells().size());
+        }
+    }
 
 }
