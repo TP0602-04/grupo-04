@@ -12,14 +12,15 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
-public class AllCollectorTests {
-    private static final int MAX_SIZE = 100;
+public class BlockCollectorTests {
+    private static final int BASE_SIZE = 20;
+    private static final int MAX_MULTIPLIER = 10;
     private static Random random;
 
     private IBoard board;
-    private int rowSize;
-    private int columnSize;
-    private AllCollector collector;
+    private int blockSize;
+    private int blockAmount;
+    private BlockCollector collector;
 
     @BeforeClass
     public static void initClass() {
@@ -28,22 +29,24 @@ public class AllCollectorTests {
 
     @Before
     public void initTest() {
-        rowSize = random.nextInt(MAX_SIZE);
-        columnSize = random.nextInt(MAX_SIZE);
-        board = new Board(rowSize, columnSize);
-        collector = new AllCollector();
+        int multiplier = random.ints(1, MAX_MULTIPLIER).iterator().nextInt();
+        blockSize = random.ints(1, BASE_SIZE).iterator().nextInt();
+        int boardSize = blockSize * multiplier;
+        blockAmount = multiplier * multiplier;
+        board = new Board(boardSize, boardSize);
+        collector = new BlockCollector(blockSize);
     }
 
     @Test
     public void testCollect_1() {
-        assertEquals(1, collector.collect(board).size());
+        assertEquals(blockAmount, collector.collect(board).size());
     }
 
     @Test
     public void testCollect_2() {
         List<CellGroup> groups = collector.collect(board);
         for (CellGroup group : groups) {
-            assertEquals(columnSize * rowSize, group.getCells().size());
+            assertEquals(blockSize * blockSize, group.getCells().size());
         }
     }
 

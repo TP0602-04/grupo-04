@@ -1,18 +1,22 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.board.IInput;
-import ar.fiuba.tdd.grupo04.rule.IInputGroup;
+import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
-import java.util.List;
-import java.util.Optional;
-
-public class UniqueCondition implements ICondition {
-
+public class UniqueCondition implements ICondition<CellGroup> {
     @Override
-    public boolean check(IInputGroup inputGroup) {
-        final List<IInput> inputs = inputGroup.getInputs();
-        final long diffCount = inputs.stream().map(IInput::getValue).filter(Optional::isPresent).map(Optional::get).distinct().count();
-        final long count = inputs.stream().map(IInput::getValue).filter(Optional::isPresent).map(Optional::get).count();
-        return diffCount == count;
+    public boolean check(CellGroup cellGroup) {
+        return cellGroup
+                .getFilledCells()
+                .stream()
+                .map(cell -> checkRepeated(cellGroup, cell.getValue()))
+                .reduce(true, (b1, b2) -> b1 && b2);
+    }
+
+    private boolean checkRepeated(CellGroup cellGroup, int value) {
+        long count = cellGroup
+                .getFilledCells()
+                .stream()
+                .filter(cell -> cell.getValue() == value).count();
+        return count == 1;
     }
 }

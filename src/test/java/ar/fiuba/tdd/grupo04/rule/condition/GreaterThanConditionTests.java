@@ -14,15 +14,15 @@ import java.util.Random;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class UniqueConditionTests {
+public class GreaterThanConditionTests {
     private static final int MAX_GROUP_SIZE = 1000;
 
     private static Random random;
 
-    private Cell repeatedCell;
+    private Cell borderCell;
     private CellGroup group;
     private CellGroup groupWithEmptyCells;
-    private UniqueCondition condition;
+    private GreaterThanCondition condition;
 
     @BeforeClass
     public static void initClass() {
@@ -32,6 +32,7 @@ public class UniqueConditionTests {
     @Before
     public void initTest() {
         int size = random.ints(1, MAX_GROUP_SIZE).iterator().next();
+        int minValue = random.ints(Integer.MIN_VALUE, Integer.MAX_VALUE - 1).iterator().nextInt();
         // init groups
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -39,7 +40,8 @@ public class UniqueConditionTests {
                     random.nextInt(),
                     random.nextInt()
             );
-            Cell cell = new Cell(coordinate, i);
+            int value = random.ints(minValue + 1, Integer.MAX_VALUE).iterator().nextInt();
+            Cell cell = new Cell(coordinate, value);
             cells.add(cell);
         }
         group = new CellGroup(cells);
@@ -48,13 +50,14 @@ public class UniqueConditionTests {
         );
         cells.add(emptyCell);
         groupWithEmptyCells = new CellGroup(cells);
-        // init repeated cell
-        repeatedCell = new Cell(
-                new Coordinate(random.nextInt(), random.nextInt()),
-                0
+        // init borer cell
+        Coordinate coordinate = new Coordinate(
+                random.nextInt(),
+                random.nextInt()
         );
+        borderCell = new Cell(coordinate, minValue);
         // init condition
-        condition = new UniqueCondition();
+        condition = new GreaterThanCondition(minValue);
     }
 
     @Test
@@ -70,7 +73,7 @@ public class UniqueConditionTests {
     @Test
     public void testCheckFailed_1() {
         List<Cell> cells = group.getCells();
-        cells.add(repeatedCell);
+        cells.add(borderCell);
         CellGroup otherGroup = new CellGroup(cells);
         assertFalse(condition.check(otherGroup));
     }
@@ -78,8 +81,9 @@ public class UniqueConditionTests {
     @Test
     public void testCheckFailed_2() {
         List<Cell> cells = groupWithEmptyCells.getCells();
-        cells.add(repeatedCell);
+        cells.add(borderCell);
         CellGroup otherGroup = new CellGroup(cells);
         assertFalse(condition.check(otherGroup));
     }
+
 }

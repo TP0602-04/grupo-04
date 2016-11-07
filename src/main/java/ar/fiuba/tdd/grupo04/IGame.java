@@ -1,23 +1,19 @@
 package ar.fiuba.tdd.grupo04;
 
+import ar.fiuba.tdd.grupo04.board.Slot;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.IBoard;
-import ar.fiuba.tdd.grupo04.rule.IRule;
+import java.util.List;
 
-/**
- * Interface for a game.
- */
-public interface IGame<T, S> {
-    void fillCell(final Coordinate coordinate, final T value);
+public interface IGame {
 
-    boolean checkWinRules();
+    void loadScenario(List<Input> initialValues, List<Slot> slots);
 
-    boolean checkLoseRules();
+    void play(Input input);
 
-    void addWinRule(IRule rule);
+    boolean hasWin();
 
-    void addLoseRule(IRule rule);
+    boolean hasLose();
 
-    void setBoard(IBoard board);
+    String printBoard();
+
 }

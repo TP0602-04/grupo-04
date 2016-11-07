@@ -1,11 +1,26 @@
 package ar.fiuba.tdd.grupo04.board;
 
-public interface IBoard<T> {
-    void put(T value, Coordinate coordinate);
+import ar.fiuba.tdd.grupo04.Coordinate;
+import ar.fiuba.tdd.grupo04.Input;
 
-    IInput<T> get(Coordinate coordinate);
+import java.util.List;
 
-    Integer rowsLength();
+public interface IBoard {
 
-    Integer columnsLength();
+    int getRowSize();
+
+    int getColumnSize();
+
+    Cell getCell(Coordinate coordinate);
+
+    List<Cell> getCells();
+
+    void fill(Input input);
+
+    void lockCell(Coordinate coordinate);
+
+    List<Reference> getReferences();
+
+    void addReference(Slot slot);
+
 }
