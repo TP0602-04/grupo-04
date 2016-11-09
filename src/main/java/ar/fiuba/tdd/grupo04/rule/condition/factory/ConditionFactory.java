@@ -1,4 +1,12 @@
-package ar.fiuba.tdd.grupo04.rule.condition;
+package ar.fiuba.tdd.grupo04.rule.condition.factory;
+
+import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.AllGreaterThanCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.AllLesserThanCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.ICondition;
+import ar.fiuba.tdd.grupo04.rule.condition.MultiplyCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.SumCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 import java.util.HashMap;
 import java.util.Map;

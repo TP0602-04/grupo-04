@@ -67,7 +67,8 @@ public class GameJsonParser {
         // Load initial values
         List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
         for (Pair<Coordinate, Integer> cell : initialValues) {
-            game.fillCell(cell.getKey(), cell.getValue());
+            //TODO
+//            game.fillCell(cell.getKey(), cell.getValue());
         }
 
         return game;

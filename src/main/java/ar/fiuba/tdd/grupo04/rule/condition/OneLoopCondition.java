@@ -1,24 +1,44 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.inputs.GraphInput;
+import ar.fiuba.tdd.grupo04.inputs.GraphInputType;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("CPD-START")
-public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition<R> {
-    private final Function<S, Boolean> isNode;
-    private final Function<S, Boolean> isConsidered;
+public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICondition<R> {
+    @Override
+    public boolean check(R inputGroup) {
+        final List<GraphInput> inputs = inputGroup.getInputs().stream().filter(GraphInput::isMarked).collect(Collectors.toList());
+        final List<Coordinate> coordinates = inputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
 
-    public OneLoopCondition(Function<S, Boolean> isNode, Function<S, Boolean> isConsidered) {
-        this.isNode = isNode;
-        this.isConsidered = isConsidered;
+        List<Coordinate> path = new ArrayList<>();
+        Optional<GraphInput> firstNodeInput = getFirstNode(inputs);
+
+        if (!firstNodeInput.isPresent()) {
+            return false;
+        }
+        Coordinate firstNode = firstNodeInput.get().getCoordinate();
+        path.add(firstNode);
+        Optional<Coordinate> actualNode = Optional.of(firstNode);
+
+        Optional<Coordinate> actualEdge = getNextEdge(coordinates, firstNode);
+        if (!actualEdge.isPresent()) {
+            return false;
+        }
+        path.add(actualEdge.get());
+
+        boolean isOneLoop = isOneLoop(actualEdge, actualNode, firstNode, path, coordinates);
+        // Check if there is only one loop all inputs are in path
+        return isOneLoop && path.size() == coordinates.size();
     }
+
 
     private boolean isOneLoop(Optional<Coordinate> actualEdge, Optional<Coordinate> actualNode,
                               Coordinate firstNode, List<Coordinate> path, List<Coordinate> coordinates) {
@@ -47,35 +67,8 @@ public class OneLoopCondition<S, R extends IInputGroup<S>> implements ICondition
         return true;
     }
 
-    @Override
-    public boolean check(R inputGroup) {
-        final List<IInput<S>> inputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i ->
-                                                   isConsidered.apply(i.getValue().get())).collect(Collectors.toList());
-        final List<Coordinate> coordinates = inputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
-
-        List<Coordinate> path = new ArrayList<>();
-        Optional<IInput<S>> firstNodeInput = getFirstNode(inputs);
-
-        if (!firstNodeInput.isPresent()) {
-            return false;
-        }
-        Coordinate firstNode = firstNodeInput.get().getCoordinate();
-        path.add(firstNode);
-        Optional<Coordinate> actualNode = Optional.of(firstNode);
-
-        Optional<Coordinate> actualEdge = getNextEdge(coordinates, firstNode);
-        if (!actualEdge.isPresent()) {
-            return false;
-        }
-        path.add(actualEdge.get());
-
-        boolean isOneLoop = isOneLoop(actualEdge, actualNode, firstNode, path, coordinates);
-        // Check if there is only one loop all inputs are in path
-        return isOneLoop && path.size() == coordinates.size();
-    }
-
-    private Optional<IInput<S>> getFirstNode(List<IInput<S>> graphElements) {
-        return graphElements.stream().filter(i -> isNode.apply(i.getValue().get())).findFirst();
+    private Optional<GraphInput> getFirstNode(List<GraphInput> graphElements) {
+        return graphElements.stream().filter(i -> i.getType().equals(GraphInputType.NODE)).findFirst();
     }
 
     private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode) {

@@ -1,26 +1,21 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.Optional;
+import java.util.function.BinaryOperator;
 
-public class SumCondition<R extends IValuedInputGroup<Integer, Integer>> implements ICondition<R> {
+public class SumCondition<R extends IValuedInputGroup<NumericInput, Integer>> implements ICondition<R> {
+    private final OperationCondition<IValuedInputGroup<NumericInput, Integer>> sumOperation;
 
-    /*
-     * Returns false if all the inputs of the group are present and
-     * don't sum the group value, true otherwise
-     * @param valuedInputGroup the input group to check
-     * @return if the group sums the value or is incomplete
-     */
+    public SumCondition() {
+        sumOperation = new OperationCondition<>(1, Integer::sum);
+    }
+
+    @Override
     public boolean check(R valuedInputGroup) {
-        final Integer value = valuedInputGroup.getValue();
-        final boolean allMatch =
-                            valuedInputGroup.getInputs().stream().map(IInput::getValue).allMatch(Optional::isPresent);
-        if (allMatch) {
-            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue).map(Optional::get)
-                                                                                    .mapToInt(Integer::intValue).sum());
-        }
-        return true;
+        return sumOperation.check(valuedInputGroup);
     }
 }

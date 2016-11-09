@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.grupo04.json.parser;
 
-import ar.fiuba.tdd.grupo04.rule.condition.ConditionFactory;
+import ar.fiuba.tdd.grupo04.rule.condition.factory.ConditionFactory;
 import ar.fiuba.tdd.grupo04.rule.condition.ICondition;
 
 import java.util.ArrayList;

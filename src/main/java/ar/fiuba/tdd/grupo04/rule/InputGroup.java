@@ -1,18 +1,18 @@
 package ar.fiuba.tdd.grupo04.rule;
 
-import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 
 import java.util.List;
 
-public class InputGroup<T> implements IInputGroup<T> {
+public class InputGroup implements IInputGroup {
 
-    private final List<IInput<T>> inputs;
+    private final List<IInput> inputs;
 
-    public InputGroup(List<IInput<T>> inputs) {
+    public InputGroup(List<IInput> inputs) {
         this.inputs = inputs;
     }
 
-    public List<IInput<T>> getInputs() {
+    public List<IInput> getInputs() {
         return inputs;
     }
 }

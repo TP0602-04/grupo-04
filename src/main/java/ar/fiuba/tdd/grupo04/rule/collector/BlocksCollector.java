@@ -1,18 +1,18 @@
 package ar.fiuba.tdd.grupo04.rule.collector;
 
-import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.rule.InputGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlocksCollector<T> implements ICollector {
-    private Board<T> board;
+public class BlocksCollector implements ICollector {
+    private IBoard board;
     private final Integer width;
     private final Integer height;
 
-    public BlocksCollector(Board<T> board, Integer width, Integer height) {
+    public BlocksCollector(IBoard board, Integer width, Integer height) {
         this.board = board;
         this.width = width;
         this.height = height;

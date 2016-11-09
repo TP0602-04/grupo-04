@@ -54,7 +54,7 @@ public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener 
     @Override
     public void onSubmit(Coordinate coordinate, String input) {
         // FIXME - THE CAST SHOULD BE HANDLED BY ANOTHER COMPONENT - NOT DECIDED YET!!!
-        game.fillCell(coordinate, Integer.valueOf(input));
+//        game.fillCell(coordinate, Integer.valueOf(input));
         boardView.setCellValue(coordinate, input);
         if (game.checkWinRules()) {
             System.out.println("GANASTE");

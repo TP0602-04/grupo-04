@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.grupo04.games;
+package ar.fiuba.tdd.grupo04.inputs;
 
 public enum GraphInputType {
     EDGE,

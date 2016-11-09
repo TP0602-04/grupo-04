@@ -2,6 +2,7 @@ package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.IBoard;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.rule.IRule;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import java.util.List;
 /**
  * Interface for a game.
  */
-public class Game<T, S> implements IGame<T, S> {
-    private IBoard<T> board;
+public class Game<R extends IInput> implements IGame<R> {
+    private IBoard<R> board;
     private List<IRule> winRules;
     private List<IRule> loseRules;
 
@@ -21,9 +22,8 @@ public class Game<T, S> implements IGame<T, S> {
     }
 
     @Override
-    public void fillCell(final Coordinate coordinate, T value) {
-        //do nothing if cell is already filled
-        board.put(value, coordinate);
+    public R getCell(final Coordinate coordinate) {
+        return board.get(coordinate);
     }
 
     @Override

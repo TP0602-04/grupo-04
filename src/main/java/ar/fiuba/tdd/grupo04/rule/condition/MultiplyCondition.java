@@ -1,21 +1,21 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.Optional;
 
 @SuppressWarnings("CPD-START")
-public class MultiplyCondition<R extends IValuedInputGroup<Integer, Integer>> implements ICondition<R> {
+public class MultiplyCondition<R extends IValuedInputGroup<NumericInput, Integer>> implements ICondition<R> {
+    private final OperationCondition<IValuedInputGroup<NumericInput, Integer>> multiplyOperation;
 
+    public MultiplyCondition() {
+        multiplyOperation = new OperationCondition<>(1, (mem, val) -> mem * val);
+    }
+
+    @Override
     public boolean check(R valuedInputGroup) {
-        final Integer value = valuedInputGroup.getValue();
-        final boolean allMatch = valuedInputGroup.getInputs().stream().map(IInput::getValue).allMatch(Optional::isPresent);
-        if (allMatch) {
-            //TODO: Arreglar esa negrada de aaA y bbB con nombres reales
-            return value.equals(valuedInputGroup.getInputs().stream().map(IInput::getValue)
-                                        .map(Optional::get).reduce(1, (foo, bar) -> foo * bar));
-        }
-        return true;
+        return multiplyOperation.check(valuedInputGroup);
     }
 }

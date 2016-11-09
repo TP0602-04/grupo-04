@@ -4,7 +4,10 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.inputs.factories.NumericInputFactory;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
@@ -16,8 +19,8 @@ import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 @SuppressWarnings("CPD-START")
 public class InshiNoHeya {
-    IGame game;
-    private Board board;
+    IGame<NumericInput> game;
+    private IBoard<NumericInput> board;
     private CustomGroupCollector customGroupCollector;
 
     @SuppressWarnings("CPD-START")
@@ -30,9 +33,9 @@ public class InshiNoHeya {
 
         game = new Game();
         // Esto se levanta del json de juego
-        board = new Board(5, 5);
+        board = new Board(5, 5, new NumericInputFactory());
         game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector<>(board);
+        customGroupCollector = new CustomGroupCollector(board);
         game.addLoseRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
         game.addLoseRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
@@ -40,9 +43,9 @@ public class InshiNoHeya {
     }
 
     private void createBoard() {
-        game.fillCell(new Coordinate(1, 1), 1);
-        game.fillCell(new Coordinate(3, 1), 2);
-        game.fillCell(new Coordinate(5, 1), 4);
+        game.getCell(new Coordinate(1, 1)).setValue(1);
+        game.getCell(new Coordinate(3, 1)).setValue(2);
+        game.getCell(new Coordinate(5, 1)).setValue(4);
         // Aca van todos los grupos que suman numeros;
         // Esto se levanta del json de escenario
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
@@ -68,7 +71,7 @@ public class InshiNoHeya {
         // aca estaria el loop con el input
         // fillCell tendria q fijarse q no esta puesto ya o algo asi
         while (game.checkWinRules()) {
-            game.fillCell(new Coordinate(2, 7), 8);
+            game.getCell(new Coordinate(2, 7)).setValue(8);
         }
     }
 }

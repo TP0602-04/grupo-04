@@ -1,12 +1,12 @@
-package ar.fiuba.tdd.grupo04.games;
+package ar.fiuba.tdd.grupo04.inputs;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 
-public class ValuedCoordinate<T> {
+public class ValuedCoordinate {
     private final Coordinate coordinate;
-    private final T value;
+    private final Integer value;
 
-    public ValuedCoordinate(Coordinate coordinate, T value) {
+    public ValuedCoordinate(Coordinate coordinate, Integer value) {
         this.coordinate = coordinate;
         this.value = value;
     }
@@ -15,7 +15,7 @@ public class ValuedCoordinate<T> {
         return coordinate;
     }
 
-    public T getValue() {
+    public Integer getValue() {
         return value;
     }
 }

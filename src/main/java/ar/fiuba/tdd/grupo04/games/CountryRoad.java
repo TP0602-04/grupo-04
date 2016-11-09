@@ -4,23 +4,26 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.inputs.GraphInput;
+import ar.fiuba.tdd.grupo04.inputs.factories.GraphInputFactory;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
 import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.AllMarkedContiguousCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.CountCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.CountNodesBiggerCondition;
+import ar.fiuba.tdd.grupo04.rule.condition.CountNodesEqualCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.EmptyContiguousInGroupCondition;
 import ar.fiuba.tdd.grupo04.rule.condition.OneLoopCondition;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @SuppressWarnings("CPD-START")
 public class CountryRoad {
-    IGame game;
-    private Board<GraphInput> board;
+    IGame<GraphInput> game;
+    private IBoard<GraphInput> board;
     private CustomGroupCollector customGroupCollector;
 
     public CountryRoad() {
@@ -38,28 +41,25 @@ public class CountryRoad {
             (i & 1) != 0 && (j & 1) != 0)
             los que tienen una coorc impar y una par son los segmentos que puede unir (uniendo dos pares de coord pares)
         */
-        board = new Board(18, 18);
-        initBoard();
+        board = new Board(18, 18, new GraphInputFactory());
         game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector<>(board);
+        customGroupCollector = new CustomGroupCollector(board);
 
-        Function<GraphInput, Boolean> isNode = GraphInputType.NODE::equals;
-        Function<GraphInput, Boolean> isMarked = GraphInput::getMarked;
         BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
 
-        customGroupCollector = new CustomGroupCollector<>(board);
-        game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition(isMarked, isNode)));
-        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition(isNode, isMarked)));
+        customGroupCollector = new CustomGroupCollector(board);
+        game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition()));
+        game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
-        game.addWinRule(new Rule<>(customGroupCollector, new CountCondition(isNode, (expected, counted) -> expected == counted)));
-        game.addLoseRule(new Rule<>(customGroupCollector, new CountCondition(isNode, bigger)));
-        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition(isMarked, isNode, board)));
+        game.addWinRule(new Rule<>(customGroupCollector, new CountNodesEqualCondition()));
+        game.addLoseRule(new Rule<>(customGroupCollector, new CountNodesBiggerCondition()));
+        game.addLoseRule(new Rule<>(customGroupCollector, new EmptyContiguousInGroupCondition(board)));
     }
 
     private void createBoard() {
-        game.fillCell(new Coordinate(1, 1), 1);
-        game.fillCell(new Coordinate(3, 1), 2);
-        game.fillCell(new Coordinate(5, 1), 4);
+        game.getCell(new Coordinate(1, 1)).toogleMarked();
+        game.getCell(new Coordinate(3, 1)).toogleMarked();
+        game.getCell(new Coordinate(5, 1)).toogleMarked();
         // Aca van todos los grupos que suman numeros;
         // Esto se levanta del json de escenario
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
@@ -79,20 +79,6 @@ public class CountryRoad {
                 .createReference());
     }
 
-    private void initBoard() {
-        for (int i = 0; i < 18; i++) {
-            for (int j = 0; j < 18; j++) {
-                GraphInput graphInput = new GraphInput(GraphInputType.EDGE, false);
-                if ((i & 1) == 0 && (j & 1) == 0) {
-                    graphInput = new GraphInput(GraphInputType.NODE, false);
-                } else if ((i & 1) != 0 && (j & 1) != 0) {
-                    graphInput = new GraphInput(GraphInputType.INVALID_ELEMENT, false);
-                }
-                board.put(graphInput, new Coordinate(i, j));
-            }
-        }
-    }
-
     public void playGame() {
         // aca estaria el loop con el input
         // fillCell tendria q fijarse q no esta puesto ya o algo asi
@@ -108,7 +94,7 @@ public class CountryRoad {
 
 
         while (game.checkWinRules()) {
-            game.fillCell(new Coordinate(2, 7), 8);
+            game.getCell(new Coordinate(2, 7)).toogleMarked();
         }
     }
 }

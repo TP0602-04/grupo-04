@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.json.model.JsonGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonMove;
@@ -28,7 +29,7 @@ public class Main {
         }
         Gson gson = new Gson();
         JsonGame jsonGame = gson.fromJson(json2, JsonGame.class);
-        IGame game = null;
+        IGame<NumericInput> game = null;
         try {
             JsonInitGame jsonInitGame = gson.fromJson(json3, JsonInitGame.class);
             game = GameJsonParser.parseLoad(jsonGame, jsonInitGame);
@@ -43,7 +44,7 @@ public class Main {
         for (JsonMove input : inputs.inputs) {
             Coordinate coordinate = new Coordinate(input.x, input.y);
             System.out.println("JUGADA NUMERO: " + i++);
-            game.fillCell(coordinate, input.value);
+            game.getCell(coordinate).setValue(input.value);
             if (game.checkLoseRules()) {
                 System.out.println("PERDISTE");
             } else {

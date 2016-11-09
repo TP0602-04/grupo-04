@@ -3,13 +3,14 @@ package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.IBoard;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.rule.IRule;
 
 /**
  * Interface for a game.
  */
-public interface IGame<T, S> {
-    void fillCell(final Coordinate coordinate, final T value);
+public interface IGame<R extends IInput> {
+    R getCell(final Coordinate coordinate);
 
     boolean checkWinRules();
 
@@ -19,5 +20,5 @@ public interface IGame<T, S> {
 
     void addLoseRule(IRule rule);
 
-    void setBoard(IBoard board);
+    void setBoard(IBoard<R> board);
 }

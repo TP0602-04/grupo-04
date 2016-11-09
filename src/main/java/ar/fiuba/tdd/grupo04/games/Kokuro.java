@@ -4,7 +4,10 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.inputs.factories.NumericInputFactory;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
@@ -16,8 +19,8 @@ import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
 
 @SuppressWarnings("CPD-START")
 public class Kokuro {
-    IGame game;
-    private Board board;
+    IGame<NumericInput> game;
+    private IBoard<NumericInput> board;
     private CustomGroupCollector customGroupCollector;
 
     public Kokuro() {
@@ -26,25 +29,24 @@ public class Kokuro {
     }
 
     private void createGame() {
-
-        game = new Game();
+        game = new Game<>();
         // Esto se levanta del json de juego
-        board = new Board(8, 8);
+        board = new Board<>(9, 9, new NumericInputFactory());
         game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector<>(board);
-        game.addLoseRule(new Rule<>(customGroupCollector, new UniqueCondition()));
-        game.addLoseRule(new Rule<>(customGroupCollector, new SumCondition()));
-        game.addLoseRule(new Rule<>(new AllCollector(board, 10), new AllLesserThanCondition()));
-        game.addLoseRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
-        game.addWinRule(new Rule<>(customGroupCollector, new AllFilledCondition()));
+        customGroupCollector = new CustomGroupCollector(board);
+        game.addLoseRule(new Rule(customGroupCollector, new UniqueCondition()));
+        game.addLoseRule(new Rule(customGroupCollector, new SumCondition()));
+        game.addLoseRule(new Rule(new AllCollector(board, 10), new AllLesserThanCondition()));
+        game.addLoseRule(new Rule(new AllCollector(board, 0), new AllGreaterThanCondition()));
+        game.addWinRule(new Rule(customGroupCollector, new AllFilledCondition()));
     }
 
     private void createBoard() {
         // Esto se levanta del json de escenario
         // Aca va si hay valores iniciales
-        game.fillCell(new Coordinate(1, 1), 1);
-        game.fillCell(new Coordinate(3, 1), 2);
-        game.fillCell(new Coordinate(5, 1), 4);
+        game.getCell(new Coordinate(1, 1)).setValue(1);
+        game.getCell(new Coordinate(3, 1)).setValue(2);
+        game.getCell(new Coordinate(5, 1)).setValue(4);
         // Aca van todos los grupos que suman numeros;
         final ReferencedBlockGroupBuilder referenceBuilder = new ReferencedBlockGroupBuilder();
         customGroupCollector.addReferencedGroup(
@@ -69,7 +71,7 @@ public class Kokuro {
         // aca estaria el loop con el input
         // fillCell tendria q fijarse q no esta puesto ya o algo asi
         while (game.checkWinRules()) {
-            game.fillCell(new Coordinate(2, 7), 8);
+            game.getCell(new Coordinate(2, 7)).setValue(8);
         }
     }
 }

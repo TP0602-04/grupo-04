@@ -1,9 +1,9 @@
 package ar.fiuba.tdd.grupo04.board;
 
-public interface IBoard<T> {
-    void put(T value, Coordinate coordinate);
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 
-    IInput<T> get(Coordinate coordinate);
+public interface IBoard<R extends IInput> {
+    R get(Coordinate coordinate);
 
     Integer rowsLength();
 

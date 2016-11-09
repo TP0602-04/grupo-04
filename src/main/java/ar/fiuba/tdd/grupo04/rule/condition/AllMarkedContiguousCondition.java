@@ -1,7 +1,9 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.IInput;
+import ar.fiuba.tdd.grupo04.inputs.GraphInput;
+import ar.fiuba.tdd.grupo04.inputs.GraphInputType;
+import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 
 import java.util.ArrayList;
@@ -9,29 +11,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SuppressWarnings("CPD-START")
-public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implements ICondition<R> {
-    private final Function<S, Boolean> isMarked;
-    private final Function<S, Boolean> isNode;
-    private final List<Coordinate> path;
-
-    public AllMarkedContiguousCondition(Function<S, Boolean> isMarked, Function<S, Boolean> isNode) {
-        this.isMarked = isMarked;
-        this.isNode = isNode;
-        path = new ArrayList<>();
-    }
+public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> implements ICondition<R> {
+    private final List<Coordinate> path = new ArrayList<>();
 
     @Override
     public boolean check(R inputGroup) {
-        final List<IInput<S>> markedInputs = inputGroup.getInputs().stream().filter(i -> i.getValue().isPresent()).filter(i -> isMarked.apply(i.getValue().get())).collect(Collectors.toList());
+        final List<GraphInput> markedInputs = inputGroup.getInputs().stream().filter(GraphInput::isMarked).collect(Collectors.toList());
         final List<Coordinate> coordinates = markedInputs.stream().map(IInput::getCoordinate).collect(Collectors.toList());
 
         if (markedInputs.isEmpty()) {
             return true;
         }
-        Optional<IInput<S>> firstNodeInput = getFirstNode(markedInputs);
+        Optional<GraphInput> firstNodeInput = getFirstNode(markedInputs);
 
         if (!firstNodeInput.isPresent()) {
             return false;
@@ -101,8 +94,8 @@ public class AllMarkedContiguousCondition<S, R extends IInputGroup<S>> implement
     }
 
 
-    private Optional<IInput<S>> getFirstNode(List<IInput<S>> graphElements) {
-        return graphElements.stream().filter(i -> isNode.apply(i.getValue().get())).findFirst();
+    private Optional<GraphInput> getFirstNode(List<GraphInput> graphElements) {
+        return graphElements.stream().filter(i -> i.getType().equals(GraphInputType.NODE)).findFirst();
     }
 
     private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode) {

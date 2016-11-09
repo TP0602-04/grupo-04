@@ -4,6 +4,8 @@ import ar.fiuba.tdd.grupo04.Game;
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.inputs.factories.NumericInputFactory;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
 import ar.fiuba.tdd.grupo04.rule.collector.BlocksCollector;
@@ -20,8 +22,8 @@ import java.io.InputStreamReader;
 
 @SuppressWarnings("CPD-START")
 public class Sudoku {
-    IGame game;
-    private Board board;
+    IGame<NumericInput> game;
+    private Board<NumericInput> board;
 
     public Sudoku() {
         createGame();
@@ -29,60 +31,60 @@ public class Sudoku {
     }
 
     private void createGame() {
-        game = new Game();
+        game = new Game<>();
         // Esto se levanta del json de juego
-        board = new Board(9, 9);
+        board = new Board<>(9, 9, new NumericInputFactory());
         game.setBoard(board);
-        game.addLoseRule(new Rule<>(new ColumnsCollector<>(board), new UniqueCondition()));
-        game.addLoseRule(new Rule<>(new RowsCollector<>(board), new UniqueCondition()));
-        game.addLoseRule(new Rule<>(new BlocksCollector<>(board, 3, 3), new UniqueCondition()));
-        game.addLoseRule(new Rule<>(new AllCollector<>(board, 10), new AllLesserThanCondition()));
-        game.addLoseRule(new Rule<>(new AllCollector<>(board, 0), new AllGreaterThanCondition()));
+        game.addLoseRule(new Rule<>(new ColumnsCollector(board), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new RowsCollector(board), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new BlocksCollector(board, 3, 3), new UniqueCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector(board, 10), new AllLesserThanCondition()));
+        game.addLoseRule(new Rule<>(new AllCollector(board, 0), new AllGreaterThanCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
     }
 
     private void setBoardNCSS1() {
-        game.fillCell(new Coordinate(0, 3), 6);
-        game.fillCell(new Coordinate(0, 4), 5);
+        game.getCell(new Coordinate(0, 3)).setValue(6);
+        game.getCell(new Coordinate(0, 4)).setValue(5);
 
-        game.fillCell(new Coordinate(1, 1), 7);
-        game.fillCell(new Coordinate(1, 3), 3);
-        game.fillCell(new Coordinate(1, 4), 8);
-        game.fillCell(new Coordinate(1, 6), 2);
+        game.getCell(new Coordinate(1, 1)).setValue(7);
+        game.getCell(new Coordinate(1, 3)).setValue(3);
+        game.getCell(new Coordinate(1, 4)).setValue(8);
+        game.getCell(new Coordinate(1, 6)).setValue(2);
 
-        game.fillCell(new Coordinate(2, 0), 2);
-        game.fillCell(new Coordinate(2, 1), 8);
-        game.fillCell(new Coordinate(2, 2), 5);
-        game.fillCell(new Coordinate(2, 4), 4);
+        game.getCell(new Coordinate(2, 0)).setValue(2);
+        game.getCell(new Coordinate(2, 1)).setValue(8);
+        game.getCell(new Coordinate(2, 2)).setValue(5);
+        game.getCell(new Coordinate(2, 4)).setValue(4);
 
-        game.fillCell(new Coordinate(4, 0), 7);
-        game.fillCell(new Coordinate(4, 2), 4);
-        game.fillCell(new Coordinate(4, 3), 8);
-        game.fillCell(new Coordinate(4, 4), 2);
-        game.fillCell(new Coordinate(4, 5), 6);
-        game.fillCell(new Coordinate(4, 6), 5);
-        game.fillCell(new Coordinate(4, 7), 9);
-        game.fillCell(new Coordinate(4, 8), 3);
+        game.getCell(new Coordinate(4, 0)).setValue(7);
+        game.getCell(new Coordinate(4, 2)).setValue(4);
+        game.getCell(new Coordinate(4, 3)).setValue(8);
+        game.getCell(new Coordinate(4, 4)).setValue(2);
+        game.getCell(new Coordinate(4, 5)).setValue(6);
+        game.getCell(new Coordinate(4, 6)).setValue(5);
+        game.getCell(new Coordinate(4, 7)).setValue(9);
+        game.getCell(new Coordinate(4, 8)).setValue(3);
     }
 
     private void setBoardNCSS2() {
-        game.fillCell(new Coordinate(5, 4), 1);
-        game.fillCell(new Coordinate(5, 5), 7);
-        game.fillCell(new Coordinate(5, 6), 6);
-        game.fillCell(new Coordinate(5, 7), 2);
-        game.fillCell(new Coordinate(5, 8), 4);
+        game.getCell(new Coordinate(5, 4)).setValue(1);
+        game.getCell(new Coordinate(5, 5)).setValue(7);
+        game.getCell(new Coordinate(5, 6)).setValue(6);
+        game.getCell(new Coordinate(5, 7)).setValue(2);
+        game.getCell(new Coordinate(5, 8)).setValue(4);
 
-        game.fillCell(new Coordinate(6, 0), 5);
-        game.fillCell(new Coordinate(6, 5), 4);
-        game.fillCell(new Coordinate(6, 8), 6);
+        game.getCell(new Coordinate(6, 0)).setValue(5);
+        game.getCell(new Coordinate(6, 5)).setValue(4);
+        game.getCell(new Coordinate(6, 8)).setValue(6);
 
-        game.fillCell(new Coordinate(7, 0), 3);
-        game.fillCell(new Coordinate(7, 4), 6);
+        game.getCell(new Coordinate(7, 0)).setValue(3);
+        game.getCell(new Coordinate(7, 4)).setValue(6);
 
-        game.fillCell(new Coordinate(8, 0), 4);
-        game.fillCell(new Coordinate(8, 3), 2);
-        game.fillCell(new Coordinate(8, 4), 3);
-        game.fillCell(new Coordinate(8, 6), 8);
+        game.getCell(new Coordinate(8, 0)).setValue(4);
+        game.getCell(new Coordinate(8, 3)).setValue(2);
+        game.getCell(new Coordinate(8, 4)).setValue(3);
+        game.getCell(new Coordinate(8, 6)).setValue(8);
     }
 
     private void createBoard() {
@@ -101,7 +103,7 @@ public class Sudoku {
                 Integer row = Integer.parseInt(input.substring(0, 1)) - 1;
                 Integer col = Integer.parseInt(input.substring(2, 3)) - 1;
                 Integer value = Integer.parseInt(input.substring(4));
-                game.fillCell(new Coordinate(row, col), value);
+                game.getCell(new Coordinate(row, col)).setValue(value);
             }
         }
         if (game.checkWinRules()) {
