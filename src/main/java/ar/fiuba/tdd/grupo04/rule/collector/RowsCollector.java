@@ -1,6 +1,5 @@
 package ar.fiuba.tdd.grupo04.rule.collector;
 
-import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 
 import java.util.List;

@@ -2,18 +2,16 @@ package ar.fiuba.tdd.grupo04.inputs;
 
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 
-import java.util.Optional;
-
 public class DiagonalInput extends IInput {
     private Boolean downLeftToUpRight;
     private Boolean marked;
     private Boolean isDiagonal;
 
     /**
-     las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
-     estar marcados true o false para estar completo el tablero)
-     las dos coord pares son los puntos del borde de la celda (estan todos en true)
-     los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
+     * las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
+     * estar marcados true o false para estar completo el tablero)
+     * las dos coord pares son los puntos del borde de la celda (estan todos en true)
+     * los que tienen una coorc impar y una par son las aristas de la celda (estan todos en true)
      */
     public DiagonalInput(Coordinate coordinate) {
         this.marked = true;

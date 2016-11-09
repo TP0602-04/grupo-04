@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlocksCollector implements ICollector {
-    private IBoard board;
     private final Integer width;
     private final Integer height;
+    private IBoard board;
 
     public BlocksCollector(IBoard board, Integer width, Integer height) {
         this.board = board;

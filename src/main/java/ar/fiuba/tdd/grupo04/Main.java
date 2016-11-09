@@ -10,8 +10,6 @@ import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.util.FileUtils;
 import com.google.gson.Gson;
 
-import java.util.List;
-
 public class Main {
     //    private static final String SUDOKU_PATH = "./src/main/resources/config/sudoku.json";
     private static final String MODEL_PATH = "./src/main/resources/config/inshinoheya.json";

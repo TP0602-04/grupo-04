@@ -6,12 +6,11 @@ import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static java.lang.Integer.toUnsignedLong;
 
+@SuppressWarnings("CPD-START")
 public class CountGraphCondition<R extends IValuedInputGroup<GraphInput, Integer>> implements ICondition<R> {
     private final GraphInputType graphInputType;
     private final BiFunction<Long, Long, Boolean> comparator;

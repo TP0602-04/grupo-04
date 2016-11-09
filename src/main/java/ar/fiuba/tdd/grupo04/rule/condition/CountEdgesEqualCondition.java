@@ -4,6 +4,7 @@ import ar.fiuba.tdd.grupo04.inputs.GraphInput;
 import ar.fiuba.tdd.grupo04.inputs.GraphInputType;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
+@SuppressWarnings("CPD-START")
 public class CountEdgesEqualCondition<R extends IValuedInputGroup<GraphInput, Integer>> implements ICondition<R> {
     private final CountGraphCondition<R> countGraphCondition;
 

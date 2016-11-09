@@ -1,16 +1,20 @@
 package ar.fiuba.tdd.grupo04.gui;
 
-import com.google.gson.Gson;
-
 import ar.fiuba.tdd.grupo04.IGame;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
-import ar.fiuba.tdd.grupo04.gui.model.*;
+import ar.fiuba.tdd.grupo04.gui.model.Board;
+import ar.fiuba.tdd.grupo04.gui.model.Cell;
+import ar.fiuba.tdd.grupo04.gui.model.Game;
+import ar.fiuba.tdd.grupo04.gui.model.Reference;
+import ar.fiuba.tdd.grupo04.gui.model.Scenario;
+import ar.fiuba.tdd.grupo04.gui.model.UiCellGroup;
+import com.google.gson.Gson;
 import javafx.util.Pair;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.*;
 
 public class GameGui implements BoardView.Observer, InputBoxView.SubmitListener {
     private static final int WINDOW_WIDTH = 900;

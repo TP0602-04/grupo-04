@@ -12,10 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConditionFactory {
-    private interface ConditionCreator {
-        ICondition execute();
-    }
-
     private static Map<String, ConditionCreator> map;
 
     static {
@@ -33,5 +29,9 @@ public class ConditionFactory {
             throw new Exception("Unknown Condition");//TODO: Use custom exception
         }
         return map.get(type).execute();
+    }
+
+    private interface ConditionCreator {
+        ICondition execute();
     }
 }

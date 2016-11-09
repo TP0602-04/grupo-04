@@ -6,93 +6,24 @@ import ar.fiuba.tdd.grupo04.gui.cell.CellView;
 import ar.fiuba.tdd.grupo04.gui.cell.CellViewFactory;
 import javafx.util.Pair;
 
-import java.awt.GridLayout;
-
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.swing.*;
 
 /*
  * N row N Board
  */
 public class BoardView implements View {
-    public interface Observer {
-        void onCellSelected(Coordinate coordinate);
-    }
-
-    /*
-     * Builder
-     */
-    public static class Builder {
-        private int size;
-        private List<List<CellView>> cells;
-        private List<List<Coordinate>> perimeters;
-
-        public Builder(int size, CellType defaultCellType) {
-            setSize(size);
-            setDefaultCellType(defaultCellType);
-            perimeters = new ArrayList<>();
-        }
-
-        private Builder setSize(int size) {
-            this.size = size;
-            cells = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                cells.add(new ArrayList<>());
-            }
-            return this;
-        }
-
-        public Builder setCellType(CellType cellType, List<Pair<Coordinate, String>> cellsData) {
-            for (Pair<Coordinate, String> data : cellsData) {
-                Coordinate coordinate = data.getKey();
-                String value = data.getValue();
-                // Create view
-                CellView cellView = CellViewFactory.create(cellType, coordinate);
-                if (value != null) {
-                    cellView.setValue(value);
-                }
-
-                List<CellView> row = cells.get(coordinate.row());
-                row.set(coordinate.column(), cellView);
-            }
-            return this;
-        }
-
-        public Builder addPerimeter(List<Coordinate> coordinates) {
-            perimeters.add(coordinates);
-            return this;
-        }
-
-        public BoardView build() {
-            BoardView boardView = new BoardView(size, cells);
-            perimeters.forEach(boardView::setPerimeter);
-            return boardView;
-        }
-
-        private void setDefaultCellType(CellType defaultCellType) {
-            for (int i = 0; i < size; i++) {
-                List<CellView> row = cells.get(i);
-                for (int j = 0; j < size; j++) {
-                    Coordinate coordinate = new Coordinate(i, j);
-                    CellView cell = CellViewFactory.create(defaultCellType, coordinate);
-                    row.add(cell);
-                }
-            }
-        }
-    }
-
     /*
      * {@link BoardView} implementation
      */
     private static final int CELL_GAP = 1;
-
     private List<List<CellView>> cells;
     private JPanel view;
     private Set<Observer> observers;
-
     private BoardView(int size, List<List<CellView>> cells) {
         observers = new HashSet<>();
         // Main container
@@ -174,6 +105,72 @@ public class BoardView implements View {
         if (!observers.isEmpty()) {
             for (Observer observer : observers) {
                 observer.onCellSelected(cell.getCoordinate());
+            }
+        }
+    }
+
+    public interface Observer {
+        void onCellSelected(Coordinate coordinate);
+    }
+
+    /*
+     * Builder
+     */
+    public static class Builder {
+        private int size;
+        private List<List<CellView>> cells;
+        private List<List<Coordinate>> perimeters;
+
+        public Builder(int size, CellType defaultCellType) {
+            setSize(size);
+            setDefaultCellType(defaultCellType);
+            perimeters = new ArrayList<>();
+        }
+
+        private Builder setSize(int size) {
+            this.size = size;
+            cells = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                cells.add(new ArrayList<>());
+            }
+            return this;
+        }
+
+        public Builder setCellType(CellType cellType, List<Pair<Coordinate, String>> cellsData) {
+            for (Pair<Coordinate, String> data : cellsData) {
+                Coordinate coordinate = data.getKey();
+                String value = data.getValue();
+                // Create view
+                CellView cellView = CellViewFactory.create(cellType, coordinate);
+                if (value != null) {
+                    cellView.setValue(value);
+                }
+
+                List<CellView> row = cells.get(coordinate.row());
+                row.set(coordinate.column(), cellView);
+            }
+            return this;
+        }
+
+        public Builder addPerimeter(List<Coordinate> coordinates) {
+            perimeters.add(coordinates);
+            return this;
+        }
+
+        public BoardView build() {
+            BoardView boardView = new BoardView(size, cells);
+            perimeters.forEach(boardView::setPerimeter);
+            return boardView;
+        }
+
+        private void setDefaultCellType(CellType defaultCellType) {
+            for (int i = 0; i < size; i++) {
+                List<CellView> row = cells.get(i);
+                for (int j = 0; j < size; j++) {
+                    Coordinate coordinate = new Coordinate(i, j);
+                    CellView cell = CellViewFactory.create(defaultCellType, coordinate);
+                    row.add(cell);
+                }
             }
         }
     }

@@ -3,8 +3,6 @@ package ar.fiuba.tdd.grupo04.rule.collector;
 import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.inputs.IInput;
-import ar.fiuba.tdd.grupo04.inputs.NumericInput;
-import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 import ar.fiuba.tdd.grupo04.rule.ValuedInputGroup;
 
 import java.util.ArrayList;

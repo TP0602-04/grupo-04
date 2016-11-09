@@ -5,20 +5,18 @@ import ar.fiuba.tdd.grupo04.gui.OnClickListener;
 import ar.fiuba.tdd.grupo04.gui.View;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
-import java.awt.Color;
+import javax.swing.*;
+import javax.swing.event.MouseInputListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.event.MouseInputListener;
 
 public abstract class CellView implements View {
     private static final int BORDER_WIDTH_PX = 1;
-
-    private Coordinate coordinate;
     protected JPanel view;
     protected Set<OnClickListener> listeners;
+    private Coordinate coordinate;
     private int borderTop;
     private int borderBottom;
     private int borderLeft;

@@ -1,11 +1,7 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
-
-import java.util.Optional;
-import java.util.function.BinaryOperator;
 
 public class SumCondition<R extends IValuedInputGroup<NumericInput, Integer>> implements ICondition<R> {
     private final OperationCondition<IValuedInputGroup<NumericInput, Integer>> sumOperation;

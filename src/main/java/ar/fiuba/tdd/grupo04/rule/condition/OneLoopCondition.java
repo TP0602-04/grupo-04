@@ -47,7 +47,7 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
             actualNode = getNextNode(actualEdge.get(), actualNode.get());
             if (!actualNode.isPresent()) {
                 return false;
-            } else if (firstNode.equals(actualNode.get()) ) {
+            } else if (firstNode.equals(actualNode.get())) {
                 // End of the loop
                 findNextStep = false;
             } else if (path.contains(actualNode.get())) {
@@ -75,7 +75,7 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
         return edgeSearcher(coordinates, actualNode, null, new Coordinate(1, 0));
     }
 
-    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates,Coordinate actualNode,Coordinate actualEdge) {
+    private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge) {
         return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(1, 0));
     }
 
@@ -85,16 +85,16 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
     // Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row())
     // y la condicion de corte es el ultimo estado (columna -1)
     private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode,
-                                                        Coordinate actualEdge, Coordinate coordinateDiff) {
+                                              Coordinate actualEdge, Coordinate coordinateDiff) {
         final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
-        if (coordinates.contains(newCoordinate)  && !newCoordinate.equals(actualEdge)) {
+        if (coordinates.contains(newCoordinate) && !newCoordinate.equals(actualEdge)) {
             return Optional.of(newCoordinate);
         }
         if (newCoordinate.column() == -1) {
             Optional.empty();
         }
         return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1),
-                                                                                                 coordinateDiff.row()));
+                coordinateDiff.row()));
     }
 
     // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo

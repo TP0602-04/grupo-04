@@ -14,12 +14,12 @@ public class NumericInput extends IInput {
         this.coordinate = coordinate;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public Optional<Integer> getValue() {
+        return Optional.ofNullable(value);
     }
 
-    public Optional<Integer> getValue() {
-        return  Optional.ofNullable(value);
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
     @Override

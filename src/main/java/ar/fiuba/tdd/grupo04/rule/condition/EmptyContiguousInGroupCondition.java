@@ -4,11 +4,9 @@ import ar.fiuba.tdd.grupo04.board.Coordinate;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.inputs.GraphInput;
 import ar.fiuba.tdd.grupo04.inputs.IInput;
-import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class EmptyContiguousInGroupCondition<R extends IValuedInputGroup<GraphInput, Integer>> implements ICondition<R> {
@@ -22,7 +20,7 @@ public class EmptyContiguousInGroupCondition<R extends IValuedInputGroup<GraphIn
     public boolean check(R inputGroup) {
         final List<? extends GraphInput> inputs = inputGroup.getInputs();
         final List<Coordinate> coordinatesInGroup = inputGroup.getInputs().stream().map(IInput::getCoordinate).collect(Collectors.toList());
-         return inputs.stream().filter(GraphInput::isFilled).filter(GraphInput::isMarked).allMatch(i -> contiguousMarkedOrInGroup(i, coordinatesInGroup));
+        return inputs.stream().filter(GraphInput::isFilled).filter(GraphInput::isMarked).allMatch(i -> contiguousMarkedOrInGroup(i, coordinatesInGroup));
     }
 
     private boolean contiguousMarkedOrInGroup(GraphInput input, List<Coordinate> coordinatesInGroup) {

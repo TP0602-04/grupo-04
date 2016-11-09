@@ -9,7 +9,6 @@ import ar.fiuba.tdd.grupo04.rule.IInputGroup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("CPD-START")
@@ -66,7 +65,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
         return path.size() == coordinates.size();
     }
 
-    private void calculateToTheOtherEdge(List<Coordinate> coordinates,Optional<Coordinate> otherEdge,Coordinate firstNode) {
+    private void calculateToTheOtherEdge(List<Coordinate> coordinates, Optional<Coordinate> otherEdge, Coordinate firstNode) {
         if (!otherEdge.isPresent()) {
             return;
         }
@@ -113,13 +112,13 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
     // y la condicion de corte es el ultimo estado (columna -1)
     private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge, Coordinate coordinateDiff) {
         final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
-        if (coordinates.contains(newCoordinate)  && !newCoordinate.equals(actualEdge)) {
+        if (coordinates.contains(newCoordinate) && !newCoordinate.equals(actualEdge)) {
             return Optional.of(newCoordinate);
         }
         if (newCoordinate.column() == -1) {
             Optional.empty();
         }
-        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column()*(-1), coordinateDiff.row()));
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row()));
     }
 
     // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo

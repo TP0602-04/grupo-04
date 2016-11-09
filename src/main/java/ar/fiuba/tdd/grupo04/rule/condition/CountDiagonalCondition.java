@@ -22,7 +22,7 @@ public class CountDiagonalCondition<R extends IValuedInputGroup<DiagonalInput, V
         final Stream<? extends DiagonalInput> stream = valuedInputGroup.getInputs().stream();
         final ValuedCoordinate valuedCoordinate = valuedInputGroup.getValue();
         final long countedInputs = stream.filter(DiagonalInput::isFilled).filter(DiagonalInput::isDiagonal).filter(i ->
-                        i.isDownLeftToUpRight().equals(countableValue(valuedCoordinate, i.getCoordinate()))).count();
+                i.isDownLeftToUpRight().equals(countableValue(valuedCoordinate, i.getCoordinate()))).count();
         return comparator.apply(valuedCoordinate.getValue(), (int) countedInputs);
     }
 
@@ -34,5 +34,7 @@ public class CountDiagonalCondition<R extends IValuedInputGroup<DiagonalInput, V
         // Si la diagonal va de abajo a la izquierda a arriba a la derecha la suma de las coordenadas
         // de la diferencia da cero
         return kindOfDiagonal == 0;
-    };
+    }
+
+    ;
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CollectorJsonParser {
     public static ICollector parse(JsonCollector jsonCollector, Board board) throws ClassNotFoundException,
-                      NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+            NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         ICollector collector;
         List<Integer> params = jsonCollector.getParams();
         Class<?> cl = Class.forName("ar.fiuba.tdd.grupo04.rule.collector." + jsonCollector.getType());
@@ -18,15 +18,15 @@ public class CollectorJsonParser {
         switch (params.size()) {
             case 1:
                 cons = cl.getConstructor(Board.class, Integer.class);
-                collector = (ICollector)cons.newInstance(board, params.get(0));
+                collector = (ICollector) cons.newInstance(board, params.get(0));
                 break;
             case 2:
                 cons = cl.getConstructor(Board.class, Integer.class, Integer.class);
-                collector = (ICollector)cons.newInstance(board, params.get(0), params.get(1));
+                collector = (ICollector) cons.newInstance(board, params.get(0), params.get(1));
                 break;
             default:
                 cons = cl.getConstructor(Board.class);
-                collector = (ICollector)cons.newInstance(board);
+                collector = (ICollector) cons.newInstance(board);
                 break;
         }
         return collector;

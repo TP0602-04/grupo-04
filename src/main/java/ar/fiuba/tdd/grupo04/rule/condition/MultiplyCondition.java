@@ -1,10 +1,7 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.inputs.IInput;
 import ar.fiuba.tdd.grupo04.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
-
-import java.util.Optional;
 
 @SuppressWarnings("CPD-START")
 public class MultiplyCondition<R extends IValuedInputGroup<NumericInput, Integer>> implements ICondition<R> {

@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.inputs.ValuedCoordinate;
 import ar.fiuba.tdd.grupo04.inputs.DiagonalInput;
+import ar.fiuba.tdd.grupo04.inputs.ValuedCoordinate;
 import ar.fiuba.tdd.grupo04.rule.IValuedInputGroup;
 
 @SuppressWarnings("CPD-START")

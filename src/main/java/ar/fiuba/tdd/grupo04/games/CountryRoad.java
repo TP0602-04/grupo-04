@@ -43,11 +43,9 @@ public class CountryRoad {
         */
         board = new Board(18, 18, new GraphInputFactory());
         game.setBoard(board);
-        customGroupCollector = new CustomGroupCollector(board);
-
-        BiFunction<Integer, Integer, Boolean> bigger = (expected, counted) -> expected < counted;
 
         customGroupCollector = new CustomGroupCollector(board);
+
         game.addWinRule(new Rule<>(customGroupCollector, new AllMarkedContiguousCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new OneLoopCondition()));
         game.addWinRule(new Rule<>(new AllCollector(board), new AllFilledCondition()));
