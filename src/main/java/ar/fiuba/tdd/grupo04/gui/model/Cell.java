@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui.model;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import com.google.gson.annotations.SerializedName;
 
 public class Cell {

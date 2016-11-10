@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.cell.CellView;
 import ar.fiuba.tdd.grupo04.gui.cell.CellViewFactory;

@@ -1,21 +1,21 @@
 package ar.fiuba.tdd.grupo04.games;
 
-import ar.fiuba.tdd.grupo04.Game;
-import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.board.Board;
-import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.IBoard;
-import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
-import ar.fiuba.tdd.grupo04.inputs.NumericInput;
-import ar.fiuba.tdd.grupo04.inputs.factories.NumericInputFactory;
-import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.ColumnsCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.RowsCollector;
-import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.MultiplyCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.UniqueCondition;
+import ar.fiuba.tdd.grupo04.model.Game;
+import ar.fiuba.tdd.grupo04.model.IGame;
+import ar.fiuba.tdd.grupo04.model.board.Board;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.IBoard;
+import ar.fiuba.tdd.grupo04.model.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.model.inputs.factories.NumericInputFactory;
+import ar.fiuba.tdd.grupo04.model.rule.Rule;
+import ar.fiuba.tdd.grupo04.model.rule.collector.AllCollector;
+import ar.fiuba.tdd.grupo04.model.rule.collector.ColumnsCollector;
+import ar.fiuba.tdd.grupo04.model.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.model.rule.collector.RowsCollector;
+import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.MultiplyCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.UniqueCondition;
 
 @SuppressWarnings("CPD-START")
 public class InshiNoHeya {

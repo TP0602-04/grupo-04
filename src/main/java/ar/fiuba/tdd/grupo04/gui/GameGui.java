@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.grupo04.gui;
 
-import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.IGame;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.cell.CellType;
 import ar.fiuba.tdd.grupo04.gui.model.Board;
 import ar.fiuba.tdd.grupo04.gui.model.Cell;

@@ -1,20 +1,20 @@
 package ar.fiuba.tdd.grupo04.games;
 
-import ar.fiuba.tdd.grupo04.Game;
-import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.board.Board;
-import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.IBoard;
-import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
-import ar.fiuba.tdd.grupo04.inputs.DiagonalInput;
-import ar.fiuba.tdd.grupo04.inputs.factories.DiagonalInputFactory;
-import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.AllCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
-import ar.fiuba.tdd.grupo04.rule.condition.AllFilledCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.CountDiagonalBiggerCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.CountDiagonalEqualCondition;
-import ar.fiuba.tdd.grupo04.rule.condition.NoLoopsCondition;
+import ar.fiuba.tdd.grupo04.model.Game;
+import ar.fiuba.tdd.grupo04.model.IGame;
+import ar.fiuba.tdd.grupo04.model.board.Board;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.IBoard;
+import ar.fiuba.tdd.grupo04.model.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInput;
+import ar.fiuba.tdd.grupo04.model.inputs.factories.DiagonalInputFactory;
+import ar.fiuba.tdd.grupo04.model.rule.Rule;
+import ar.fiuba.tdd.grupo04.model.rule.collector.AllCollector;
+import ar.fiuba.tdd.grupo04.model.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.CountDiagonalBiggerCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.CountDiagonalEqualCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.NoLoopsCondition;
 
 @SuppressWarnings("CPD-START")
 public class GokigenNaname {
