@@ -2,7 +2,6 @@ package ar.fiuba.tdd.grupo04.json.parser;
 
 import ar.fiuba.tdd.grupo04.model.Game;
 import ar.fiuba.tdd.grupo04.model.IGame;
-import ar.fiuba.tdd.grupo04.model.board.Board;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.model.board.IBoard;
 import ar.fiuba.tdd.grupo04.model.board.reference.builder.ReferencedBlockGroupBuilder;
@@ -13,12 +12,11 @@ import ar.fiuba.tdd.grupo04.json.model.JsonInitValue;
 import ar.fiuba.tdd.grupo04.json.model.JsonReference;
 import ar.fiuba.tdd.grupo04.json.model.JsonRules;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInput;
+import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInput;
-import ar.fiuba.tdd.grupo04.model.inputs.IInput;
+import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
-import ar.fiuba.tdd.grupo04.model.inputs.factories.DiagonalInputFactory;
-import ar.fiuba.tdd.grupo04.model.inputs.factories.GraphInputFactory;
-import ar.fiuba.tdd.grupo04.model.inputs.factories.NumericInputFactory;
+import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
 import ar.fiuba.tdd.grupo04.model.rule.IRule;
 import ar.fiuba.tdd.grupo04.model.rule.Rule;
 import ar.fiuba.tdd.grupo04.model.rule.collector.CustomGroupCollector;
@@ -84,28 +82,30 @@ public class GameJsonParser {
         // Load initial values
         switch (jsonGame.getBoard().getInputType()) {
             case "NumericInput": {
-                IGame<NumericInput> clGame = (IGame<NumericInput>) game;
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
-                    clGame.getCell(cell.getKey()).setValue(cell.getValue());
+                    game.addInputModification(cell.getKey(), new NumericInputModification(cell.getValue()));
                 }
-                return clGame;
+                return game;
             }
             case "GraphInput": {
-                IGame<GraphInput> clGame = (IGame<GraphInput>) game;
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
-                    clGame.getCell(cell.getKey()).toogleMarked();
+                    game.addInputModification(cell.getKey(), new GraphInputModification());
                 }
-                return clGame;
+                return game;
             }
             case "DiagonalInput": {
-                IGame<DiagonalInput> clGame = (IGame<DiagonalInput>) game;
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
-                    clGame.getCell(cell.getKey()).toogleMarked();
+                    switch (cell.getValue()) {
+                        case 0: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));
+                        case 1: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));
+                        case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));
+                        case 3: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));
+                    }
                 }
-                return clGame;
+                return game;
             }
         }
         return null;

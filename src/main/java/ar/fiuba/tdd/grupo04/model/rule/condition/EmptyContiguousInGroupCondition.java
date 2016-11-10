@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmptyContiguousInGroupCondition<R extends IValuedInputGroup<GraphInput, Integer>> implements ICondition<R> {
-    private final IBoard<GraphInput> board;
+    private final IBoard board;
 
-    public EmptyContiguousInGroupCondition(IBoard<GraphInput> board) {
+    public EmptyContiguousInGroupCondition(IBoard board) {
         this.board = board;
     }
 
@@ -30,10 +30,10 @@ public class EmptyContiguousInGroupCondition<R extends IValuedInputGroup<GraphIn
         final Coordinate left = new Coordinate(coordinates.row(), coordinates.column());
         final Coordinate right = new Coordinate(coordinates.row(), coordinates.column());
 
-        final boolean upOk = coordinatesInGroup.contains(up) || board.get(up).isMarked();
-        final boolean downOk = coordinatesInGroup.contains(down) || board.get(down).isMarked();
-        final boolean leftOk = coordinatesInGroup.contains(left) || board.get(left).isMarked();
-        final boolean rightOk = coordinatesInGroup.contains(right) || board.get(right).isMarked();
+        final boolean upOk = coordinatesInGroup.contains(up) || ((GraphInput)board.get(up)).isMarked();
+        final boolean downOk = coordinatesInGroup.contains(down) || ((GraphInput)board.get(down)).isMarked();
+        final boolean leftOk = coordinatesInGroup.contains(left) || ((GraphInput)board.get(left)).isMarked();
+        final boolean rightOk = coordinatesInGroup.contains(right) || ((GraphInput)board.get(right)).isMarked();
 
         return upOk && downOk && leftOk && rightOk;
     }

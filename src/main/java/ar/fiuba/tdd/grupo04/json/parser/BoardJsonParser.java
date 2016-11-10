@@ -13,9 +13,9 @@ public class BoardJsonParser {
         Integer columns = jsonBoard.getColumns();
         String inputType = jsonBoard.getInputType();
         switch (inputType) {
-            case "NumericInput": return new Board<>(rows, columns, new NumericInputFactory());
-            case "GraphInput": return new Board<>(rows, columns, new GraphInputFactory());
-            case "DiagonalInput": return new Board<>(rows, columns, new DiagonalInputFactory());
+            case "NumericInput": return new Board(rows, columns, new NumericInputFactory());
+            case "GraphInput": return new Board(rows, columns, new GraphInputFactory());
+            case "DiagonalInput": return new Board(rows, columns, new DiagonalInputFactory());
         }
         return null;
     }

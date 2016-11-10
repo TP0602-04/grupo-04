@@ -10,6 +10,7 @@ import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
 import ar.fiuba.tdd.grupo04.model.util.FileUtils;
 import com.google.gson.Gson;
 import org.junit.Test;
@@ -30,13 +31,12 @@ public class SudokuTest {
         String outputFile = FileUtils.readFile(OUTPUT_PATH);
 
         if (inputs == null || model == null || initGame == null) {
-            System.out.println("CONFIGURATION FILE DOESN'T EXISTS!");
-            return;
+            throw new NullPointerException();
         }
 
         Gson gson = new Gson();
         JsonGame jsonGame = gson.fromJson(model, JsonGame.class);
-        IGame<NumericInput> game = null;
+        IGame game = null;
         try {
             JsonInitGame jsonInitGame = gson.fromJson(initGame, JsonInitGame.class);
             game = GameJsonParser.parseLoad(jsonGame, jsonInitGame);
@@ -58,7 +58,7 @@ public class SudokuTest {
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
         for (JsonMove input : moves.inputs) {
-            game.getCell(new Coordinate(input.x, input.y)).setValue(input.value);
+            game.addInputModification(new Coordinate(input.x, input.y), new NumericInputModification(input.value));
             if (game.checkLoseRules()) {
                 output = output.concat("lose");
             } else if (game.checkWinRules()) {
