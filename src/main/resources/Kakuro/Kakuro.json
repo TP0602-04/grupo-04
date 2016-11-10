@@ -1,8 +1,7 @@
 {
     "board": {
         "rows": 6,
-        "columns": 6,
-        "cellType": "Number"
+        "columns": 6
     },
     "loseRules": [
         {

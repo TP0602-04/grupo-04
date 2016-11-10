@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Board;
+import ar.fiuba.tdd.grupo04.board.Cell;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.Slot;
 import ar.fiuba.tdd.grupo04.json.game.*;
@@ -33,6 +34,18 @@ public class GameBuilder {
         // Board
         BoardMapper boardMapper = gameMapper.getBoard();
         IBoard board = new Board(boardMapper.getRows(), boardMapper.getColumns());
+        //      Structure - Even/Odd cells
+        List<StructureMapper> structures = boardMapper.getStructure();
+        structures.forEach(structureMapper -> {
+            boolean isColumnEven = structureMapper.getColumnRange().equals(StructureMapper.EVEN);
+            boolean isRowEven = structureMapper.getRowRange().equals(StructureMapper.EVEN);
+            List<Coordinate> coordinates = filterBoard(board, isRowEven, isColumnEven);
+            coordinates.forEach(coordinate -> {
+                Input input = new Input(coordinate, structureMapper.getValue());
+                board.fill(input);
+                board.lockCell(coordinate);
+            });
+        });
 
         // Rules
         List<IRule> winRules =
@@ -69,6 +82,17 @@ public class GameBuilder {
         game.loadScenario(inputs, slots);
 
         return game;
+    }
+
+    private static List<Coordinate> filterBoard(IBoard board, boolean isRowEven, boolean isColumnEven) {
+        return board.getCells()
+                .stream()
+                .map(Cell::getCoordinate)
+                .filter(coordinate ->
+                        (isRowEven && coordinate.row() % 2 == 0 || !isRowEven && coordinate.row() % 2 != 0) &&
+                                (isColumnEven && coordinate.column() % 2 == 0 || !isColumnEven && coordinate.column() % 2 != 0)
+                )
+                .collect(Collectors.toList());
     }
 
     private static IRule createRule(RuleMapper ruleMapper) {

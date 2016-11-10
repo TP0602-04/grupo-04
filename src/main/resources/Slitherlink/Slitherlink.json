@@ -1,7 +1,18 @@
 {
     "board": {
-        "rows": 4,
-        "columns": 4
+        "rows": 11,
+        "columns": 11,
+        "structure": [
+            {
+                "columnRange": "odd",
+                "rowRange": "odd",
+                "value": 2
+            },{
+                "columnRange": "even",
+                "rowRange": "even",
+                "value": 1
+            }
+        ]
     },
     "loseRules": [
         {

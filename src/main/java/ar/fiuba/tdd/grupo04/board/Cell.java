@@ -39,4 +39,8 @@ public class Cell {
         this.isEditable = isEditable;
     }
 
+    public double distance(Cell cell) {
+        return coordinate.distance(cell.getCoordinate());
+    }
+
 }
