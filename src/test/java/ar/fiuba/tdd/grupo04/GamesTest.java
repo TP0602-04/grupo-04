@@ -9,7 +9,8 @@ import ar.fiuba.tdd.grupo04.json.model.JsonOutputStatus;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
-import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
+import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
 import ar.fiuba.tdd.grupo04.model.util.FileUtils;
 import com.google.gson.Gson;
@@ -38,7 +39,6 @@ public class GamesTest {
         checkGameOk(KAKURO_MODEL_PATH, KAKURO_INIT_PATH, KAKURO_INPUT_PATH, KAKURO_OUTPUT_PATH);
     }
 
-
     private static final String INSHINOHEYA_MODEL_PATH = "./src/main/resources/inshiNoHeya/inshiNoHeya.json";
     private static final String INSHINOHEYA_INIT_PATH = "./src/test/resources/inshiNoHeya/init-1.json";
     private static final String INSHINOHEYA_INPUT_PATH = "./src/test/resources/inshiNoHeya/input-1.json";
@@ -47,6 +47,16 @@ public class GamesTest {
     @Test
     public void testInshiNoHeya() {
         checkGameOk(INSHINOHEYA_MODEL_PATH, INSHINOHEYA_INIT_PATH, INSHINOHEYA_INPUT_PATH, INSHINOHEYA_OUTPUT_PATH);
+    }
+
+    private static final String SITHERLINK_MODEL_PATH = "./src/main/resources/slitherLink/slitherLink.json";
+    private static final String SITHERLINK_INIT_PATH = "./src/test/resources/slitherLink/init-1.json";
+    private static final String SITHERLINK_INPUT_PATH = "./src/test/resources/slitherLink/input-1.json";
+    private static final String SITHERLINK_OUTPUT_PATH = "./src/test/resources/slitherLink/output-1.json";
+
+    @Test
+    public void testSlitherLink() {
+        checkGameOk(SITHERLINK_MODEL_PATH, SITHERLINK_INIT_PATH, SITHERLINK_INPUT_PATH, SITHERLINK_OUTPUT_PATH);
     }
 
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
@@ -83,7 +93,24 @@ public class GamesTest {
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
         for (JsonMove input : moves.inputs) {
-            game.addInputModification(new Coordinate(input.x, input.y), new NumericInputModification(input.value));
+
+            switch (jsonGame.getBoard().getInputType()) {
+                case "NumericInput": {
+                    game.addInputModification(new Coordinate(input.x, input.y), new NumericInputModification(input.value));
+                }
+                case "GraphInput": {
+                    game.addInputModification(new Coordinate(input.x, input.y), new GraphInputModification());
+                }
+                case "DiagonalInput": {
+                    final Coordinate coordinate = new Coordinate(input.x, input.y);
+                    switch (input.value) {
+                        case 0: game.addInputModification(coordinate, new DiagonalInputModification(false, false));
+                        case 1: game.addInputModification(coordinate, new DiagonalInputModification(false, true));
+                        case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));
+                        case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));
+                    }
+                }
+            }
             if (game.checkLoseRules()) {
                 output = output.concat("lose");
             } else if (game.checkWinRules()) {

@@ -9,7 +9,7 @@ public class CountDiagonalBiggerCondition<R extends IValuedInputGroup<DiagonalIn
     private final CountDiagonalCondition<R> countDiagonalCondition;
 
     public CountDiagonalBiggerCondition() {
-        this.countDiagonalCondition = new CountDiagonalCondition<>((expected, counted) -> expected > counted);
+        this.countDiagonalCondition = new CountDiagonalCondition<>((expected, counted) -> expected >= counted);
     }
 
     @Override

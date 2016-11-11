@@ -9,7 +9,7 @@ public class CountEdgesBiggerCondition<R extends IValuedInputGroup<GraphInput, I
     private final CountGraphCondition<R> countGraphCondition;
 
     public CountEdgesBiggerCondition() {
-        this.countGraphCondition = new CountGraphCondition<>(GraphInputType.EDGE, (expected, counted) -> expected > counted);
+        this.countGraphCondition = new CountGraphCondition<>(GraphInputType.EDGE, (expected, counted) -> expected >= counted);
     }
 
     @Override

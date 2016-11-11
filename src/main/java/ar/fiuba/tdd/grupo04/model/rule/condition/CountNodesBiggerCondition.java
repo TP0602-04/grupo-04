@@ -9,7 +9,7 @@ public class CountNodesBiggerCondition<R extends IValuedInputGroup<GraphInput, I
     private final CountGraphCondition<R> countGraphCondition;
 
     public CountNodesBiggerCondition() {
-        this.countGraphCondition = new CountGraphCondition<>(GraphInputType.NODE, (expected, counted) -> expected > counted);
+        this.countGraphCondition = new CountGraphCondition<>(GraphInputType.NODE, (expected, counted) -> expected >= counted);
     }
 
     @Override

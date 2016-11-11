@@ -39,6 +39,9 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
         return isOneLoop && path.size() == coordinates.size();
     }
 
+    private Optional<GraphInput> getFirstNode(List<GraphInput> graphElements) {
+        return graphElements.stream().filter(i -> i.getType().equals(GraphInputType.NODE)).findFirst();
+    }
 
     private boolean isOneLoop(Optional<Coordinate> actualEdge, Optional<Coordinate> actualNode,
                               Coordinate firstNode, List<Coordinate> path, List<Coordinate> coordinates) {
@@ -67,10 +70,6 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
         return true;
     }
 
-    private Optional<GraphInput> getFirstNode(List<GraphInput> graphElements) {
-        return graphElements.stream().filter(i -> i.getType().equals(GraphInputType.NODE)).findFirst();
-    }
-
     private Optional<Coordinate> getNextEdge(List<Coordinate> coordinates, Coordinate actualNode) {
         return edgeSearcher(coordinates, actualNode, null, new Coordinate(1, 0));
     }
@@ -90,11 +89,10 @@ public class OneLoopCondition<R extends IInputGroup<GraphInput>> implements ICon
         if (coordinates.contains(newCoordinate) && !newCoordinate.equals(actualEdge)) {
             return Optional.of(newCoordinate);
         }
-        if (newCoordinate.column() == -1) {
-            Optional.empty();
+        if (coordinateDiff.column() == -1) {
+            return Optional.empty();
         }
-        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1),
-                coordinateDiff.row()));
+        return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row()));
     }
 
     // Si estas en un arista y venis de un nodo solo podes ir al proximo nodo
