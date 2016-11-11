@@ -42,10 +42,10 @@ public class GameJsonParser {
                 JsonCellGroup group = reference.getGroup();
                 ReferencedBlockGroupBuilder builder = new ReferencedBlockGroupBuilder();
                 builder.referencedValue(reference.getValue())
-                        .rowOffset(group.getRowOffset())
-                        .columnOffset(group.getColumnOffset())
-                        .columnLarge(group.getColumnLarge())
-                        .rowLarge(group.getRowLarge());
+                        .rowOffset(group.getOffsetX())
+                        .columnOffset(group.getOffsetY())
+                        .columnLarge(group.getDeltaY())
+                        .rowLarge(group.getDeltaX());
                 customCollector.addReferencedGroup(builder.createReference());
             }
         }
@@ -88,7 +88,7 @@ public class GameJsonParser {
         List<JsonInitValue> jsonInitialValues = jsonInitGame.getInitialValues();
         for (JsonInitValue jsonInitValue : jsonInitialValues) {
             Pair<Coordinate, Integer> cell = new Pair<>(
-                    jsonInitValue.getCoordinate(),
+                    new Coordinate(jsonInitValue.getRow(), jsonInitValue.getColumn()),
                     jsonInitValue.getValue()
             );
             cells.add(cell);

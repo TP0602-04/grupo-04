@@ -2,8 +2,6 @@ package ar.fiuba.tdd.grupo04.json.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
-
 @SuppressWarnings("CPD-START")
 public class JsonInitValue {
     @SerializedName("row")
@@ -13,11 +11,15 @@ public class JsonInitValue {
     @SerializedName("value")
     private Integer value;
 
-    public Integer getValue() {
-        return value;
+    public Integer getRow() {
+        return row;
     }
 
-    public Coordinate getCoordinate() {
-        return new Coordinate(row, column);
+    public Integer getColumn() {
+        return column;
+    }
+
+    public Integer getValue() {
+        return value;
     }
 }

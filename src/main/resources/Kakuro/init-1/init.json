@@ -4,66 +4,66 @@
         {
             "value": 13,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 2,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 1,
+                "offsetY": 2,
+                "deltaX": 1,
+                "deltaY": 2
             }
         },{
             "value": 29,
             "group": {
-                "columnOffset": 2,
-                "rowOffset": 1,
-                "rowLarge": 1,
-                "columnLarge": 4
+                "offsetX": 2,
+                "offsetY": 1,
+                "deltaX": 1,
+                "deltaY": 4
             }
         },{
             "value": 17,
             "group": {
-                "columnOffset": 3,
-                "rowOffset": 1,
-                "rowLarge": 1,
-                "columnLarge": 4
+                "offsetX": 3,
+                "offsetY": 1,
+                "deltaX": 1,
+                "deltaY": 4
             }
         },{
             "value": 4,
             "group": {
-                "columnOffset": 4,
-                "rowOffset": 2,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 4,
+                "offsetY": 2,
+                "deltaX": 1,
+                "deltaY": 2
             }
         },{
             "value": 7,
             "group": {
-                "columnOffset": 2,
-                "rowOffset": 1,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 2,
+                "offsetY": 1,
+                "deltaX": 2,
+                "deltaY": 1
             }
         },{
             "value": 20,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 2,
-                "rowLarge": 4,
-                "columnLarge": 1
+                "offsetX": 1,
+                "offsetY": 2,
+                "deltaX": 4,
+                "deltaY": 1
             }
         },{
             "value": 27,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 3,
-                "rowLarge": 4,
-                "columnLarge": 1
+                "offsetX": 1,
+                "offsetY": 3,
+                "deltaX": 4,
+                "deltaY": 1
             }
         },{
             "value": 9,
             "group": {
-                "columnOffset": 2,
-                "rowOffset": 4,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 2,
+                "offsetY": 4,
+                "deltaX": 2,
+                "deltaY": 1
             }
         }
     ]

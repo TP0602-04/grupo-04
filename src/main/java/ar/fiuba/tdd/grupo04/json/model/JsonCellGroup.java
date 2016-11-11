@@ -4,28 +4,28 @@ import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("CPD-START")
 public class JsonCellGroup {
-    @SerializedName("rowOffset")
-    private Integer rowOffset;
-    @SerializedName("columnOffset")
-    private Integer columnOffset;
-    @SerializedName("rowLarge")
-    private Integer rowLarge;
-    @SerializedName("columnLarge")
-    private Integer columnLarge;
+    @SerializedName("offsetX")
+    private Integer offsetX;
+    @SerializedName("offsetY")
+    private Integer offsetY;
+    @SerializedName("deltaX")
+    private Integer deltaX;
+    @SerializedName("deltaY")
+    private Integer deltaY;
 
-    public Integer getRowOffset() {
-        return rowOffset;
+    public Integer getOffsetX() {
+        return offsetX;
     }
 
-    public Integer getColumnOffset() {
-        return columnOffset;
+    public Integer getOffsetY() {
+        return offsetY;
     }
 
-    public Integer getRowLarge() {
-        return rowLarge;
+    public Integer getDeltaX() {
+        return deltaX;
     }
 
-    public Integer getColumnLarge() {
-        return columnLarge;
+    public Integer getDeltaY() {
+        return deltaY;
     }
 }

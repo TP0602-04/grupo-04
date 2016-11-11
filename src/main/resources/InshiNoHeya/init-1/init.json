@@ -4,98 +4,98 @@
         {
             "value": 6,
             "group": {
-                "columnOffset": 0,
-                "rowOffset": 0,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 0,
+                "offsetY": 0,
+                "deltaY": 2,
+                "deltaX": 1
             }
         },{
             "value": 4,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 0,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 1,
+                "offsetY": 0,
+                "deltaX": 2,
+                "deltaY": 1
             }
         },{
             "value": 5,
             "group": {
-                "columnOffset": 3,
-                "rowOffset": 0,
-                "rowLarge": 1,
-                "columnLarge": 1
+                "offsetX": 3,
+                "offsetY": 0,
+                "deltaX": 1,
+                "deltaY": 1
             }
         },{
             "value": 40,
             "group": {
-                "columnOffset": 4,
-                "rowOffset": 0,
-                "rowLarge": 1,
-                "columnLarge": 3
+                "offsetX": 4,
+                "offsetY": 0,
+                "deltaY": 3,
+                "deltaX": 1
             }
         },{
             "value": 3,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 1,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 1,
+                "offsetY": 1,
+                "deltaX": 2,
+                "deltaY": 1
             }
         },{
             "value": 4,
             "group": {
-                "columnOffset": 3,
-                "rowOffset": 1,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 3,
+                "offsetY": 1,
+                "deltaY": 2,
+                "deltaX": 1
             }
         },{
             "value": 15,
             "group": {
-                "columnOffset": 0,
-                "rowOffset": 2,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 0,
+                "offsetY": 2,
+                "deltaX": 2,
+                "deltaY": 1
             }
         },{
             "value": 40,
             "group": {
-                "columnOffset": 2,
-                "rowOffset": 2,
-                "rowLarge": 1,
-                "columnLarge": 3
+                "offsetX": 2,
+                "offsetY": 2,
+                "deltaY": 3,
+                "deltaX": 1
             }
         },{
             "value": 4,
             "group": {
-                "columnOffset": 0,
-                "rowOffset": 3,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 0,
+                "offsetY": 3,
+                "deltaY": 2,
+                "deltaX": 1
             }
         },{
             "value": 10,
             "group": {
-                "columnOffset": 1,
-                "rowOffset": 3,
-                "rowLarge": 1,
-                "columnLarge": 2
+                "offsetX": 1,
+                "offsetY": 3,
+                "deltaY": 2,
+                "deltaX": 1
             }
         },{
             "value": 6,
             "group": {
-                "columnOffset": 3,
-                "rowOffset": 3,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 3,
+                "offsetY": 3,
+                "deltaX": 2,
+                "deltaY": 1
             }
         },{
             "value": 3,
             "group": {
-                "columnOffset": 3,
-                "rowOffset": 4,
-                "rowLarge": 2,
-                "columnLarge": 1
+                "offsetX": 3,
+                "offsetY": 4,
+                "deltaX": 2,
+                "deltaY": 1
             }
         }
     ]
