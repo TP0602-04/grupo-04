@@ -1,9 +1,7 @@
 package ar.fiuba.tdd.grupo04.gui.model;
 
-
-import com.google.gson.annotations.SerializedName;
-
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;

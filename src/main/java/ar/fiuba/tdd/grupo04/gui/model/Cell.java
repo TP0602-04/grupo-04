@@ -1,8 +1,7 @@
 package ar.fiuba.tdd.grupo04.gui.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import ar.fiuba.tdd.grupo04.board.Coordinate;
+import com.google.gson.annotations.SerializedName;
 
 public class Cell {
     @SerializedName("x")

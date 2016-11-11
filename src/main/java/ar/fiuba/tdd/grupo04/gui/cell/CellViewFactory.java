@@ -22,8 +22,6 @@ public class CellViewFactory {
                 break;
             case DYNAMIC_DIAGONAL_CONNECTOR:
                 break;
-            default:
-                System.out.println("ERROR CelViewFactory: cell type unknown");
         }
         return cell;
     }

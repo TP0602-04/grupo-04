@@ -27,8 +27,7 @@ public class EmptyContiguousInGroupCondition<S, R extends IInputGroup<S>> implem
     public boolean check(R inputGroup) {
         final List<? extends IInput<S>> inputs = inputGroup.getInputs();
         final List<Coordinate> coordinatesInGroup = inputGroup.getInputs().stream().map(IInput::getCoordinate).collect(Collectors.toList());
-        return inputs.stream().filter(i -> i.getValue().isPresent()).filter(i -> !isNode.apply(i.getValue().get()))
-        .filter(i -> !isMarked.apply(i.getValue().get())).allMatch(i -> contiguousMarkedOrInGroup(i, coordinatesInGroup));
+         return inputs.stream().filter(i -> i.getValue().isPresent()).filter(i -> !isNode.apply(i.getValue().get())).filter(i -> !isMarked.apply(i.getValue().get())).allMatch(i -> contiguousMarkedOrInGroup(i, coordinatesInGroup));
     }
 
     private boolean contiguousMarkedOrInGroup(IInput<S> input, List<Coordinate> coordinatesInGroup) {
