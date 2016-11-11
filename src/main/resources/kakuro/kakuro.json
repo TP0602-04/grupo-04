@@ -2,7 +2,7 @@
     "board": {
         "rows": 5,
         "columns": 5,
-        "cellType": "Integer"
+        "inputType": "NumericInput"
     },
     "loseRules": [
         {
@@ -10,7 +10,7 @@
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["UniqueCondition", "SumCondition"]
+            "condition": ["UniqueCondition"]
         },{
             "collector": {
                 "type": "AllCollector",
@@ -31,7 +31,7 @@
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["AllFilledCondition"]
+            "condition": ["AllFilledCondition", "SumCondition"]
         }
     ]
 }

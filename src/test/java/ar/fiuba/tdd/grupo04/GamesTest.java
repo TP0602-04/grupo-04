@@ -17,18 +17,32 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SudokuTest {
-    private static final String MODEL_PATH = "./src/main/resources/sudoku/sudoku.json";
-    private static final String INIT_PATH = "./src/test/resources/sudoku/init-1.json";
-    private static final String INPUT_PATH = "./src/test/resources/sudoku/input-1.json";
-    private static final String OUTPUT_PATH = "./src/test/resources/sudoku/output-1.json";
+public class GamesTest {
+    private static final String SUDOKU_MODEL_PATH = "./src/main/resources/sudoku/sudoku.json";
+    private static final String SUDOKU_INIT_PATH = "./src/test/resources/sudoku/init-1.json";
+    private static final String SUDOKU_INPUT_PATH = "./src/test/resources/sudoku/input-1.json";
+    private static final String SUDOKU_OUTPUT_PATH = "./src/test/resources/sudoku/output-1.json";
 
-	@Test
-	public void testCheckGameOk() {
-        String inputs = FileUtils.readFile(INPUT_PATH);
-        String model = FileUtils.readFile(MODEL_PATH);
-        String initGame = FileUtils.readFile(INIT_PATH);
-        String outputFile = FileUtils.readFile(OUTPUT_PATH);
+    @Test
+    public void testSudoku() {
+        checkGameOk(SUDOKU_MODEL_PATH, SUDOKU_INIT_PATH, SUDOKU_INPUT_PATH, SUDOKU_OUTPUT_PATH);
+    }
+
+    private static final String KAKURO_MODEL_PATH = "./src/main/resources/kakuro/kakuro.json";
+    private static final String KAKURO_INIT_PATH = "./src/test/resources/kakuro/init-1.json";
+    private static final String KAKURO_INPUT_PATH = "./src/test/resources/kakuro/input-1.json";
+    private static final String KAKURO_OUTPUT_PATH = "./src/test/resources/kakuro/output-1.json";
+
+    @Test
+    public void testKakuro() {
+        checkGameOk(KAKURO_MODEL_PATH, KAKURO_INIT_PATH, KAKURO_INPUT_PATH, KAKURO_OUTPUT_PATH);
+    }
+
+	private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
+        String inputs = FileUtils.readFile(inputPath);
+        String model = FileUtils.readFile(modelPath);
+        String initGame = FileUtils.readFile(initPath);
+        String outputFile = FileUtils.readFile(outputPath);
 
         if (inputs == null || model == null || initGame == null) {
             throw new NullPointerException();

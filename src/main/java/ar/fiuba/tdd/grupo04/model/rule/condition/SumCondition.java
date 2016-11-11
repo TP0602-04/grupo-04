@@ -7,7 +7,7 @@ public class SumCondition<R extends IValuedInputGroup<NumericInput, Integer>> im
     private final OperationCondition<IValuedInputGroup<NumericInput, Integer>> sumOperation;
 
     public SumCondition() {
-        sumOperation = new OperationCondition<>(1, Integer::sum);
+        sumOperation = new OperationCondition<>(0, Integer::sum);
     }
 
     @Override

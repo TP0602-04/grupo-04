@@ -25,11 +25,7 @@ public class OperationCondition<R extends IValuedInputGroup<NumericInput, Intege
     @Override
     public boolean check(R valuedInputGroup) {
         final Integer value = valuedInputGroup.getValue();
-        final boolean allMatch = valuedInputGroup.getInputs().stream().allMatch(IInput::isFilled);
-        if (allMatch) {
-            return value.equals(valuedInputGroup.getInputs().stream().map(NumericInput::getValue)
+        return value.equals(valuedInputGroup.getInputs().stream().filter(IInput::isFilled).map(NumericInput::getValue)
                     .map(Optional::get).reduce(initialState, accumulator));
-        }
-        return true;
     }
 }
