@@ -1,23 +1,18 @@
 package ar.fiuba.tdd.grupo04.gui;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.*;
 
 public class InputBoxView implements View {
-    public interface SubmitListener {
-        void onSubmit(Coordinate coordinate, String input);
-    }
-
     private JPanel view;
     private JLabel selectionText;
     private JTextField inputText;
     private Coordinate selection;
     private Set<SubmitListener> listeners;
-
     public InputBoxView() {
         listeners = new HashSet<>();
 
@@ -102,6 +97,10 @@ public class InputBoxView implements View {
                 listener.onSubmit(selection, inputText.getText());
             }
         }
+    }
+
+    public interface SubmitListener {
+        void onSubmit(Coordinate coordinate, String input);
     }
 
 }

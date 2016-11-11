@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.grupo04.gui.cell;
 
-import ar.fiuba.tdd.grupo04.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.gui.exception.IllegalInputException;
 
 import java.awt.*;

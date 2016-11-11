@@ -7,8 +7,8 @@ public class JsonBoard {
     private Integer rows;
     @SerializedName("columns")
     private Integer columns;
-    @SerializedName("cellType")
-    private String cellType;
+    @SerializedName("inputType")
+    private String inputType;
 
     public Integer getRows() {
         return rows;
@@ -18,7 +18,7 @@ public class JsonBoard {
         return columns;
     }
 
-    public String getCellType() {
-        return cellType;
+    public String getInputType() {
+        return inputType;
     }
 }

@@ -1,16 +1,27 @@
 package ar.fiuba.tdd.grupo04.json.parser;
 
-import ar.fiuba.tdd.grupo04.Game;
-import ar.fiuba.tdd.grupo04.IGame;
-import ar.fiuba.tdd.grupo04.board.Board;
-import ar.fiuba.tdd.grupo04.board.Coordinate;
-import ar.fiuba.tdd.grupo04.board.reference.builder.ReferencedBlockGroupBuilder;
-import ar.fiuba.tdd.grupo04.json.model.*;
-import ar.fiuba.tdd.grupo04.rule.IRule;
-import ar.fiuba.tdd.grupo04.rule.Rule;
-import ar.fiuba.tdd.grupo04.rule.collector.CustomGroupCollector;
-import ar.fiuba.tdd.grupo04.rule.collector.ICollector;
-import ar.fiuba.tdd.grupo04.rule.condition.ICondition;
+import ar.fiuba.tdd.grupo04.model.Game;
+import ar.fiuba.tdd.grupo04.model.IGame;
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.board.IBoard;
+import ar.fiuba.tdd.grupo04.model.board.reference.builder.ReferencedBlockGroupBuilder;
+import ar.fiuba.tdd.grupo04.json.model.JsonCellGroup;
+import ar.fiuba.tdd.grupo04.json.model.JsonGame;
+import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
+import ar.fiuba.tdd.grupo04.json.model.JsonInitValue;
+import ar.fiuba.tdd.grupo04.json.model.JsonReference;
+import ar.fiuba.tdd.grupo04.json.model.JsonRules;
+import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInput;
+import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
+import ar.fiuba.tdd.grupo04.model.inputs.GraphInput;
+import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
+import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
+import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
+import ar.fiuba.tdd.grupo04.model.rule.IRule;
+import ar.fiuba.tdd.grupo04.model.rule.Rule;
+import ar.fiuba.tdd.grupo04.model.rule.collector.CustomGroupCollector;
+import ar.fiuba.tdd.grupo04.model.rule.collector.ICollector;
+import ar.fiuba.tdd.grupo04.model.rule.condition.ICondition;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -19,9 +30,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GameJsonParser {
+
     public static IGame parseLoad(JsonGame jsonGame, JsonInitGame jsonInitGame) throws Exception {
         IGame game = new Game();
-        Board board = BoardJsonParser.parse(jsonGame.getBoard());
+        IBoard board = BoardJsonParser.parse(jsonGame.getBoard());
+        if (board == null) {
+            return null;
+        }
         game.setBoard(board);
 
         // Load references
@@ -65,15 +80,39 @@ public class GameJsonParser {
         }
 
         // Load initial values
-        List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
-        for (Pair<Coordinate, Integer> cell : initialValues) {
-            game.fillCell(cell.getKey(), cell.getValue());
+        switch (jsonGame.getBoard().getInputType()) {
+            case "NumericInput": {
+                List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
+                for (Pair<Coordinate, Integer> cell : initialValues) {
+                    game.addInputModification(cell.getKey(), new NumericInputModification(cell.getValue()));
+                }
+                break;
+            }
+            case "GraphInput": {
+                List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
+                for (Pair<Coordinate, Integer> cell : initialValues) {
+                    game.addInputModification(cell.getKey(), new GraphInputModification());
+                }
+                break;
+            }
+            case "DiagonalInput": {
+                List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
+                for (Pair<Coordinate, Integer> cell : initialValues) {
+                    switch (cell.getValue()) {
+                        case 0: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));break;
+                        case 1: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));break;
+                        case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));break;
+                        default: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));break;
+                    }
+                }
+                break;
+            }
+            default:{}
         }
-
         return game;
     }
 
-    private static List<Pair<ICollector, List<ICondition>>> getRuleComponents(List<JsonRules> jsonRules, Board board) throws Exception {
+    private static List<Pair<ICollector, List<ICondition>>> getRuleComponents(List<JsonRules> jsonRules, IBoard board) throws Exception {
         List<Pair<ICollector, List<ICondition>>> list = new ArrayList<>();
         for (JsonRules rule : jsonRules) {
             ICollector collector = CollectorJsonParser.parse(rule.getCollector(), board);
