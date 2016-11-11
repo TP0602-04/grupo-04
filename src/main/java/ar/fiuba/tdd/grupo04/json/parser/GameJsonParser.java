@@ -86,29 +86,30 @@ public class GameJsonParser {
                 for (Pair<Coordinate, Integer> cell : initialValues) {
                     game.addInputModification(cell.getKey(), new NumericInputModification(cell.getValue()));
                 }
-                return game;
+                break;
             }
             case "GraphInput": {
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
                     game.addInputModification(cell.getKey(), new GraphInputModification());
                 }
-                return game;
+                break;
             }
             case "DiagonalInput": {
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
                     switch (cell.getValue()) {
-                        case 0: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));
-                        case 1: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));
-                        case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));
-                        case 3: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));
+                        case 0: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));break;
+                        case 1: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));break;
+                        case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));break;
+                        default: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));break;
                     }
                 }
-                return game;
+                break;
             }
+            default:{}
         }
-        return null;
+        return game;
     }
 
     private static List<Pair<ICollector, List<ICondition>>> getRuleComponents(List<JsonRules> jsonRules, IBoard board) throws Exception {
