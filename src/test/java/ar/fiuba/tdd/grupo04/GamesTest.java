@@ -38,7 +38,18 @@ public class GamesTest {
         checkGameOk(KAKURO_MODEL_PATH, KAKURO_INIT_PATH, KAKURO_INPUT_PATH, KAKURO_OUTPUT_PATH);
     }
 
-	private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
+
+    private static final String INSHINOHEYA_MODEL_PATH = "./src/main/resources/inshiNoHeya/inshiNoHeya.json";
+    private static final String INSHINOHEYA_INIT_PATH = "./src/test/resources/inshiNoHeya/init-1.json";
+    private static final String INSHINOHEYA_INPUT_PATH = "./src/test/resources/inshiNoHeya/input-1.json";
+    private static final String INSHINOHEYA_OUTPUT_PATH = "./src/test/resources/inshiNoHeya/output-1.json";
+
+    @Test
+    public void testInshiNoHeya() {
+        checkGameOk(INSHINOHEYA_MODEL_PATH, INSHINOHEYA_INIT_PATH, INSHINOHEYA_INPUT_PATH, INSHINOHEYA_OUTPUT_PATH);
+    }
+
+    private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
         String initGame = FileUtils.readFile(initPath);

@@ -18,13 +18,13 @@
 //import ar.fiuba.tdd.grupo04.model.rule.condition.UniqueCondition;
 //
 //@SuppressWarnings("CPD-START")
-//public class InshiNoHeya {
+//public class inshiNoHeya {
 //    IGame<NumericInput> game;
 //    private IBoard<NumericInput> board;
 //    private CustomGroupCollector customGroupCollector;
 //
 //    @SuppressWarnings("CPD-START")
-//    public InshiNoHeya() {
+//    public inshiNoHeya() {
 //        createGame();
 //        createBoard();
 //    }

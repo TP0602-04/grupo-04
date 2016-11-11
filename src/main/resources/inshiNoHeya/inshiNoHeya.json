@@ -2,7 +2,7 @@
     "board": {
         "rows": 5,
         "columns": 5,
-        "cellType": "Integer"
+        "inputType": "NumericInput"
     },
     "loseRules": [
         {
