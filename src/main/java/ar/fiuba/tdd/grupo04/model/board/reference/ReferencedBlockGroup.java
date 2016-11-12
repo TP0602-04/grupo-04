@@ -5,34 +5,22 @@ import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReferencedBlockGroup<S> implements IReferencedGroup<S> {
-    private final Integer rowOffset;
-    private final Integer columnOffset;
-    private final Integer rowLarge;
-    private final Integer columnLarge;
-    private final S referencedValue;
+public class ReferencedBlockGroup implements IReferencedGroup<Integer> {
+    private List<Coordinate> coordinates;
+    private Integer value;
 
-    public ReferencedBlockGroup(Integer rowOffset, Integer columnOffset, Integer rowLarge, Integer columnLarge, S referencedValue) {
-        this.rowOffset = rowOffset;
-        this.columnOffset = columnOffset;
-        this.rowLarge = rowLarge;
-        this.columnLarge = columnLarge;
-        this.referencedValue = referencedValue;
+    public ReferencedBlockGroup(List<Coordinate> coordinates, Integer value) {
+        this.coordinates = coordinates;
+        this.value = value;
     }
 
     @Override
-    public S getValue() {
-        return referencedValue;
+    public Integer getValue() {
+        return value;
     }
 
     @Override
     public List<Coordinate> getCoordinates() {
-        final List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = rowOffset; i < (rowOffset + rowLarge); i++) {
-            for (int j = columnOffset; j < (columnOffset + columnLarge); j++) {
-                coordinates.add(new Coordinate(i, j));
-            }
-        }
         return coordinates;
     }
 }
