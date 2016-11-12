@@ -18,7 +18,6 @@ public class CountGraphCondition<R extends IValuedInputGroup<GraphInput, Integer
     public CountGraphCondition(GraphInputType graphInputType, BiFunction<Long, Long, Boolean> comparator) {
         this.graphInputType = graphInputType;
         this.comparator = comparator;
-
     }
 
     @Override
