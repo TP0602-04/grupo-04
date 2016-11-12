@@ -11,6 +11,7 @@ import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
 import ar.fiuba.tdd.grupo04.json.model.JsonInitValue;
 import ar.fiuba.tdd.grupo04.json.model.JsonReference;
 import ar.fiuba.tdd.grupo04.json.model.JsonRules;
+import ar.fiuba.tdd.grupo04.model.inputs.BooleanInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInput;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInput;
@@ -104,6 +105,13 @@ public class GameJsonParser {
                         case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));break;
                         default: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));break;
                     }
+                }
+                break;
+            }
+            case "BooleanInput": {
+                List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
+                for (Pair<Coordinate, Integer> cell : initialValues) {
+                    game.addInputModification(cell.getKey(), new BooleanInputModification());
                 }
                 break;
             }

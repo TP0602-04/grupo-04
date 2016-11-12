@@ -9,6 +9,7 @@ import ar.fiuba.tdd.grupo04.json.model.JsonOutputStatus;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.inputs.BooleanInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
@@ -109,6 +110,9 @@ public class GamesTest {
                         case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));
                         case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));
                     }
+                }
+                case "BooleanInput": {
+                    game.addInputModification(new Coordinate(input.x, input.y), new BooleanInputModification());
                 }
             }
             if (game.checkLoseRules()) {
