@@ -47,7 +47,7 @@ public class Coordinate {
     }
 
     public boolean isAround(Coordinate coordinate) {
-        return (column == coordinate.column() && (row == coordinate.row() + 1 || row == coordinate.row() - 1)) ||
-                (row == coordinate.row() && (column == coordinate.column() + 1 || column == coordinate.column() - 1));
+        return (column.equals(coordinate.column()) && (row.equals(coordinate.row() + 1) || row.equals(coordinate.row() - 1))) ||
+                (row.equals(coordinate.row()) && (column.equals(coordinate.column() + 1) || column.equals(coordinate.column() - 1)));
     }
 }
