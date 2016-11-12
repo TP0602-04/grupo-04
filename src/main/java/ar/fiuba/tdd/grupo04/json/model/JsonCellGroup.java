@@ -1,8 +1,12 @@
 package ar.fiuba.tdd.grupo04.json.model;
 
+import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("CPD-START")
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class JsonCellGroup {
     @SerializedName("offsetX")
     private Integer offsetX;
@@ -13,19 +17,14 @@ public class JsonCellGroup {
     @SerializedName("deltaY")
     private Integer deltaY;
 
-    public Integer getOffsetX() {
-        return offsetX;
-    }
-
-    public Integer getOffsetY() {
-        return offsetY;
-    }
-
-    public Integer getDeltaX() {
-        return deltaX;
-    }
-
-    public Integer getDeltaY() {
-        return deltaY;
+    public List<Coordinate> getCoordinates() {
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = offsetX; i < offsetX + deltaX; i++) {
+            for (int j = offsetY; j < offsetY + deltaY; j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                coordinates.add(coordinate);
+            }
+        }
+        return coordinates;
     }
 }

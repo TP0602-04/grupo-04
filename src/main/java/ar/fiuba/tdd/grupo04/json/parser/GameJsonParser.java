@@ -1,21 +1,13 @@
 package ar.fiuba.tdd.grupo04.json.parser;
 
+import ar.fiuba.tdd.grupo04.json.model.*;
 import ar.fiuba.tdd.grupo04.model.Game;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.model.board.IBoard;
-import ar.fiuba.tdd.grupo04.model.board.reference.builder.ReferencedBlockGroupBuilder;
-import ar.fiuba.tdd.grupo04.json.model.JsonCellGroup;
-import ar.fiuba.tdd.grupo04.json.model.JsonGame;
-import ar.fiuba.tdd.grupo04.json.model.JsonInitGame;
-import ar.fiuba.tdd.grupo04.json.model.JsonInitValue;
-import ar.fiuba.tdd.grupo04.json.model.JsonReference;
-import ar.fiuba.tdd.grupo04.json.model.JsonRules;
-import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInput;
+import ar.fiuba.tdd.grupo04.model.board.reference.ReferencedBlockGroup;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
-import ar.fiuba.tdd.grupo04.model.inputs.GraphInput;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
-import ar.fiuba.tdd.grupo04.model.inputs.NumericInput;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
 import ar.fiuba.tdd.grupo04.model.rule.IRule;
 import ar.fiuba.tdd.grupo04.model.rule.Rule;
@@ -54,14 +46,10 @@ public class GameJsonParser {
         for (ICollector collector : customs) {
             CustomGroupCollector customCollector = (CustomGroupCollector) collector;
             for (JsonReference reference : initialReferences) {
-                JsonCellGroup group = reference.getGroup();
-                ReferencedBlockGroupBuilder builder = new ReferencedBlockGroupBuilder();
-                builder.referencedValue(reference.getValue())
-                        .rowOffset(group.getOffsetX())
-                        .columnOffset(group.getOffsetY())
-                        .columnLarge(group.getDeltaY())
-                        .rowLarge(group.getDeltaX());
-                customCollector.addReferencedGroup(builder.createReference());
+                List<Coordinate> coordinates = reference.getCoordinates();
+                Integer value = reference.getValue();
+                ReferencedBlockGroup blockGroup = new ReferencedBlockGroup(coordinates, value);
+                customCollector.addReferencedGroup(blockGroup);
             }
         }
 
@@ -99,15 +87,24 @@ public class GameJsonParser {
                 List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
                 for (Pair<Coordinate, Integer> cell : initialValues) {
                     switch (cell.getValue()) {
-                        case 0: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));break;
-                        case 1: game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));break;
-                        case 2: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));break;
-                        default: game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));break;
+                        case 0:
+                            game.addInputModification(cell.getKey(), new DiagonalInputModification(false, false));
+                            break;
+                        case 1:
+                            game.addInputModification(cell.getKey(), new DiagonalInputModification(false, true));
+                            break;
+                        case 2:
+                            game.addInputModification(cell.getKey(), new DiagonalInputModification(true, false));
+                            break;
+                        default:
+                            game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));
+                            break;
                     }
                 }
                 break;
             }
-            default:{}
+            default: {
+            }
         }
         return game;
     }
