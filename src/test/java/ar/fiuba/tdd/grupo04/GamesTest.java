@@ -60,6 +60,16 @@ public class GamesTest {
         checkGameOk(SITHERLINK_MODEL_PATH, SITHERLINK_INIT_PATH, SITHERLINK_INPUT_PATH, SITHERLINK_OUTPUT_PATH);
     }
 
+    private static final String NORINORI_MODEL_PATH = "./src/main/resources/norinori/norinori.json";
+    private static final String NORINORI_INIT_PATH = "./src/test/resources/norinori/init-1.json";
+    private static final String NORINORI_INPUT_PATH = "./src/test/resources/norinori/input-1.json";
+    private static final String NORINORI_OUTPUT_PATH = "./src/test/resources/norinori/output-1.json";
+
+    @Test
+    public void testNorinori() {
+        checkGameOk(NORINORI_MODEL_PATH, NORINORI_INIT_PATH, NORINORI_INPUT_PATH, NORINORI_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
@@ -93,7 +103,12 @@ public class GamesTest {
         }
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
+
+        int asd =  moves.inputs.size()-1;
+        int asd2 =  0;
+
         for (JsonMove input : moves.inputs) {
+            asd2 = asd2+1;
 
             switch (jsonGame.getBoard().getInputType()) {
                 case "NumericInput": {

@@ -4,10 +4,10 @@ import ar.fiuba.tdd.grupo04.model.inputs.BooleanInput;
 import ar.fiuba.tdd.grupo04.model.rule.IInputGroup;
 
 @SuppressWarnings("CPD-START")
-public class MoraThanTwoContiguousMarkedCondition<R extends IInputGroup<BooleanInput>> implements ICondition<R> {
+public class MoreThanTwoContiguousMarkedCondition<R extends IInputGroup<BooleanInput>> implements ICondition<R> {
     private final TwoContiguousMarkedComparatorCondition<R> comparatorCondition;
 
-    public MoraThanTwoContiguousMarkedCondition() {
+    public MoreThanTwoContiguousMarkedCondition() {
         this.comparatorCondition = new TwoContiguousMarkedComparatorCondition<>((expected, counted) -> expected >= counted);
     }
 

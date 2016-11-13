@@ -1,22 +1,22 @@
 {
     "board": {
-        "rows": 10,
-        "columns": 10,
+        "rows": 5,
+        "columns": 5,
         "inputType": "BooleanInput"
     },
     "loseRules": [
         {
             "collector": {
-                "type": "AllCollector",
-                "params": []
-            },
-            "condition": ["MoraThanTwoContiguousMarkedCondition"]
-        },{
-            "collector": {
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["MoraThanTwoContiguousMarkedCondition"]
+            "condition": ["CountBooleanBiggerCondition"]
+        },{
+            "collector": {
+                "type": "AllCollector",
+                "params": []
+            },
+            "condition": ["MoreThanTwoContiguousMarkedCondition"]
         }
     ],
     "winRules": [
@@ -31,7 +31,7 @@
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["TwoContiguousMarkedCondition"]
+            "condition": ["CountBooleanEqualCondition"]
         }
     ]
 }

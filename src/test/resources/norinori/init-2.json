@@ -1,0 +1,255 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 0,
+                "deltaY": 2,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 2,
+                "deltaY": 1,
+                "deltaX": 3
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 3,
+                "deltaY": 1,
+                "deltaX": 4
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 4,
+                "deltaY": 1,
+                "deltaX": 4
+            },{
+                "offsetX": 2,
+                "offsetY": 5,
+                "deltaY": 1,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 5,
+                "deltaY": 1,
+                "deltaX": 2
+            },{
+                "offsetX": 0,
+                "offsetY": 6,
+                "deltaY": 1,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 7,
+                "deltaY": 3,
+                "deltaX": 1
+            },{
+                "offsetX": 1,
+                "offsetY": 6,
+                "deltaY": 3,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 1,
+                "offsetY": 0,
+                "deltaY": 1,
+                "deltaX": 6
+            },{
+                "offsetX": 1,
+                "offsetY": 1,
+                "deltaY": 1,
+                "deltaX": 2
+            },{
+                "offsetX": 4,
+                "offsetY": 1,
+                "deltaY": 1,
+                "deltaX": 3
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 3,
+                "offsetY": 1,
+                "deltaY": 1,
+                "deltaX": 1
+            },{
+                "offsetX": 3,
+                "offsetY": 2,
+                "deltaY": 1,
+                "deltaX": 2
+            },{
+                "offsetX": 5,
+                "offsetY": 3,
+                "deltaY": 4,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 4,
+                "offsetY": 3,
+                "deltaY": 4,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 3,
+                "offsetY": 6,
+                "deltaY": 1,
+                "deltaX": 1
+            },{
+                "offsetX": 3,
+                "offsetY": 7,
+                "deltaY": 2,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 1,
+                "offsetY": 9,
+                "deltaY": 1,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 3,
+                "offsetY": 9,
+                "deltaY": 1,
+                "deltaX": 3
+            },{
+                "offsetX": 5,
+                "offsetY": 6,
+                "deltaY": 3,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 7,
+                "offsetY": 0,
+                "deltaY": 2,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 7,
+                "offsetY": 2,
+                "deltaY": 1,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 6,
+                "offsetY": 2,
+                "deltaY": 1,
+                "deltaX": 1
+            },{
+                "offsetX": 6,
+                "offsetY": 3,
+                "deltaY": 1,
+                "deltaX": 2
+            },{
+                "offsetX": 8,
+                "offsetY": 3,
+                "deltaY": 3,
+                "deltaX": 1
+            },{
+                "offsetX": 9,
+                "offsetY": 5,
+                "deltaY": 1,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 6,
+                "offsetY": 4,
+                "deltaY": 4,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 6,
+                "offsetY": 8,
+                "deltaY": 2,
+                "deltaX": 2
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 9,
+                "offsetY": 0,
+                "deltaY": 5,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 8,
+                "offsetY": 6,
+                "deltaY": 4,
+                "deltaX": 1
+            },{
+                "offsetX": 9,
+                "offsetY": 6,
+                "deltaY": 1,
+                "deltaX": 1
+            },{
+                "offsetX": 9,
+                "offsetY": 9,
+                "deltaY": 1,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 0,
+            "groups": [{
+                "offsetX": 9,
+                "offsetY": 7,
+                "deltaY": 2,
+                "deltaX": 1
+            }]
+        }
+    ]
+}
