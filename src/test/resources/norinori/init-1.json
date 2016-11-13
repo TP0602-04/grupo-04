@@ -1,0 +1,55 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 0,
+                "offsetY": 0,
+                "deltaY": 5,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 1,
+                "offsetY": 0,
+                "deltaY": 2,
+                "deltaX": 3
+            }]
+        },
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 1,
+                "offsetY": 3,
+                "deltaY": 2,
+                "deltaX": 3
+            }]
+        },
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 4,
+                "offsetY": 3,
+                "deltaY": 2,
+                "deltaX": 1
+            }]
+        },
+        {
+            "value": 2,
+            "groups": [{
+                "offsetX": 1,
+                "offsetY": 2,
+                "deltaY": 1,
+                "deltaX": 2
+            },{
+                "offsetX": 4,
+                "offsetY": 0,
+                "deltaY": 3,
+                "deltaX": 1
+            }]
+        }
+    ]
+}

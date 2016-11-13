@@ -3,17 +3,22 @@ package ar.fiuba.tdd.grupo04.model.rule.condition.factory;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllGreaterThanCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllLesserThanCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.CountBooleanBiggerCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.CountBooleanEqualCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.CountEdgesBiggerCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.CountEdgesEqualCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.ICondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.MoreThanTwoContiguousMarkedCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.MultiplyCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.OneLoopCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.SumCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.TwoContiguousMarkedCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.UniqueCondition;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("CPD-START")
 public class ConditionFactory {
     private static Map<String, ConditionCreator> map;
 
@@ -28,6 +33,10 @@ public class ConditionFactory {
         map.put("CountEdgesBiggerCondition", CountEdgesBiggerCondition::new);
         map.put("CountEdgesEqualCondition", CountEdgesEqualCondition::new);
         map.put("OneLoopCondition", OneLoopCondition::new);
+        map.put("MoreThanTwoContiguousMarkedCondition", MoreThanTwoContiguousMarkedCondition::new);
+        map.put("TwoContiguousMarkedCondition", TwoContiguousMarkedCondition::new);
+        map.put("CountBooleanBiggerCondition", CountBooleanBiggerCondition::new);
+        map.put("CountBooleanEqualCondition", CountBooleanEqualCondition::new);
     }
 
     public static ICondition create(String type) throws Exception {

@@ -9,6 +9,7 @@ import ar.fiuba.tdd.grupo04.json.model.JsonOutputStatus;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.inputs.BooleanInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
@@ -59,6 +60,16 @@ public class GamesTest {
         checkGameOk(SITHERLINK_MODEL_PATH, SITHERLINK_INIT_PATH, SITHERLINK_INPUT_PATH, SITHERLINK_OUTPUT_PATH);
     }
 
+    private static final String NORINORI_MODEL_PATH = "./src/main/resources/norinori/norinori.json";
+    private static final String NORINORI_INIT_PATH = "./src/test/resources/norinori/init-1.json";
+    private static final String NORINORI_INPUT_PATH = "./src/test/resources/norinori/input-1.json";
+    private static final String NORINORI_OUTPUT_PATH = "./src/test/resources/norinori/output-1.json";
+
+    @Test
+    public void testNorinori() {
+        checkGameOk(NORINORI_MODEL_PATH, NORINORI_INIT_PATH, NORINORI_INPUT_PATH, NORINORI_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
@@ -92,7 +103,12 @@ public class GamesTest {
         }
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
+
+        int asd =  moves.inputs.size()-1;
+        int asd2 =  0;
+
         for (JsonMove input : moves.inputs) {
+            asd2 = asd2+1;
 
             switch (jsonGame.getBoard().getInputType()) {
                 case "NumericInput": {
@@ -109,6 +125,9 @@ public class GamesTest {
                         case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));
                         case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));
                     }
+                }
+                case "BooleanInput": {
+                    game.addInputModification(new Coordinate(input.x, input.y), new BooleanInputModification());
                 }
             }
             if (game.checkLoseRules()) {
