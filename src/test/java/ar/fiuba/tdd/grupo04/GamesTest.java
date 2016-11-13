@@ -70,6 +70,16 @@ public class GamesTest {
         checkGameOk(NORINORI_MODEL_PATH, NORINORI_INIT_PATH, NORINORI_INPUT_PATH, NORINORI_OUTPUT_PATH);
     }
 
+    private static final String NORINORI2_MODEL_PATH = "./src/main/resources/norinori/norinori-10-10.json";
+    private static final String NORINORI2_INIT_PATH = "./src/test/resources/norinori/init-2.json";
+    private static final String NORINORI2_INPUT_PATH = "./src/test/resources/norinori/input-2.json";
+    private static final String NORINORI2_OUTPUT_PATH = "./src/test/resources/norinori/output-2.json";
+
+    @Test
+    public void testNorinori2() {
+        checkGameOk(NORINORI2_MODEL_PATH, NORINORI2_INIT_PATH, NORINORI2_INPUT_PATH, NORINORI2_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
