@@ -12,8 +12,8 @@ import java.util.List;
 public class CustomValuedCollector implements ICollector<ReferencedCellGroup> {
     private ValuedCollector valuedCollector;
 
-    public CustomValuedCollector(int filterValue) {
-        this.valuedCollector = new ValuedCollector(filterValue);
+    public CustomValuedCollector(List<Integer> filterValues) {
+        this.valuedCollector = new ValuedCollector(filterValues);
     }
 
     @Override

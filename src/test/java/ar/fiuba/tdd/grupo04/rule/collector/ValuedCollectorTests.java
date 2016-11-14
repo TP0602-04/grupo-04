@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,7 +44,9 @@ public class ValuedCollectorTests {
                 board.fill(input);
             }
         }
-        collector = new ValuedCollector(VALUE);
+        List<Integer> values = new ArrayList<>();
+        values.add(VALUE);
+        collector = new ValuedCollector(values);
     }
 
     @Test

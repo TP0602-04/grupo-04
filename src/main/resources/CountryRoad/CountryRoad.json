@@ -1,7 +1,35 @@
 {
     "board": {
-        "rows": 4,
-        "columns": 4
+        "rows": 12,
+        "columns": 12,
+        "inputType": "Boolean",
+        "structure": [
+            {
+                "offsetRow": 0,
+                "offsetColumn": 0,
+                "stepRow": 3,
+                "stepColumn": 3,
+                "value": 0
+            },{
+                "offsetRow": 2,
+                "offsetColumn": 0,
+                "stepRow": 3,
+                "stepColumn": 3,
+                "value": 0
+            },{
+                "offsetRow": 0,
+                "offsetColumn": 2,
+                "stepRow": 3,
+                "stepColumn": 3,
+                "value": 0
+            },{
+                "offsetRow": 2,
+                "offsetColumn": 2,
+                "stepRow": 3,
+                "stepColumn": 3,
+                "value": 0
+            }
+        ]
     },
     "loseRules": [
         {
@@ -25,7 +53,7 @@
             },
             "conditions": [
                 {
-                    "type": "Loop",
+                    "type": "SingleLoop",
                     "params": []
                 }
             ]

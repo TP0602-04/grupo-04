@@ -18,11 +18,13 @@ public class Game implements IGame {
     }
 
     @Override
+    public void loadStructure(List<Input> structure) {
+        loadAndLockInputs(structure);
+    }
+
+    @Override
     public void loadScenario(List<Input> initialValues, List<Slot> slots) {
-        for (Input input : initialValues) {
-            board.fill(input);
-            board.lockCell(input.getCoordinate());
-        }
+        loadAndLockInputs(initialValues);
         for (Slot slot : slots) {
             board.addReference(slot);
         }
@@ -52,6 +54,13 @@ public class Game implements IGame {
     @Override
     public String printBoard() {
         return board.toString();
+    }
+
+    private void loadAndLockInputs(List<Input> inputs) {
+        inputs.forEach(input -> {
+            board.fill(input);
+            board.lockCell(input.getCoordinate());
+        });
     }
 
 }

@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ValuedCollector implements ICollector<CellGroup> {
-    private int filterValue;
+    private List<Integer> filterValues;
 
-    public ValuedCollector(int filterValue) {
-        this.filterValue = filterValue;
+    public ValuedCollector(List<Integer> filterValues) {
+        this.filterValues = filterValues;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ValuedCollector implements ICollector<CellGroup> {
         List<Cell> cells = source
                 .stream()
                 .filter(cell -> cell.getValue() != null)
-                .filter(cell -> cell.getValue().equals(filterValue))
+                .filter(cell -> filterValues.contains(cell.getValue()))
                 .collect(Collectors.toList());
         return new CellGroup(cells);
     }

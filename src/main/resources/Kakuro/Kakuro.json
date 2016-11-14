@@ -1,7 +1,8 @@
 {
     "board": {
         "rows": 6,
-        "columns": 6
+        "columns": 6,
+        "inputType": "Numeric"
     },
     "loseRules": [
         {

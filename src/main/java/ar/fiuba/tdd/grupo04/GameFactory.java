@@ -1,13 +1,15 @@
 package ar.fiuba.tdd.grupo04;
 
 import ar.fiuba.tdd.grupo04.board.Board;
-import ar.fiuba.tdd.grupo04.board.Cell;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.Slot;
 import ar.fiuba.tdd.grupo04.json.game.*;
 import ar.fiuba.tdd.grupo04.json.scenario.CellMapper;
 import ar.fiuba.tdd.grupo04.json.scenario.ScenarioMapper;
 import ar.fiuba.tdd.grupo04.json.scenario.SlotMapper;
+import ar.fiuba.tdd.grupo04.neighborhood.DiagonalNeighborhood;
+import ar.fiuba.tdd.grupo04.neighborhood.Neighborhood;
+import ar.fiuba.tdd.grupo04.neighborhood.StraightNeighborhood;
 import ar.fiuba.tdd.grupo04.rule.IRule;
 import ar.fiuba.tdd.grupo04.rule.Rule;
 import ar.fiuba.tdd.grupo04.rule.collector.*;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 import static ar.fiuba.tdd.grupo04.json.game.CollectorMapper.*;
 import static ar.fiuba.tdd.grupo04.json.game.ConditionMapper.*;
 
-public class GameBuilder {
+public class GameFactory {
     private static Gson gson = new Gson();
 
     public static IGame createGame(String gameUrl, String scenarioUrl) {
@@ -34,35 +36,32 @@ public class GameBuilder {
         // Board
         BoardMapper boardMapper = gameMapper.getBoard();
         IBoard board = new Board(boardMapper.getRows(), boardMapper.getColumns());
-        //      Structure - Even/Odd cells
-        List<StructureMapper> structures = boardMapper.getStructure();
-        structures.forEach(structureMapper -> {
-            boolean isColumnEven = structureMapper.getColumnRange().equals(StructureMapper.EVEN);
-            boolean isRowEven = structureMapper.getRowRange().equals(StructureMapper.EVEN);
-            List<Coordinate> coordinates = filterBoard(board, isRowEven, isColumnEven);
-            coordinates.forEach(coordinate -> {
-                Input input = new Input(coordinate, structureMapper.getValue());
-                board.fill(input);
-                board.lockCell(coordinate);
-            });
-        });
+
+        // Input type --> defines Neighborhood
+        String inputType = boardMapper.getInputType();
+        Neighborhood neighborhood = createNeighborhood(inputType);
 
         // Rules
         List<IRule> winRules =
                 gameMapper
                         .getWinRules()
                         .stream()
-                        .map(GameBuilder::createRule)
+                        .map(ruleMapper -> createRule(ruleMapper, neighborhood))
                         .collect(Collectors.toList());
         List<IRule> loseRules =
                 gameMapper
                         .getLoseRules()
                         .stream()
-                        .map(GameBuilder::createRule)
+                        .map(ruleMapper -> createRule(ruleMapper, neighborhood))
                         .collect(Collectors.toList());
 
         // Game creation
         IGame game = new Game(board, winRules, loseRules);
+
+        // Load Structure
+        List<StructureMapper> structures = boardMapper.getStructure();
+        List<Input> structureInputs = getBoardStructure(board, structures);
+        game.loadStructure(structureInputs);
 
         // Load Scenario
         //      Initial values
@@ -70,38 +69,48 @@ public class GameBuilder {
         List<Input> inputs =
                 cellMappers
                         .stream()
-                        .map(GameBuilder::createInput)
+                        .map(GameFactory::createInput)
                         .collect(Collectors.toList());
         //      Slots
         List<SlotMapper> slotMappers = scenarioMapper.getReferences();
         List<Slot> slots =
                 slotMappers
                         .stream()
-                        .map(GameBuilder::createSlot)
+                        .map(GameFactory::createSlot)
                         .collect(Collectors.toList());
         game.loadScenario(inputs, slots);
 
         return game;
     }
 
-    private static List<Coordinate> filterBoard(IBoard board, boolean isRowEven, boolean isColumnEven) {
-        return board.getCells()
+    private static List<Input> getInputsFromStructure(IBoard board, StructureMapper structureMapper) {
+        int value = structureMapper.getValue();
+        return structureMapper
+                .getCoordinates(board.getRowSize(), board.getColumnSize())
                 .stream()
-                .map(Cell::getCoordinate)
-                .filter(coordinate ->
-                        (isRowEven && coordinate.row() % 2 == 0 || !isRowEven && coordinate.row() % 2 != 0) &&
-                                (isColumnEven && coordinate.column() % 2 == 0 || !isColumnEven && coordinate.column() % 2 != 0)
-                )
+                .map(coordinate -> new Input(coordinate, value))
                 .collect(Collectors.toList());
     }
 
-    private static IRule createRule(RuleMapper ruleMapper) {
+    private static List<Input> getBoardStructure(IBoard board, List<StructureMapper> structureMappers) {
+        return structureMappers.stream()
+                .map(structureMapper -> getInputsFromStructure(board, structureMapper))
+                .reduce(
+                        new ArrayList<>(),
+                        (l1, l2) -> {
+                            l1.addAll(l2);
+                            return l1;
+                        }
+                );
+    }
+
+    private static IRule createRule(RuleMapper ruleMapper, Neighborhood neighborhood) {
         CollectorMapper collectorMapper = ruleMapper.getCollector();
         ICollector collector = createCollector(collectorMapper);
         List<ConditionMapper> conditionMappers = ruleMapper.getConditions();
         List<ICondition> conditions = new ArrayList<>();
         for (ConditionMapper conditionMapper : conditionMappers) {
-            ICondition condition = createCondition(conditionMapper);
+            ICondition condition = createCondition(conditionMapper, neighborhood);
             conditions.add(condition);
         }
         return new Rule(collector, conditions);
@@ -110,6 +119,7 @@ public class GameBuilder {
     private static ICollector createCollector(CollectorMapper collectorMapper) {
         final String type = collectorMapper.getType();
         int filterValue;
+        List<Integer> filterValues;
         switch (type) {
             case ALL:
                 return new AllCollector();
@@ -121,19 +131,19 @@ public class GameBuilder {
                 int blockSize = collectorMapper.getParams().get(0);
                 return new BlockCollector(blockSize);
             case VALUED:
-                filterValue = collectorMapper.getParams().get(0);
-                return new ValuedCollector(filterValue);
+                filterValues = collectorMapper.getParams();
+                return new ValuedCollector(filterValues);
             case CUSTOM:
                 return new CustomCollector();
             case CUSTOM_VALUED:
-                filterValue = collectorMapper.getParams().get(0);
-                return new CustomValuedCollector(filterValue);
+                filterValues = collectorMapper.getParams();
+                return new CustomValuedCollector(filterValues);
             default:
                 throw new RuntimeException("Parsing error! Check collectors' name. " + type + " NOT VALID!");
         }
     }
 
-    private static ICondition createCondition(ConditionMapper conditionMapper) {
+    private static ICondition createCondition(ConditionMapper conditionMapper, Neighborhood neighborhood) {
         final String type = conditionMapper.getType();
         switch (type) {
             case UNIQUE:
@@ -150,8 +160,10 @@ public class GameBuilder {
                 return new EqualsSumCondition();
             case EQUALS_MULTIPLY:
                 return new EqualsMultiplyCondition();
-            case LOOP:
-                return new LoopCondition();
+            case SINGLE_LOOP:
+                return new SingleLoopCondition(neighborhood);
+            case NO_LOOP:
+                return new NoLoopCondition(neighborhood);
             case COUNT_WITHIN_RANGE:
                 return new CountWithinRange();
             default:
@@ -173,6 +185,17 @@ public class GameBuilder {
                 slotMapper.getCoordinates(),
                 slotMapper.getValues()
         );
+    }
+
+    private static Neighborhood createNeighborhood(String inputType) {
+        switch (inputType) {
+            case BoardMapper.INPUT_DIAGONAL:
+                return new DiagonalNeighborhood();
+            case BoardMapper.INPUT_NUMERIC:
+            case BoardMapper.INPUT_BOOLEAN:
+            default:
+                return new StraightNeighborhood();
+        }
     }
 
 }

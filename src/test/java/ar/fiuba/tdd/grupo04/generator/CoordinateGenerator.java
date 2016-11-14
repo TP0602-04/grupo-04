@@ -16,6 +16,11 @@ public class CoordinateGenerator {
         return new Coordinate(getInt(), getInt());
     }
 
+    public static Coordinate getCoordinate(int inclusiveMin, int exclusiveMax) {
+        PrimitiveIterator.OfInt iterator = RANDOM.ints(inclusiveMin, exclusiveMax).iterator();
+        return new Coordinate(iterator.next(), iterator.next());
+    }
+
     public static List<Coordinate> getCoordinateList(int listSize) {
         return getCoordinateList(
                 RANDOM.ints().iterator(),

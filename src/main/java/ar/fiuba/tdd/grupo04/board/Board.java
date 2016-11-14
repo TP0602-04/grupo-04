@@ -93,7 +93,7 @@ public class Board implements IBoard {
     public String toString() {
         String boardToString = "BOARD:\n";
         for (int i = 0; i < rowSize; i++) {
-            boardToString = boardToString + "\t====================================================================================\n";
+            boardToString = boardToString + "\t===================================================================================================\n";
             for (int j = 0; j < columnSize; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 Integer value = getCell(coordinate).getValue();
@@ -102,7 +102,7 @@ public class Board implements IBoard {
             }
             boardToString = boardToString + "\t|\t\n";
         }
-        boardToString = boardToString + "\t====================================================================================";
+        boardToString = boardToString + "\t===================================================================================================";
         return boardToString;
     }
 

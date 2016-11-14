@@ -2,46 +2,50 @@
     "board": {
         "rows": 11,
         "columns": 11,
-        "inputType": "Boolean",
+        "inputType": "Diagonal",
         "structure": [
             {
                 "offsetRow": 0,
                 "offsetColumn": 0,
                 "stepRow": 2,
                 "stepColumn": 2,
-                "value": 1
+                "value": 0
             },{
-                "offsetRow": 1,
+                "offsetRow": 0,
                 "offsetColumn": 1,
                 "stepRow": 2,
                 "stepColumn": 2,
-                "value": 0
+                "value": 3
+            },{
+                "offsetRow": 1,
+                "offsetColumn": 0,
+                "stepRow": 2,
+                "stepColumn": 2,
+                "value": 3
             }
         ]
     },
-    "loseRules": [
-        {
-            "collector": {
-                "type": "CustomValued",
-                "params": [1]
-            },
-            "conditions": [
-                {
-                    "type": "CountWithinRange",
-                    "params": []
-                }
-            ]
-        }
-    ],
+    "loseRules": [],
     "winRules": [
         {
             "collector": {
-                "type": "Valued",
-                "params": [1]
+                "type": "All",
+                "params": []
             },
             "conditions": [
                 {
-                    "type": "SingleLoop",
+                    "type": "Filled",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "Valued",
+                "params": [0, 1, 2]
+            },
+            "conditions": [
+                {
+                    "type": "NoLoop",
                     "params": []
                 }
             ]
