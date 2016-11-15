@@ -122,7 +122,7 @@ public class GameJsonParser {
         List<Pair<ICollector, List<ICondition>>> list = new ArrayList<>();
         for (JsonRules rule : jsonRules) {
             ICollector collector = CollectorJsonParser.parse(rule.getCollector(), board);
-            List<ICondition> conditions = ConditionJsonParser.parse(rule.getCondition());
+            List<ICondition> conditions = ConditionJsonParser.parse(rule.getCondition(), board);
             list.add(new Pair<>(collector, conditions));
         }
         return list;

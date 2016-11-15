@@ -1,5 +1,6 @@
 package ar.fiuba.tdd.grupo04.model.rule.condition.factory;
 
+import ar.fiuba.tdd.grupo04.model.board.IBoard;
 import ar.fiuba.tdd.grupo04.model.rule.condition.*;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllGreaterThanCondition;
@@ -51,7 +52,10 @@ public class ConditionFactory {
         map.put("AtDistanceCondition", AtDistanceCondition::new);
     }
 
-    public static ICondition create(String type) throws Exception {
+    public static ICondition create(String type, IBoard board) throws Exception {
+        if (type.equals("EmptyContiguousInGroupCondition")) {
+            return new EmptyContiguousInGroupCondition(board);
+        }
         if (!map.containsKey(type)) {
             throw new Exception("Unknown Condition");//TODO: Use custom exception
         }

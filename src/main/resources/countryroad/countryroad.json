@@ -1,7 +1,7 @@
 {
     "board": {
-        "rows": 11,
-        "columns": 11,
+        "rows": 7,
+        "columns": 7,
         "inputType": "GraphInput"
     },
     "loseRules": [
@@ -10,7 +10,7 @@
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["CountNodesBiggerCondition"]
+            "condition": ["CountNodesBiggerCondition", "EmptyContiguousInGroupCondition"]
         }
     ],
     "winRules": [
@@ -23,17 +23,10 @@
         },
         {
             "collector": {
-                "type": "AllCollector",
-                "params": []
-            },
-            "condition": ["AllFilledCondition"]
-        },
-        {
-            "collector": {
                 "type": "CustomGroupCollector",
                 "params": []
             },
-            "condition": ["CountNodesEqualCondition"]
+            "condition": ["CountNodesEqualCondition", "AllMarkedContiguousCondition"]
         }
     ]
 }
