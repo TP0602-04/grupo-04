@@ -80,6 +80,16 @@ public class GamesTest {
         checkGameOk(NORINORI2_MODEL_PATH, NORINORI2_INIT_PATH, NORINORI2_INPUT_PATH, NORINORI2_OUTPUT_PATH);
     }
 
+    private static final String GOKIGENNANAME_MODEL_PATH = "./src/main/resources/gokigenNaname/gokigenNaname.json";
+    private static final String GOKIGENNANAME_INIT_PATH = "./src/test/resources/gokigenNaname/init-1.json";
+    private static final String GOKIGENNANAME_INPUT_PATH = "./src/test/resources/gokigenNaname/input-1.json";
+    private static final String GOKIGENNANAME_OUTPUT_PATH = "./src/test/resources/gokigenNaname/output-1.json";
+
+    @Test
+    public void testGokigenNaname() {
+        checkGameOk(GOKIGENNANAME_MODEL_PATH, GOKIGENNANAME_INIT_PATH, GOKIGENNANAME_INPUT_PATH, GOKIGENNANAME_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
@@ -130,10 +140,10 @@ public class GamesTest {
                 case "DiagonalInput": {
                     final Coordinate coordinate = new Coordinate(input.x, input.y);
                     switch (input.value) {
-                        case 0: game.addInputModification(coordinate, new DiagonalInputModification(false, false));
-                        case 1: game.addInputModification(coordinate, new DiagonalInputModification(false, true));
-                        case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));
-                        case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));
+                        case 0: game.addInputModification(coordinate, new DiagonalInputModification(false, false));break;
+                        case 1: game.addInputModification(coordinate, new DiagonalInputModification(false, true));break;
+                        case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));break;
+                        case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));break;
                     }
                 }
                 case "BooleanInput": {

@@ -6,6 +6,7 @@ public class DiagonalInput extends IInput {
     private Boolean downLeftToUpRight;
     private Boolean marked;
     private Boolean isDiagonal;
+    private Boolean isCenter;
 
     /**
      * las dos coord impares son los centros de la celdas(las diagonales) (todos tienen que
@@ -17,9 +18,12 @@ public class DiagonalInput extends IInput {
         this.marked = true;
         this.downLeftToUpRight = false;
         this.isDiagonal = false;
+        this.isCenter = false;
         if ((coordinate.column() & 1) != 0 && (coordinate.row() & 1) != 0) {
             this.marked = false;
             this.isDiagonal = true;
+        } else if ((coordinate.column() & 1) == 0 && (coordinate.row() & 1) == 0) {
+            this.isCenter = true;
         }
         this.coordinate = coordinate;
     }
@@ -30,6 +34,10 @@ public class DiagonalInput extends IInput {
 
     public Boolean isDiagonal() {
         return isDiagonal;
+    }
+
+    public Boolean isCenter() {
+        return isCenter;
     }
 
     public Boolean isDownLeftToUpRight() {
