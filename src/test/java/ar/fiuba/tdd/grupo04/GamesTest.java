@@ -60,6 +60,16 @@ public class GamesTest {
         checkGameOk(SITHERLINK_MODEL_PATH, SITHERLINK_INIT_PATH, SITHERLINK_INPUT_PATH, SITHERLINK_OUTPUT_PATH);
     }
 
+    private static final String COUTRYROAD_MODEL_PATH = "./src/main/resources/countryroad/countryroad.json";
+    private static final String COUTRYROAD_INIT_PATH = "./src/test/resources/countryroad/init-1.json";
+    private static final String COUTRYROAD_INPUT_PATH = "./src/test/resources/countryroad/input-1.json";
+    private static final String COUTRYROAD_OUTPUT_PATH = "./src/test/resources/countryroad/output-1.json";
+
+    @Test
+    public void testCountryRoad() {
+        checkGameOk(COUTRYROAD_MODEL_PATH, COUTRYROAD_INIT_PATH, COUTRYROAD_INPUT_PATH, COUTRYROAD_OUTPUT_PATH);
+    }
+
     private static final String NORINORI_MODEL_PATH = "./src/main/resources/norinori/norinori.json";
     private static final String NORINORI_INIT_PATH = "./src/test/resources/norinori/init-1.json";
     private static final String NORINORI_INPUT_PATH = "./src/test/resources/norinori/input-1.json";
@@ -136,6 +146,7 @@ public class GamesTest {
         }
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
+
 
         int asd =  moves.inputs.size()-1;
         int asd2 =  0;

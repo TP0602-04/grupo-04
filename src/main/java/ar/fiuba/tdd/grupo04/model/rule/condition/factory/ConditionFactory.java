@@ -1,5 +1,7 @@
 package ar.fiuba.tdd.grupo04.model.rule.condition.factory;
 
+import ar.fiuba.tdd.grupo04.model.board.IBoard;
+import ar.fiuba.tdd.grupo04.model.rule.condition.*;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllGreaterThanCondition;
 import ar.fiuba.tdd.grupo04.model.rule.condition.AllLesserThanCondition;
@@ -31,11 +33,14 @@ public class ConditionFactory {
         map.put("AllFilledCondition", AllFilledCondition::new);
         map.put("AllGreaterThanCondition", AllGreaterThanCondition::new);
         map.put("AllLesserThanCondition", AllLesserThanCondition::new);
+        map.put("AllMarkedContiguousCondition", AllMarkedContiguousCondition::new);
         map.put("MultiplyCondition", MultiplyCondition::new);
         map.put("SumCondition", SumCondition::new);
         map.put("UniqueCondition", UniqueCondition::new);
         map.put("CountEdgesBiggerCondition", CountEdgesBiggerCondition::new);
         map.put("CountEdgesEqualCondition", CountEdgesEqualCondition::new);
+        map.put("CountNodesBiggerCondition", CountNodesBiggerCondition::new);
+        map.put("CountNodesEqualCondition", CountNodesEqualCondition::new);
         map.put("OneLoopCondition", OneLoopCondition::new);
         map.put("MoreThanTwoContiguousMarkedCondition", MoreThanTwoContiguousMarkedCondition::new);
         map.put("TwoContiguousMarkedCondition", TwoContiguousMarkedCondition::new);
@@ -47,7 +52,10 @@ public class ConditionFactory {
         map.put("AtDistanceCondition", AtDistanceCondition::new);
     }
 
-    public static ICondition create(String type) throws Exception {
+    public static ICondition create(String type, IBoard board) throws Exception {
+        if (type.equals("EmptyContiguousInGroupCondition")) {
+            return new EmptyContiguousInGroupCondition(board);
+        }
         if (!map.containsKey(type)) {
             throw new Exception("Unknown Condition");//TODO: Use custom exception
         }

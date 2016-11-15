@@ -1,0 +1,32 @@
+{
+    "board": {
+        "rows": 7,
+        "columns": 7,
+        "inputType": "GraphInput"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["CountNodesBiggerCondition", "EmptyContiguousInGroupCondition"]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "AllCollector",
+                "params": []
+            },
+            "condition": ["OneLoopCondition"]
+        },
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["CountNodesEqualCondition", "AllMarkedContiguousCondition"]
+        }
+    ]
+}

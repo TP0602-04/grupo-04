@@ -29,6 +29,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
             return false;
         }
         Coordinate firstNode = firstNodeInput.get().getCoordinate();
+        path.clear();
         path.add(firstNode);
         Optional<Coordinate> actualNode = Optional.of(firstNode);
 
@@ -47,7 +48,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
             actualNode = getNextNode(actualEdge.get(), actualNode.get());
             if (!actualNode.isPresent()) {
                 findNextStep = false;
-            } else if (path.contains(actualNode.get())) {
+            } else if (path.contains(actualNode.get()) || !coordinates.contains(actualNode.get())) {
                 findNextStep = false;
             } else {
                 path.add(actualNode.get());
@@ -69,6 +70,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
         if (!otherEdge.isPresent()) {
             return;
         }
+        path.add(otherEdge.get());
 
         Optional<Coordinate> actualNode = Optional.of(firstNode);
         Optional<Coordinate> actualEdge = otherEdge;
@@ -77,7 +79,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
             actualNode = getNextNode(actualEdge.get(), actualNode.get());
             if (!actualNode.isPresent()) {
                 return;
-            } else if (path.contains(actualNode.get())) {
+            } else if (path.contains(actualNode.get()) || !coordinates.contains(actualNode.get())) {
                 return;
             } else {
                 path.add(actualNode.get());
@@ -116,7 +118,7 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
             return Optional.of(newCoordinate);
         }
         if (newCoordinate.column() == -1) {
-            Optional.empty();
+            return Optional.empty();
         }
         return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row()));
     }
