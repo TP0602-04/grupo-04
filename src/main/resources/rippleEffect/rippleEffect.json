@@ -1,0 +1,38 @@
+{
+    "board": {
+        "rows": 4,
+        "columns": 4,
+        "inputType": "NumericInput"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["AllLesserThanCondition", "UniqueCondition"]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "ColumnsCollector",
+                "params": []
+            },
+            "condition": ["AtDistanceCondition"]
+        },{
+            "collector": {
+                "type": "RowsCollector",
+                "params": []
+            },
+            "condition": ["AtDistanceCondition"]
+        },
+        {
+            "collector": {
+                "type": "AllCollector",
+                "params": []
+            },
+            "condition": ["AllFilledCondition"]
+        }
+    ]
+}

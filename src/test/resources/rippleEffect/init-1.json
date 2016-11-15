@@ -1,0 +1,81 @@
+{
+    "initialValues": [
+        {
+            "row": 1,
+            "column": 1,
+            "value": 2
+        },{
+            "row": 2,
+            "column": 1,
+            "value": 1
+        },{
+            "row": 0,
+            "column": 3,
+            "value": 2
+        }
+    ],
+    "references": [
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "deltaX": 2,
+                    "deltaY": 1
+                }
+            ]
+        },{
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 0,
+                    "offsetY": 1,
+                    "deltaX": 2,
+                    "deltaY": 1
+                }
+            ]
+        },{
+            "value": 5,
+            "groups": [
+                {
+                    "offsetX": 0,
+                    "offsetY": 2,
+                    "deltaX": 2,
+                    "deltaY": 2
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 2,
+                    "offsetY": 2,
+                    "deltaX": 1,
+                    "deltaY": 2
+                }
+            ]
+        },{
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 3,
+                    "offsetY": 2,
+                    "deltaX": 1,
+                    "deltaY": 2
+                }
+            ]
+        },{
+            "value": 5,
+            "groups": [
+                {
+                    "offsetX": 2,
+                    "offsetY": 0,
+                    "deltaX": 2,
+                    "deltaY": 2
+                }
+            ]
+        }
+    ]
+}

@@ -67,6 +67,7 @@ public class GamesTest {
 
     @Test
     public void testNorinori() {
+        // http://www.nikoli.com/en/puzzles/norinori/rule.html
         checkGameOk(NORINORI_MODEL_PATH, NORINORI_INIT_PATH, NORINORI_INPUT_PATH, NORINORI_OUTPUT_PATH);
     }
 
@@ -77,6 +78,7 @@ public class GamesTest {
 
     @Test
     public void testNorinori2() {
+        // http://www.nikoli.com/en/puzzles/norinori/rule.html
         checkGameOk(NORINORI2_MODEL_PATH, NORINORI2_INIT_PATH, NORINORI2_INPUT_PATH, NORINORI2_OUTPUT_PATH);
     }
 
@@ -88,6 +90,17 @@ public class GamesTest {
     @Test
     public void testGokigenNaname() {
         checkGameOk(GOKIGENNANAME_MODEL_PATH, GOKIGENNANAME_INIT_PATH, GOKIGENNANAME_INPUT_PATH, GOKIGENNANAME_OUTPUT_PATH);
+    }
+
+    private static final String RIPPLEEFFECT_MODEL_PATH = "./src/main/resources/rippleEffect/rippleEffect.json";
+    private static final String RIPPLEEFFECT_INIT_PATH = "./src/test/resources/rippleEffect/init-1.json";
+    private static final String RIPPLEEFFECT_INPUT_PATH = "./src/test/resources/rippleEffect/input-1.json";
+    private static final String RIPPLEEFFECT_OUTPUT_PATH = "./src/test/resources/rippleEffect/output-1.json";
+
+    @Test
+    public void testRippleEffect() {
+        // http://www.nikoli.co.jp/en/puzzles/ripple_effect.html
+        checkGameOk(RIPPLEEFFECT_MODEL_PATH, RIPPLEEFFECT_INIT_PATH, RIPPLEEFFECT_INPUT_PATH, RIPPLEEFFECT_OUTPUT_PATH);
     }
 
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
