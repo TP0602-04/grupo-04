@@ -1,15 +1,6 @@
 package ar.fiuba.tdd.grupo04.model.rule.condition.factory;
 
-import ar.fiuba.tdd.grupo04.model.rule.condition.AllFilledCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.AllGreaterThanCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.AllLesserThanCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.CountEdgesBiggerCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.CountEdgesEqualCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.ICondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.MultiplyCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.OneLoopCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.SumCondition;
-import ar.fiuba.tdd.grupo04.model.rule.condition.UniqueCondition;
+import ar.fiuba.tdd.grupo04.model.rule.condition.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +13,14 @@ public class ConditionFactory {
         map.put("AllFilledCondition", AllFilledCondition::new);
         map.put("AllGreaterThanCondition", AllGreaterThanCondition::new);
         map.put("AllLesserThanCondition", AllLesserThanCondition::new);
+        map.put("AllMarkedContiguousCondition", AllMarkedContiguousCondition::new);
         map.put("MultiplyCondition", MultiplyCondition::new);
         map.put("SumCondition", SumCondition::new);
         map.put("UniqueCondition", UniqueCondition::new);
         map.put("CountEdgesBiggerCondition", CountEdgesBiggerCondition::new);
         map.put("CountEdgesEqualCondition", CountEdgesEqualCondition::new);
+        map.put("CountNodesBiggerCondition", CountNodesBiggerCondition::new);
+        map.put("CountNodesEqualCondition", CountNodesEqualCondition::new);
         map.put("OneLoopCondition", OneLoopCondition::new);
     }
 

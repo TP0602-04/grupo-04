@@ -59,6 +59,16 @@ public class GamesTest {
         checkGameOk(SITHERLINK_MODEL_PATH, SITHERLINK_INIT_PATH, SITHERLINK_INPUT_PATH, SITHERLINK_OUTPUT_PATH);
     }
 
+    private static final String COUTRYROAD_MODEL_PATH = "./src/main/resources/countryroad/countryroad.json";
+    private static final String COUTRYROAD_INIT_PATH = "./src/test/resources/countryroad/init-1.json";
+    private static final String COUTRYROAD_INPUT_PATH = "./src/test/resources/countryroad/input-1.json";
+    private static final String COUTRYROAD_OUTPUT_PATH = "./src/test/resources/countryroad/output-1.json";
+
+    @Test
+    public void testCountryRoad() {
+        checkGameOk(COUTRYROAD_MODEL_PATH, COUTRYROAD_INIT_PATH, COUTRYROAD_INPUT_PATH, COUTRYROAD_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
@@ -92,8 +102,8 @@ public class GamesTest {
         }
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
-        for (JsonMove input : moves.inputs) {
 
+        for (JsonMove input : moves.inputs) {
             switch (jsonGame.getBoard().getInputType()) {
                 case "NumericInput": {
                     game.addInputModification(new Coordinate(input.x, input.y), new NumericInputModification(input.value));

@@ -1,0 +1,39 @@
+{
+    "board": {
+        "rows": 11,
+        "columns": 11,
+        "inputType": "GraphInput"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["CountNodesBiggerCondition"]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "AllCollector",
+                "params": []
+            },
+            "condition": ["OneLoopCondition"]
+        },
+        {
+            "collector": {
+                "type": "AllCollector",
+                "params": []
+            },
+            "condition": ["AllFilledCondition"]
+        },
+        {
+            "collector": {
+                "type": "CustomGroupCollector",
+                "params": []
+            },
+            "condition": ["CountNodesEqualCondition"]
+        }
+    ]
+}

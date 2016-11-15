@@ -113,10 +113,10 @@ public class AllMarkedContiguousCondition<R extends IInputGroup<GraphInput>> imp
     private Optional<Coordinate> edgeSearcher(List<Coordinate> coordinates, Coordinate actualNode, Coordinate actualEdge, Coordinate coordinateDiff) {
         final Coordinate newCoordinate = actualNode.plus(coordinateDiff);
         if (coordinates.contains(newCoordinate) && !newCoordinate.equals(actualEdge)) {
-            return Optional.of(newCoordinate);
+            return Optional.of(coordinateDiff);
         }
         if (newCoordinate.column() == -1) {
-            Optional.empty();
+            return Optional.empty();
         }
         return edgeSearcher(coordinates, actualNode, actualEdge, new Coordinate(coordinateDiff.column() * (-1), coordinateDiff.row()));
     }
