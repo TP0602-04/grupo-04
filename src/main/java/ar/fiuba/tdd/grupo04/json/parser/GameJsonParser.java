@@ -6,6 +6,7 @@ import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
 import ar.fiuba.tdd.grupo04.model.board.IBoard;
 import ar.fiuba.tdd.grupo04.model.board.reference.ReferencedBlockGroup;
+import ar.fiuba.tdd.grupo04.model.inputs.BooleanInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@SuppressWarnings("CPD-START")
 public class GameJsonParser {
 
     public static IGame parseLoad(JsonGame jsonGame, JsonInitGame jsonInitGame) throws Exception {
@@ -100,6 +102,13 @@ public class GameJsonParser {
                             game.addInputModification(cell.getKey(), new DiagonalInputModification(true, true));
                             break;
                     }
+                }
+                break;
+            }
+            case "BooleanInput": {
+                List<Pair<Coordinate, Integer>> initialValues = getInitCells(jsonInitGame);
+                for (Pair<Coordinate, Integer> cell : initialValues) {
+                    game.addInputModification(cell.getKey(), new BooleanInputModification());
                 }
                 break;
             }

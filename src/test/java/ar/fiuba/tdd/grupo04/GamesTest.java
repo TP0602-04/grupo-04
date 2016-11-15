@@ -9,6 +9,7 @@ import ar.fiuba.tdd.grupo04.json.model.JsonOutputStatus;
 import ar.fiuba.tdd.grupo04.json.parser.GameJsonParser;
 import ar.fiuba.tdd.grupo04.model.IGame;
 import ar.fiuba.tdd.grupo04.model.board.Coordinate;
+import ar.fiuba.tdd.grupo04.model.inputs.BooleanInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.DiagonalInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.GraphInputModification;
 import ar.fiuba.tdd.grupo04.model.inputs.NumericInputModification;
@@ -69,6 +70,49 @@ public class GamesTest {
         checkGameOk(COUTRYROAD_MODEL_PATH, COUTRYROAD_INIT_PATH, COUTRYROAD_INPUT_PATH, COUTRYROAD_OUTPUT_PATH);
     }
 
+    private static final String NORINORI_MODEL_PATH = "./src/main/resources/norinori/norinori.json";
+    private static final String NORINORI_INIT_PATH = "./src/test/resources/norinori/init-1.json";
+    private static final String NORINORI_INPUT_PATH = "./src/test/resources/norinori/input-1.json";
+    private static final String NORINORI_OUTPUT_PATH = "./src/test/resources/norinori/output-1.json";
+
+    @Test
+    public void testNorinori() {
+        // http://www.nikoli.com/en/puzzles/norinori/rule.html
+        checkGameOk(NORINORI_MODEL_PATH, NORINORI_INIT_PATH, NORINORI_INPUT_PATH, NORINORI_OUTPUT_PATH);
+    }
+
+    private static final String NORINORI2_MODEL_PATH = "./src/main/resources/norinori/norinori-10-10.json";
+    private static final String NORINORI2_INIT_PATH = "./src/test/resources/norinori/init-2.json";
+    private static final String NORINORI2_INPUT_PATH = "./src/test/resources/norinori/input-2.json";
+    private static final String NORINORI2_OUTPUT_PATH = "./src/test/resources/norinori/output-2.json";
+
+    @Test
+    public void testNorinori2() {
+        // http://www.nikoli.com/en/puzzles/norinori/rule.html
+        checkGameOk(NORINORI2_MODEL_PATH, NORINORI2_INIT_PATH, NORINORI2_INPUT_PATH, NORINORI2_OUTPUT_PATH);
+    }
+
+    private static final String GOKIGENNANAME_MODEL_PATH = "./src/main/resources/gokigenNaname/gokigenNaname.json";
+    private static final String GOKIGENNANAME_INIT_PATH = "./src/test/resources/gokigenNaname/init-1.json";
+    private static final String GOKIGENNANAME_INPUT_PATH = "./src/test/resources/gokigenNaname/input-1.json";
+    private static final String GOKIGENNANAME_OUTPUT_PATH = "./src/test/resources/gokigenNaname/output-1.json";
+
+    @Test
+    public void testGokigenNaname() {
+        checkGameOk(GOKIGENNANAME_MODEL_PATH, GOKIGENNANAME_INIT_PATH, GOKIGENNANAME_INPUT_PATH, GOKIGENNANAME_OUTPUT_PATH);
+    }
+
+    private static final String RIPPLEEFFECT_MODEL_PATH = "./src/main/resources/rippleEffect/rippleEffect.json";
+    private static final String RIPPLEEFFECT_INIT_PATH = "./src/test/resources/rippleEffect/init-1.json";
+    private static final String RIPPLEEFFECT_INPUT_PATH = "./src/test/resources/rippleEffect/input-1.json";
+    private static final String RIPPLEEFFECT_OUTPUT_PATH = "./src/test/resources/rippleEffect/output-1.json";
+
+    @Test
+    public void testRippleEffect() {
+        // http://www.nikoli.co.jp/en/puzzles/ripple_effect.html
+        checkGameOk(RIPPLEEFFECT_MODEL_PATH, RIPPLEEFFECT_INIT_PATH, RIPPLEEFFECT_INPUT_PATH, RIPPLEEFFECT_OUTPUT_PATH);
+    }
+
     private void checkGameOk(String modelPath, String initPath, String inputPath, String outputPath) {
         String inputs = FileUtils.readFile(inputPath);
         String model = FileUtils.readFile(modelPath);
@@ -103,7 +147,13 @@ public class GamesTest {
 
         JsonMoves moves = gson.fromJson(inputs, JsonMoves.class);
 
+
+        int asd =  moves.inputs.size()-1;
+        int asd2 =  0;
+
         for (JsonMove input : moves.inputs) {
+            asd2 = asd2+1;
+
             switch (jsonGame.getBoard().getInputType()) {
                 case "NumericInput": {
                     game.addInputModification(new Coordinate(input.x, input.y), new NumericInputModification(input.value));
@@ -114,11 +164,14 @@ public class GamesTest {
                 case "DiagonalInput": {
                     final Coordinate coordinate = new Coordinate(input.x, input.y);
                     switch (input.value) {
-                        case 0: game.addInputModification(coordinate, new DiagonalInputModification(false, false));
-                        case 1: game.addInputModification(coordinate, new DiagonalInputModification(false, true));
-                        case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));
-                        case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));
+                        case 0: game.addInputModification(coordinate, new DiagonalInputModification(false, false));break;
+                        case 1: game.addInputModification(coordinate, new DiagonalInputModification(false, true));break;
+                        case 2: game.addInputModification(coordinate, new DiagonalInputModification(true, false));break;
+                        case 3: game.addInputModification(coordinate, new DiagonalInputModification(true, true));break;
                     }
+                }
+                case "BooleanInput": {
+                    game.addInputModification(new Coordinate(input.x, input.y), new BooleanInputModification());
                 }
             }
             if (game.checkLoseRules()) {

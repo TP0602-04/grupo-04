@@ -1,0 +1,137 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "value": 2,
+            "groups": [
+                {
+                    "offsetX": 0,
+                    "offsetY": 1,
+                    "deltaX": 2,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 1,
+            "groups": [
+                {
+                    "offsetX": 0,
+                    "offsetY": 3,
+                    "deltaX": 2,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 1,
+                    "offsetY": 3,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 1,
+                    "offsetY": 5,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 0,
+            "groups": [
+                {
+                    "offsetX": 1,
+                    "offsetY": 9,
+                    "deltaX": 3,
+                    "deltaY": 2
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 5,
+                    "offsetY": 3,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 5,
+                    "offsetY": 5,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 0,
+            "groups": [
+                {
+                    "offsetX": 7,
+                    "offsetY": 0,
+                    "deltaX": 3,
+                    "deltaY": 2
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 7,
+                    "offsetY": 5,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 3,
+            "groups": [
+                {
+                    "offsetX": 7,
+                    "offsetY": 7,
+                    "deltaX": 3,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 1,
+            "groups": [
+                {
+                    "offsetX": 9,
+                    "offsetY": 7,
+                    "deltaX": 2,
+                    "deltaY": 3
+                }
+            ]
+        },
+        {
+            "value": 1,
+            "groups": [
+                {
+                    "offsetX": 9,
+                    "offsetY": 9,
+                    "deltaX": 2,
+                    "deltaY": 2
+                }
+            ]
+        }
+    ]
+}

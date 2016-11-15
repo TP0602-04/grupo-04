@@ -45,4 +45,9 @@ public class Coordinate {
     public Coordinate plus(Coordinate summand) {
         return new Coordinate(this.row + summand.row, this.column + summand.column);
     }
+
+    public boolean isAround(Coordinate coordinate) {
+        return (column.equals(coordinate.column()) && (row.equals(coordinate.row() + 1) || row.equals(coordinate.row() - 1))) ||
+                (row.equals(coordinate.row()) && (column.equals(coordinate.column() + 1) || column.equals(coordinate.column() - 1)));
+    }
 }
