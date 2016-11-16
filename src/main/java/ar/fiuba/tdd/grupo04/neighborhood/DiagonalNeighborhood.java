@@ -2,7 +2,7 @@ package ar.fiuba.tdd.grupo04.neighborhood;
 
 import ar.fiuba.tdd.grupo04.board.Cell;
 
-public class DiagonalNeighborhood implements Neighborhood {
+public class DiagonalNeighborhood extends Neighborhood {
     public static final int DOT = 0;
     public static final int DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE = 1;
     public static final int DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW = 2;

@@ -169,6 +169,9 @@ public class GameFactory {
                 return new NoLoopCondition(neighborhood);
             case COUNT_WITHIN_RANGE:
                 return new CountWithinRange();
+            case SLOTS_OF_SIZE:
+                int slotSize = conditionMapper.getParams().get(0);
+                return new SlotsOfSizeCondition(neighborhood, slotSize);
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }

@@ -21,20 +21,13 @@ public abstract class PathCondition {
 
     protected List<Cell> getBifurcations(List<Cell> cells) {
         return cells.stream()
-                .filter(cell -> getNeighbors(cell, cells).size() > 2)
-                .collect(Collectors.toList());
-    }
-
-    private List<Cell> getNeighbors(Cell cell, List<Cell> potentialNeighbors) {
-        return potentialNeighbors
-                .stream()
-                .filter(potential -> neighborhood.areNeighbors(cell, potential))
+                .filter(cell -> neighborhood.getNeighbors(cell, cells).size() > 2)
                 .collect(Collectors.toList());
     }
 
     private List<Cell> getBranchedOffCells(List<Cell> branched, List<Cell> cells) {
         List<Cell> newBranchedCells = cells.stream()
-                .filter(cell -> getNeighbors(cell, cells).size() < 2)
+                .filter(cell -> neighborhood.getNeighbors(cell, cells).size() < 2)
                 .collect(Collectors.toList());
         // Exit Condition
         if (newBranchedCells.isEmpty()) {

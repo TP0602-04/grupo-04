@@ -15,6 +15,7 @@ public class ConditionMapper {
     public static final String NO_LOOP = "NoLoop";
     public static final String SINGLE_LOOP = "SingleLoop";
     public static final String COUNT_WITHIN_RANGE = "CountWithinRange";
+    public static final String SLOTS_OF_SIZE = "SlotsOfSize";
 
     @SerializedName("type")
     private String type;
