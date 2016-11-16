@@ -11,6 +11,7 @@ public class ConditionMapper {
     public static final String FILLED = "Filled";
     public static final String EQUALS_SUM = "EqualsSum";
     public static final String EQUALS_MULTIPLY = "EqualsMultiply";
+    public static final String NO_BRANCHED_OFF = "NoBranchedOff";
     public static final String NO_LOOP = "NoLoop";
     public static final String SINGLE_LOOP = "SingleLoop";
     public static final String COUNT_WITHIN_RANGE = "CountWithinRange";

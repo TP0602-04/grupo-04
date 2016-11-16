@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class LoopCondition {
+public abstract class PathCondition {
 
     private Neighborhood neighborhood;
 
-    public LoopCondition(Neighborhood neighborhood) {
+    public PathCondition(Neighborhood neighborhood) {
         this.neighborhood = neighborhood;
     }
 
@@ -34,9 +34,7 @@ public abstract class LoopCondition {
 
     private List<Cell> getBranchedOffCells(List<Cell> branched, List<Cell> cells) {
         List<Cell> newBranchedCells = cells.stream()
-                .filter(cell -> {
-                    return getNeighbors(cell, cells).size() < 2;
-                })
+                .filter(cell -> getNeighbors(cell, cells).size() < 2)
                 .collect(Collectors.toList());
         // Exit Condition
         if (newBranchedCells.isEmpty()) {

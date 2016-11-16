@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
 import java.util.List;
 
-public class SingleLoopCondition extends LoopCondition implements ICondition<CellGroup> {
+public class SingleLoopCondition extends PathCondition implements ICondition<CellGroup> {
 
     public SingleLoopCondition(Neighborhood neighborhood) {
         super(neighborhood);
@@ -17,16 +17,8 @@ public class SingleLoopCondition extends LoopCondition implements ICondition<Cel
         String errorMessage;
         List<Cell> cells = cellGroup.getCells();
 
-        // Check Branched cells
+        // Remove Branched cells
         List<Cell> branchedOffCells = getBranchedOffCells(cells);
-        if (!branchedOffCells.isEmpty()) {
-            errorMessage = branchedOffCells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Branched off cells: ", (s1, s2) -> s1 + " " + s2);
-            printError(errorMessage);
-            return false;
-        }
         cells.removeAll(branchedOffCells);
 
         // Check Bifurcations

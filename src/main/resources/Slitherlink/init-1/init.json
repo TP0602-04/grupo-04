@@ -2,7 +2,7 @@
     "initialValues": [],
     "references": [
         {
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 0,
@@ -12,7 +12,7 @@
                 }
             ]
         },{
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 0,
@@ -22,7 +22,7 @@
                 }
             ]
         },{
-            "values": [7, 7],
+            "values": [3, 3],
             "groups": [
                 {
                     "rowOffset": 2,
@@ -32,7 +32,7 @@
                 }
             ]
         },{
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 2,
@@ -42,7 +42,7 @@
                 }
             ]
         },{
-            "values": [4, 4],
+            "values": [0, 0],
             "groups": [
                 {
                     "rowOffset": 4,
@@ -52,7 +52,7 @@
                 }
             ]
         },{
-            "values": [7, 7],
+            "values": [3, 3],
             "groups": [
                 {
                     "rowOffset": 4,
@@ -62,7 +62,7 @@
                 }
             ]
         },{
-            "values": [7, 7],
+            "values": [3, 3],
             "groups": [
                 {
                     "rowOffset": 6,
@@ -72,7 +72,7 @@
                 }
             ]
         },{
-            "values": [7, 7],
+            "values": [3, 3],
             "groups": [
                 {
                     "rowOffset": 6,
@@ -82,7 +82,7 @@
                 }
             ]
         },{
-            "values": [7, 7],
+            "values": [3, 3],
             "groups": [
                 {
                     "rowOffset": 6,
@@ -92,7 +92,7 @@
                 }
             ]
         },{
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 8,
@@ -102,7 +102,7 @@
                 }
             ]
         },{
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 8,
@@ -112,7 +112,7 @@
                 }
             ]
         },{
-            "values": [6, 6],
+            "values": [2, 2],
             "groups": [
                 {
                     "rowOffset": 8,

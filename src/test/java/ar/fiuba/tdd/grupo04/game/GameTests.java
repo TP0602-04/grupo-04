@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -40,15 +41,26 @@ public abstract class GameTests {
         // Game creation
         game = GameFactory.createGame(getFileGame(), getFileScenario());
 
+        String json;
+        InputsMapper inputsMapper;
+
         // Inputs to Win
-        String json = FileUtils.readFile(getFileMovesToWin());
-        InputsMapper inputsMapper = gson.fromJson(json, InputsMapper.class);
-        inputsToWin = inputsMapper.getInputs();
+        String winGame = getFileMovesToWin();
+        inputsToWin = new ArrayList<>();
+        if (winGame != null) {
+            json = FileUtils.readFile(getFileMovesToWin());
+            inputsMapper = gson.fromJson(json, InputsMapper.class);
+            inputsToWin = inputsMapper.getInputs();
+        }
 
         // Inputs to Lose
-        json = FileUtils.readFile(getFileMovesToLose());
-        inputsMapper = gson.fromJson(json, InputsMapper.class);
-        inputsToLose = inputsMapper.getInputs();
+        String loseGame = getFileMovesToLose();
+        inputsToLose = new ArrayList<>();
+        if (loseGame != null) {
+            json = FileUtils.readFile(loseGame);
+            inputsMapper = gson.fromJson(json, InputsMapper.class);
+            inputsToLose = inputsMapper.getInputs();
+        }
     }
 
     @Test

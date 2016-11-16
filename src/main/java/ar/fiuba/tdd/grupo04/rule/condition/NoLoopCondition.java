@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
 import java.util.List;
 
-public class NoLoopCondition extends LoopCondition implements ICondition<CellGroup> {
+public class NoLoopCondition extends PathCondition implements ICondition<CellGroup> {
 
     public NoLoopCondition(Neighborhood neighborhood) {
         super(neighborhood);

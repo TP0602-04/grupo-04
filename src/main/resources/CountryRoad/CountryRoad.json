@@ -9,25 +9,25 @@
                 "offsetColumn": 0,
                 "stepRow": 3,
                 "stepColumn": 3,
-                "value": 0
+                "value": 3
             },{
                 "offsetRow": 2,
                 "offsetColumn": 0,
                 "stepRow": 3,
                 "stepColumn": 3,
-                "value": 0
+                "value": 3
             },{
                 "offsetRow": 0,
                 "offsetColumn": 2,
                 "stepRow": 3,
                 "stepColumn": 3,
-                "value": 0
+                "value": 3
             },{
                 "offsetRow": 2,
                 "offsetColumn": 2,
                 "stepRow": 3,
                 "stepColumn": 3,
-                "value": 0
+                "value": 3
             }
         ]
     },
@@ -47,6 +47,17 @@
     ],
     "winRules": [
         {
+            "collector": {
+                "type": "Valued",
+                "params": [1]
+            },
+            "conditions": [
+                {
+                    "type": "NoBranchedOff",
+                    "params": [1]
+                }
+            ]
+        },{
             "collector": {
                 "type": "Valued",
                 "params": [1]

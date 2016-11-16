@@ -9,13 +9,13 @@
                 "offsetColumn": 0,
                 "stepRow": 2,
                 "stepColumn": 2,
-                "value": 1
+                "value": 0
             },{
                 "offsetRow": 1,
                 "offsetColumn": 1,
                 "stepRow": 2,
                 "stepColumn": 2,
-                "value": 0
+                "value": 3
             }
         ]
     },
@@ -37,7 +37,18 @@
         {
             "collector": {
                 "type": "Valued",
-                "params": [1]
+                "params": [0, 1]
+            },
+            "conditions": [
+                {
+                    "type": "NoBranchedOff",
+                    "params": [1]
+                }
+            ]
+        },{
+            "collector": {
+                "type": "Valued",
+                "params": [0, 1]
             },
             "conditions": [
                 {

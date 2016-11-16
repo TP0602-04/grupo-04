@@ -160,6 +160,9 @@ public class GameFactory {
                 return new EqualsSumCondition();
             case EQUALS_MULTIPLY:
                 return new EqualsMultiplyCondition();
+            case NO_BRANCHED_OFF:
+                int filterValue = conditionMapper.getParams().get(0);
+                return new NoBranchedOffCondition(neighborhood, filterValue);
             case SINGLE_LOOP:
                 return new SingleLoopCondition(neighborhood);
             case NO_LOOP:
