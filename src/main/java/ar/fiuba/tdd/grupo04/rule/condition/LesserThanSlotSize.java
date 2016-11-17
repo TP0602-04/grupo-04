@@ -28,9 +28,9 @@ public class LesserThanSlotSize implements ICondition {
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: LesserThanSlotSize\n" +
-                message;
+        message = "============= FAILED =============\n"
+                + "Condition: LesserThanSlotSize\n" 
+                + message;
         System.out.println(message);
     }
 

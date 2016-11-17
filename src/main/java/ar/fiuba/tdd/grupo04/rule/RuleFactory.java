@@ -84,25 +84,21 @@ public class RuleFactory {
             case UNIQUE:
                 return new UniqueCondition();
             case GREATER_THAN:
-                int minValue = params.get(0);
-                return new GreaterThanCondition(minValue);
+                return new GreaterThanCondition(params.get(0));
             case LESSER_THAN:
-                int maxValue = params.get(0);
-                return new LesserThanCondition(maxValue);
+                return new LesserThanCondition(params.get(0));
             case LESSER_THAN_SLOT_SIZE:
                 return new LesserThanSlotSize();
             case FILLED:
                 return new FilledCondition();
             case NO_BRANCHED_OFF:
-                int filterValue = params.get(0);
-                return new NoBranchedOffCondition(neighborhood, filterValue);
+                return new NoBranchedOffCondition(neighborhood, params.get(0));
             case SINGLE_LOOP:
                 return new SingleLoopCondition(neighborhood);
             case NO_LOOP:
                 return new NoLoopCondition(neighborhood);
             case SLOTS_OF_SIZE:
-                int slotSize = params.get(0);
-                return new SlotsOfSizeCondition(neighborhood, slotSize);
+                return new SlotsOfSizeCondition(neighborhood, params.get(0));
             case MIN_MATCH_AT_VALUE_DISTANCE:
                 return new MinMatchAtValueDistance();
             default:

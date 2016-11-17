@@ -16,10 +16,10 @@ public class CountWithinRangeCondition implements ICustomCondition {
         long count = referencedCellGroup.getCells().size();
         boolean check = count >= min && count <= max;
         if (!check) {
-            System.out.println("============= FAILED =============\n" +
-                    "Condition: CountWithinRangeCondition\n" +
-                    "Count: " + count + "\n" +
-                    "Range: [" + min + ", " + max + "]");
+            System.out.println("============= FAILED =============\n"
+                    + "Condition: CountWithinRangeCondition\n"
+                    + "Count: " + count + "\n"
+                    + "Range: [" + min + ", " + max + "]");
         }
         return check;
     }

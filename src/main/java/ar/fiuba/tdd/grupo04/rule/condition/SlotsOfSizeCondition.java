@@ -92,19 +92,21 @@ public class SlotsOfSizeCondition implements ICondition {
     private List<Cell> mergeCellLists(List<Cell> list1, List<Cell> list2) {
         List<Cell> mergedList = new ArrayList<>();
         mergedList.addAll(list1);
-        list2.forEach(cell -> {
-            if (!mergedList.contains(cell)) {
-                mergedList.add(cell);
+        list2.forEach(
+                cell -> {
+                if (!mergedList.contains(cell)) {
+                    mergedList.add(cell);
+                }
             }
-        });
+        );
         return mergedList;
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: SlotsOfSizeCondition\n" +
-                "Expected Size: " + expectedSlotSize + "\n" +
-                message;
+        message = "============= FAILED =============\n"
+                + "Condition: SlotsOfSizeCondition\n"
+                + "Expected Size: " + expectedSlotSize + "\n"
+                + message;
         System.out.println(message);
     }
 

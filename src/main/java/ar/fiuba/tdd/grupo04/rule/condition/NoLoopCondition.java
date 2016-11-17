@@ -29,9 +29,9 @@ public class NoLoopCondition extends PathCondition implements ICondition {
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: NoLoopCondition\n" +
-                message;
+        message = "============= FAILED =============\n" 
+                + "Condition: NoLoopCondition\n" 
+                + message;
         System.out.println(message);
     }
 

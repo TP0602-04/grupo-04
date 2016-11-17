@@ -16,13 +16,16 @@ public class MinMatchAtValueDistance implements ICondition {
                 .map(cell -> checkCell(cell, filledCells))
                 .reduce(new ArrayList<>(),
                         (list, otherList) -> {
-                            otherList.forEach(cell -> {
+                        otherList.forEach(
+                                    cell -> {
                                 if (!list.contains(cell)) {
                                     list.add(cell);
                                 }
-                            });
-                            return list;
-                        });
+                            }
+                        );
+                        return list;
+                    }
+                );
         boolean check = problematicCells.isEmpty();
         if (!check) {
             String message = problematicCells
@@ -46,14 +49,14 @@ public class MinMatchAtValueDistance implements ICondition {
     private boolean isSameRowOrColumn(Cell cell, Cell otherCell) {
         Coordinate coordinate = cell.getCoordinate();
         Coordinate otherCoordinate = otherCell.getCoordinate();
-        return coordinate.row() == otherCoordinate.row() ||
-                coordinate.column() == otherCoordinate.column();
+        return coordinate.row() == otherCoordinate.row()
+                || coordinate.column() == otherCoordinate.column();
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: MinMatchAtValueDistance\n" +
-                message;
+        message = "============= FAILED =============\n" 
+                + "Condition: MinMatchAtValueDistance\n" 
+                + message;
         System.out.println(message);
     }
 

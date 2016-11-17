@@ -15,14 +15,14 @@ public abstract class PathCondition {
         this.neighborhood = neighborhood;
     }
 
-    protected List<Cell> getBranchedOffCells(List<Cell> cells) {
-        return getBranchedOffCells(new ArrayList<>(), cells);
-    }
-
     protected List<Cell> getBifurcations(List<Cell> cells) {
         return cells.stream()
                 .filter(cell -> neighborhood.getNeighbors(cell, cells).size() > 2)
                 .collect(Collectors.toList());
+    }
+
+    protected List<Cell> getBranchedOffCells(List<Cell> cells) {
+        return getBranchedOffCells(new ArrayList<>(), cells);
     }
 
     private List<Cell> getBranchedOffCells(List<Cell> branched, List<Cell> cells) {

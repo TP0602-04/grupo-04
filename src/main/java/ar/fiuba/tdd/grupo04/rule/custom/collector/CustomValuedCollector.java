@@ -21,13 +21,15 @@ public class CustomValuedCollector implements ICustomCollector {
     public List<ReferencedCellGroup> collect(IBoard board) {
         List<Reference> references = board.getReferences();
         List<ReferencedCellGroup> cellGroups = new ArrayList<>();
-        references.forEach(reference -> {
-            List<Integer> values = reference.getReferenceValues();
-            List<Cell> source = reference.getCells();
-            CellGroup filteredCells = valuedCollector.collect(source);
-            ReferencedCellGroup group = new ReferencedCellGroup(filteredCells.getCells(), values);
-            cellGroups.add(group);
-        });
+        references.forEach(
+                reference -> {
+                List<Integer> values = reference.getReferenceValues();
+                List<Cell> source = reference.getCells();
+                CellGroup filteredCells = valuedCollector.collect(source);
+                ReferencedCellGroup group = new ReferencedCellGroup(filteredCells.getCells(), values);
+                cellGroups.add(group);
+            }
+        );
         return cellGroups;
     }
 

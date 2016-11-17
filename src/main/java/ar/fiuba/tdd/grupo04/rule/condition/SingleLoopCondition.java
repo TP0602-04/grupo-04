@@ -43,9 +43,9 @@ public class SingleLoopCondition extends PathCondition implements ICondition {
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: SingleLoopCondition\n" +
-                message;
+        message = "============= FAILED =============\n" 
+                + "Condition: SingleLoopCondition\n" 
+                + message;
         System.out.println(message);
     }
 }

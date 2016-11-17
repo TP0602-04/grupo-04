@@ -40,8 +40,8 @@ public class BlockCollector implements ICollector {
     }
 
     private boolean checkBoardSize(IBoard board) {
-        return board.getColumnSize() % size == 0 &&
-                board.getRowSize() % size == 0;
+        return board.getColumnSize() % size == 0
+                && board.getRowSize() % size == 0;
     }
 
     private boolean filter(int blockRow, int blockColumn, Cell cell) {
@@ -53,8 +53,8 @@ public class BlockCollector implements ICollector {
         int row = cell.getCoordinate().row();
         int column = cell.getCoordinate().column();
 
-        return row >= rowLowBound && row < rowHiBound &&
-                column >= columnLowBound && column < columnHiBound;
+        return row >= rowLowBound && row < rowHiBound 
+                && column >= columnLowBound && column < columnHiBound;
     }
 
 }

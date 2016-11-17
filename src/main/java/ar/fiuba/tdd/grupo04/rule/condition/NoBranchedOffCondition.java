@@ -34,9 +34,9 @@ public class NoBranchedOffCondition extends PathCondition implements ICondition 
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: NoBranchedOffCondition\n" +
-                message;
+        message = "============= FAILED =============\n" 
+                + "Condition: NoBranchedOffCondition\n" 
+                + message;
         System.out.println(message);
     }
 

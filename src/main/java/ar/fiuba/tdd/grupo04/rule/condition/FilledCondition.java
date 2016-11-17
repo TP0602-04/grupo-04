@@ -26,9 +26,9 @@ public class FilledCondition implements ICondition {
     }
 
     private void printError(String message) {
-        message = "============= FAILED =============\n" +
-                "Condition: FilledCondition\n" +
-                message;
+        message = "============= FAILED =============\n"
+                + "Condition: FilledCondition\n" 
+                + message;
         System.out.println(message);
     }
 }
