@@ -2,9 +2,9 @@ package ar.fiuba.tdd.grupo04;
 
 public class Input {
     private Coordinate coordinate;
-    private int value;
+    private Integer value;
 
-    public Input(Coordinate coordinate, int value) {
+    public Input(Coordinate coordinate, Integer value) {
         this.coordinate = coordinate;
         this.value = value;
     }
@@ -13,7 +13,7 @@ public class Input {
         return coordinate;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 }

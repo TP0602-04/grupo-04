@@ -77,16 +77,34 @@ public abstract class GameTests {
         }
     }
 
+    @Test
+    public void testUndo() {
+        playGame(game, inputsToWin);
+        assertTrue(game.hasWin());
+        System.out.println("======================== UNDO ==============================");
+        game.undo();
+        System.out.println(game.printBoard());
+        assertFalse(game.hasWin());
+        doMove(game, inputsToWin.get(inputsToWin.size() - 1));
+        assertTrue(game.hasWin());
+        System.out.println("======================== END ==============================");
+    }
+
     private void playGame(IGame game, List<Input> inputs) {
         System.out.println("======================== INIT ==============================");
         System.out.println(game.printBoard());
         for (Input input : inputs) {
-            System.out.println("======================== MOVE ==============================");
-            game.play(input);
-            System.out.println(game.printBoard());
-            game.hasWin();
-            System.out.println("============================================================");
+            doMove(game, input);
         }
+        System.out.println("======================== END ==============================");
+    }
+
+    private void doMove(IGame game, Input input) {
+        System.out.println("======================== MOVE ==============================");
+        game.play(input);
+        System.out.println(game.printBoard());
+        game.hasWin();
+        System.out.println("============================================================");
     }
 
 }

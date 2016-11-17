@@ -16,6 +16,8 @@ public interface IGame {
 
     boolean hasLose();
 
+    void undo();
+
     String printBoard();
 
 }

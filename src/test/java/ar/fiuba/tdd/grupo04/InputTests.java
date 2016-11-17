@@ -12,7 +12,7 @@ public class InputTests {
     private static Random random;
 
     private Coordinate coordinate;
-    private int value;
+    private Integer value;
     private Input input;
 
     @BeforeClass
