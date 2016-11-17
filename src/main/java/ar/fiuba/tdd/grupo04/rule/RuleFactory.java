@@ -15,13 +15,34 @@ import ar.fiuba.tdd.grupo04.rule.custom.condition.EqualsMultiplyCondition;
 import ar.fiuba.tdd.grupo04.rule.custom.condition.EqualsSumCondition;
 import ar.fiuba.tdd.grupo04.rule.custom.condition.ICustomCondition;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static ar.fiuba.tdd.grupo04.json.game.CollectorMapper.*;
 import static ar.fiuba.tdd.grupo04.json.game.ConditionMapper.*;
 
 public class RuleFactory {
+    private interface BaseConditionCreator {
+        public ICondition create(List<Integer> params, Neighborhood neighborhood);
+    }
+
+    private static Map<String, BaseConditionCreator> baseConditionMap;
+
+    static {
+        baseConditionMap = new HashMap<>();
+        baseConditionMap.put(UNIQUE, (params, neighborhood) -> new UniqueCondition());
+        baseConditionMap.put(GREATER_THAN, (params, neighborhood) -> new GreaterThanCondition(params.get(0)));
+        baseConditionMap.put(LESSER_THAN, (params, neighborhood) -> new LesserThanCondition(params.get(0)));
+        baseConditionMap.put(LESSER_THAN_SLOT_SIZE, (params, neighborhood) -> new LesserThanSlotSize());
+        baseConditionMap.put(FILLED, (params, neighborhood) -> new FilledCondition());
+        baseConditionMap.put(NO_BRANCHED_OFF, (params, neighborhood) -> new NoBranchedOffCondition(neighborhood, params.get(0)));
+        baseConditionMap.put(SINGLE_LOOP, (params, neighborhood) -> new SingleLoopCondition(neighborhood));
+        baseConditionMap.put(NO_LOOP, (params, neighborhood) -> new NoLoopCondition(neighborhood));
+        baseConditionMap.put(SLOTS_OF_SIZE, (params, neighborhood) -> new SlotsOfSizeCondition(neighborhood, params.get(0)));
+        baseConditionMap.put(MIN_MATCH_AT_VALUE_DISTANCE, (params, neighborhood) -> new MinMatchAtValueDistance());
+    }
 
     public static IRule createRule(Neighborhood neighborhood, RuleMapper ruleMapper) {
         // Create conditions
@@ -80,29 +101,10 @@ public class RuleFactory {
     private static ICondition createBaseCondition(Neighborhood neighborhood, ConditionMapper conditionMapper) {
         String type = conditionMapper.getType();
         List<Integer> params = conditionMapper.getParams();
-        switch (type) {
-            case UNIQUE:
-                return new UniqueCondition();
-            case GREATER_THAN:
-                return new GreaterThanCondition(params.get(0));
-            case LESSER_THAN:
-                return new LesserThanCondition(params.get(0));
-            case LESSER_THAN_SLOT_SIZE:
-                return new LesserThanSlotSize();
-            case FILLED:
-                return new FilledCondition();
-            case NO_BRANCHED_OFF:
-                return new NoBranchedOffCondition(neighborhood, params.get(0));
-            case SINGLE_LOOP:
-                return new SingleLoopCondition(neighborhood);
-            case NO_LOOP:
-                return new NoLoopCondition(neighborhood);
-            case SLOTS_OF_SIZE:
-                return new SlotsOfSizeCondition(neighborhood, params.get(0));
-            case MIN_MATCH_AT_VALUE_DISTANCE:
-                return new MinMatchAtValueDistance();
-            default:
-                throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
+        if (!baseConditionMap.containsKey(type)) {
+            throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
+        } else {
+            return baseConditionMap.get(type).create(params, neighborhood);
         }
     }
 
