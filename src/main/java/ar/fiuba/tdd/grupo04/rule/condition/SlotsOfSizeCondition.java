@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class SlotsOfSizeCondition implements ICondition<CellGroup> {
     private Neighborhood neighborhood;
-    private int expectedSlotSiza;
+    private int expectedSlotSize;
 
     public SlotsOfSizeCondition(Neighborhood neighborhood, int slotSize) {
         this.neighborhood = neighborhood;
-        expectedSlotSiza = slotSize;
+        expectedSlotSize = slotSize;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SlotsOfSizeCondition implements ICondition<CellGroup> {
     }
 
     private boolean checkSlotSize(List<Cell> cells) {
-        boolean check = cells.size() == expectedSlotSiza;
+        boolean check = cells.size() == expectedSlotSize;
         if (!check) {
             String message = cells
                     .stream()
@@ -103,7 +103,7 @@ public class SlotsOfSizeCondition implements ICondition<CellGroup> {
     private void printError(String message) {
         message = "============= FAILED =============\n" +
                 "Condition: SlotsOfSizeCondition\n" +
-                "Expected Size: " + expectedSlotSiza + "\n" +
+                "Expected Size: " + expectedSlotSize + "\n" +
                 message;
         System.out.println(message);
     }

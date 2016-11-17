@@ -8,6 +8,7 @@ public class ConditionMapper {
     public static final String UNIQUE = "Unique";
     public static final String GREATER_THAN = "GreaterThan";
     public static final String LESSER_THAN = "LesserThan";
+    public static final String LESSER_THAN_SLOT_SIZE = "LesserThanSlotSize";
     public static final String FILLED = "Filled";
     public static final String EQUALS_SUM = "EqualsSum";
     public static final String EQUALS_MULTIPLY = "EqualsMultiply";
@@ -16,6 +17,7 @@ public class ConditionMapper {
     public static final String SINGLE_LOOP = "SingleLoop";
     public static final String COUNT_WITHIN_RANGE = "CountWithinRange";
     public static final String SLOTS_OF_SIZE = "SlotsOfSize";
+    public static final String MIN_MATCH_AT_VALUE_DISTANCE = "MinMatchAtValueDistance";
 
     @SerializedName("type")
     private String type;

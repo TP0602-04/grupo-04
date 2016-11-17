@@ -154,6 +154,8 @@ public class GameFactory {
             case LESSER_THAN:
                 int maxValue = conditionMapper.getParams().get(0);
                 return new LesserThanCondition(maxValue);
+            case LESSER_THAN_SLOT_SIZE:
+                return new LesserThanSlotSize();
             case FILLED:
                 return new FilledCondition();
             case EQUALS_SUM:
@@ -172,6 +174,8 @@ public class GameFactory {
             case SLOTS_OF_SIZE:
                 int slotSize = conditionMapper.getParams().get(0);
                 return new SlotsOfSizeCondition(neighborhood, slotSize);
+            case MIN_MATCH_AT_VALUE_DISTANCE:
+                return new MinMatchAtValueDistance();
             default:
                 throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
         }
