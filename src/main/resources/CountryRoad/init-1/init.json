@@ -1,0 +1,81 @@
+{
+    "initialValues": [],
+    "references": [
+        {
+            "values": [0, 3],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 0,
+                    "rowLarge": 3,
+                    "columnLarge": 3
+                }
+            ]
+        },{
+            "values": [0, 15],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 3,
+                    "rowLarge": 3,
+                    "columnLarge": 3
+                },{
+                    "rowOffset": 3,
+                    "columnOffset": 0,
+                    "rowLarge": 6,
+                    "columnLarge": 6
+                }
+            ]
+        },{
+            "values": [3, 3],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 6,
+                    "rowLarge": 6,
+                    "columnLarge": 3
+                }
+            ]
+        },{
+            "values": [0, 9],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 6,
+                    "rowLarge": 6,
+                    "columnLarge": 3
+                },{
+                    "rowOffset": 9,
+                    "columnOffset": 6,
+                    "rowLarge": 3,
+                    "columnLarge": 3
+                }
+            ]
+        },{
+            "values": [0, 9],
+            "groups": [
+                {
+                    "rowOffset": 6,
+                    "columnOffset": 6,
+                    "rowLarge": 3,
+                    "columnLarge": 6
+                },{
+                    "rowOffset": 9,
+                    "columnOffset": 9,
+                    "rowLarge": 3,
+                    "columnLarge": 3
+                }
+            ]
+        },{
+            "values": [6, 6],
+            "groups": [
+                {
+                    "rowOffset": 9,
+                    "columnOffset": 0,
+                    "rowLarge": 6,
+                    "columnLarge": 3
+                }
+            ]
+        }
+    ]
+}

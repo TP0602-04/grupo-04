@@ -1,0 +1,33 @@
+{
+    "board": {
+        "rows": 10,
+        "columns": 10,
+        "inputType": "Boolean"
+    },
+    "loseRules": [],
+    "winRules": [
+        {
+            "collector": {
+                "type": "CustomValued",
+                "params": [1]
+            },
+            "conditions": [
+                {
+                    "type": "CountWithinRange",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "Valued",
+                "params": [1]
+            },
+            "conditions": [
+                {
+                    "type": "SlotsOfSize",
+                    "params": [2]
+                }
+            ]
+        }
+    ]
+}

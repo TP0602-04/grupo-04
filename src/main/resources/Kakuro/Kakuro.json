@@ -1,0 +1,60 @@
+{
+    "board": {
+        "rows": 6,
+        "columns": 6,
+        "inputType": "Numeric"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "Custom",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                },{
+                    "type": "EqualsSum",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions":[
+                {
+                    "type": "LesserThan",
+                    "params": [10]
+                }
+            ]
+        },{
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "GreaterThan",
+                    "params": [0]
+                }
+            ]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "Custom",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Filled",
+                    "params": []
+                }
+            ]
+        }
+    ]
+}

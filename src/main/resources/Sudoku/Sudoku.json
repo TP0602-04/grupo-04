@@ -1,0 +1,71 @@
+{
+    "board": {
+        "rows": 9,
+        "columns": 9,
+        "inputType": "Numeric"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "Columns",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "Rows",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "Blocks",
+                "params": [3]
+            },
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                }
+            ]
+        },{
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type":"LesserThan",
+                    "params": [10]
+                },{
+                    "type": "GreaterThan",
+                    "params": [0]
+                }
+            ]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Filled",
+                    "params": []
+                }
+            ]
+        }
+    ]
+}

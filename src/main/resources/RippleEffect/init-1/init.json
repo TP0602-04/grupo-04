@@ -1,0 +1,324 @@
+{
+    "initialValues": [
+        {
+            "row": 0,
+            "column": 3,
+            "value": 3
+        },{
+            "row": 2,
+            "column": 6,
+            "value": 2
+        },{
+            "row": 3,
+            "column": 3,
+            "value": 1
+        },{
+            "row": 3,
+            "column": 5,
+            "value": 3
+        },{
+            "row": 4,
+            "column": 2,
+            "value": 1
+        },{
+            "row": 4,
+            "column": 4,
+            "value": 5
+        },{
+            "row": 5,
+            "column": 1,
+            "value": 3
+        },{
+            "row": 7,
+            "column": 4,
+            "value": 2
+        }],
+    "references": [
+        {
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 0,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 2,
+                    "rowLarge": 3,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 0,
+                    "columnOffset": 5,
+                    "rowLarge": 3,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 1,
+                    "columnOffset": 6,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 0,
+                    "rowLarge": 1,
+                    "columnLarge": 3
+                },{
+                    "rowOffset": 2,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 3,
+                    "rowLarge": 1,
+                    "columnLarge": 3
+                },{
+                    "rowOffset": 2,
+                    "columnOffset": 4,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 4,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 2,
+                    "columnOffset": 5,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 1,
+                    "columnOffset": 7,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 6,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 2,
+                    "columnOffset": 7,
+                    "rowLarge": 1,
+                    "columnLarge": 3
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 4,
+                    "columnOffset": 0,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 3,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 3
+                },{
+                    "rowOffset": 3,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 4,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 5,
+                    "columnOffset": 3,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 3,
+                    "columnOffset": 4,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 4,
+                    "columnOffset": 5,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 5,
+                    "columnOffset": 5,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 4,
+                    "columnOffset": 3,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 5,
+                    "columnOffset": 4,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 6,
+                    "columnOffset": 3,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 5,
+                    "columnOffset": 0,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 6,
+                    "columnOffset": 1,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 7,
+                    "columnOffset": 0,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 6,
+                    "columnOffset": 2,
+                    "rowLarge": 1,
+                    "columnLarge": 2
+                },{
+                    "rowOffset": 7,
+                    "columnOffset": 3,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 5,
+                    "columnOffset": 6,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 6,
+                    "columnOffset": 5,
+                    "rowLarge": 2,
+                    "columnLarge": 1
+                }
+            ]
+        },{
+            "values": [],
+            "groups": [
+                {
+                    "rowOffset": 7,
+                    "columnOffset": 5,
+                    "rowLarge": 3,
+                    "columnLarge": 1
+                },{
+                    "rowOffset": 6,
+                    "columnOffset": 7,
+                    "rowLarge": 1,
+                    "columnLarge": 1
+                }
+            ]
+        }
+    ]
+}

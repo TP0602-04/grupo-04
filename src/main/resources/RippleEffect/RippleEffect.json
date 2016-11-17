@@ -1,0 +1,52 @@
+{
+    "board": {
+        "rows": 8,
+        "columns": 8,
+        "inputType": "Number"
+    },
+    "loseRules": [
+        {
+            "collector": {
+                "type": "Custom",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Unique",
+                    "params": []
+                },{
+                    "type": "LesserThanSlotSize",
+                    "params": []
+                },{
+                    "type": "GreaterThan",
+                    "params": [0]
+                }
+            ]
+        },{
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "MinMatchAtValueDistance",
+                    "params": []
+                }
+            ]
+        }
+    ],
+    "winRules": [
+        {
+            "collector": {
+                "type": "All",
+                "params": []
+            },
+            "conditions": [
+                {
+                    "type": "Filled",
+                    "params": []
+                }
+            ]
+        }
+    ]
+}
