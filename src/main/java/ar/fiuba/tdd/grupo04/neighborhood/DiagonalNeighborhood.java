@@ -21,19 +21,12 @@ public class DiagonalNeighborhood extends Neighborhood {
         // Second -> Check positions: vicinity
         int deltaRow = dotCell.getCoordinate().row() - diagonalCell.getCoordinate().row();
         int deltaColumn = dotCell.getCoordinate().column() - diagonalCell.getCoordinate().column();
-        if (Math.abs(deltaRow) != 1 && Math.abs(deltaColumn) != 1) {
-            return false;
-        }
-        // Third -> Check diagonal type with position
-        if (deltaRow * deltaColumn == 1
-                && diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW) {
-            return true;
-        }
-        if (deltaRow * deltaColumn == -1 
-                && diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE) {
-            return true;
-        }
-        return false;
+
+        return (deltaRow * deltaColumn == 1
+                && diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW)
+                || (deltaRow * deltaColumn == -1
+                && diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE)
+                || !(Math.abs(deltaRow) != 1 && Math.abs(deltaColumn) != 1);
     }
 
     private Cell getUniqueCell(int value, Cell cell1, Cell cell2) {
