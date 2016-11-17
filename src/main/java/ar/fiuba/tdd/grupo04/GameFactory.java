@@ -1,5 +1,7 @@
 package ar.fiuba.tdd.grupo04;
 
+import com.google.gson.Gson;
+
 import ar.fiuba.tdd.grupo04.board.Board;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.Slot;
@@ -15,7 +17,6 @@ import ar.fiuba.tdd.grupo04.neighborhood.StraightNeighborhood;
 import ar.fiuba.tdd.grupo04.rule.IRule;
 import ar.fiuba.tdd.grupo04.rule.RuleFactory;
 import ar.fiuba.tdd.grupo04.util.FileUtils;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +58,7 @@ public class GameFactory {
 
         // Load Structure
         List<StructureMapper> structures = boardMapper.getStructure();
-        List<Input> structureInputs = getBoardStructure(board, structures);
-        game.loadStructure(structureInputs);
+        game.loadStructure(getBoardStructure(board, structures));
 
         // Load Scenario
         //      Initial values
@@ -95,9 +95,9 @@ public class GameFactory {
                 .reduce(
                         new ArrayList<>(),
                         (l1, l2) -> {
-                            l1.addAll(l2);
-                            return l1;
-                        }
+                        l1.addAll(l2);
+                        return l1;
+                    }
                 );
     }
 

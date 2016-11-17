@@ -1,7 +1,8 @@
 package ar.fiuba.tdd.grupo04.json.scenario;
 
-import ar.fiuba.tdd.grupo04.Coordinate;
 import com.google.gson.annotations.SerializedName;
+
+import ar.fiuba.tdd.grupo04.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

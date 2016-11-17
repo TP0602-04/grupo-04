@@ -25,12 +25,12 @@ public class DiagonalNeighborhood extends Neighborhood {
             return false;
         }
         // Third -> Check diagonal type with position
-        if (deltaRow * deltaColumn == 1 &&
-                diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW) {
+        if (deltaRow * deltaColumn == 1
+                && diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW) {
             return true;
         }
-        if (deltaRow * deltaColumn == -1 &&
-                diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE) {
+        if (deltaRow * deltaColumn == -1 
+                && diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE) {
             return true;
         }
         return false;

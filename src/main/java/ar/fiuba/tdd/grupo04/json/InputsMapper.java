@@ -1,9 +1,10 @@
 package ar.fiuba.tdd.grupo04.json;
 
+import com.google.gson.annotations.SerializedName;
+
 import ar.fiuba.tdd.grupo04.Coordinate;
 import ar.fiuba.tdd.grupo04.Input;
 import ar.fiuba.tdd.grupo04.json.scenario.CellMapper;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 import java.util.stream.Collectors;

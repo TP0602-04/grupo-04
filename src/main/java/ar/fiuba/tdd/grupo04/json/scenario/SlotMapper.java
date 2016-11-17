@@ -1,7 +1,8 @@
 package ar.fiuba.tdd.grupo04.json.scenario;
 
-import ar.fiuba.tdd.grupo04.Coordinate;
 import com.google.gson.annotations.SerializedName;
+
+import ar.fiuba.tdd.grupo04.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,12 @@ public class SlotMapper {
 
     public List<Coordinate> getCoordinates() {
         List<Coordinate> coordinates = new ArrayList<>();
-        groups.forEach(groupMapper -> {
-            List<Coordinate> coordinateList = groupMapper.getCoordinates();
-            coordinates.addAll(coordinateList);
-        });
+        groups.forEach(
+                groupMapper -> {
+                List<Coordinate> coordinateList = groupMapper.getCoordinates();
+                coordinates.addAll(coordinateList);
+            }
+        );
         return coordinates;
     }
 }

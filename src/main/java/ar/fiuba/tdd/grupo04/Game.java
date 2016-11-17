@@ -73,10 +73,12 @@ public class Game implements IGame {
     }
 
     private void loadAndLockInputs(List<Input> inputs) {
-        inputs.forEach(input -> {
-            board.fill(input);
-            board.lockCell(input.getCoordinate());
-        });
+        inputs.forEach(
+                input -> {
+                board.fill(input);
+                board.lockCell(input.getCoordinate());
+            }
+        );
     }
 
 }
