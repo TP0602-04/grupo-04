@@ -25,7 +25,7 @@ public class CustomRule implements IRule {
     @Override
     public boolean check(IBoard board) {
         return collector.collect(board).stream()
-                .map(this::check)
+                .map(referencedCellGroup -> check(referencedCellGroup))
                 .reduce(true, (res1, res2) -> res1 && res2);
     }
 

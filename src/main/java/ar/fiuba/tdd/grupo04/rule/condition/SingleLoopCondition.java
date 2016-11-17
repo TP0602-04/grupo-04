@@ -13,6 +13,11 @@ public class SingleLoopCondition extends PathCondition implements ICondition {
     }
 
     @Override
+    protected String getConditionName() {
+        return SingleLoopCondition.class.getSimpleName();
+    }
+
+    @Override
     public boolean check(CellGroup cellGroup) {
         String errorMessage;
         List<Cell> cells = cellGroup.getCells();
@@ -24,11 +29,7 @@ public class SingleLoopCondition extends PathCondition implements ICondition {
         // Check Bifurcations
         List<Cell> bifurcations = getBifurcations(cells);
         if (!bifurcations.isEmpty()) {
-            errorMessage = bifurcations
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("More than one loop...Check bifurcations: ", (s1, s2) -> s1 + " " + s2);
-            printError(errorMessage);
+            printError(bifurcations);
             return false;
         }
 
@@ -42,10 +43,4 @@ public class SingleLoopCondition extends PathCondition implements ICondition {
         return true;
     }
 
-    private void printError(String message) {
-        message = "============= FAILED =============\n" 
-                + "Condition: SingleLoopCondition\n" 
-                + message;
-        System.out.println(message);
-    }
 }

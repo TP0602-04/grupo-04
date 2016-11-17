@@ -32,6 +32,14 @@ public class Coordinate {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = ((hash + row) << 5) - (hash + row);
+        hash = ((hash + column) << 5) - (hash + column);
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "(" + row + ", " + column + ")";
     }

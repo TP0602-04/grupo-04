@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class PathCondition {
+public abstract class PathCondition extends Condition {
 
     private Neighborhood neighborhood;
 

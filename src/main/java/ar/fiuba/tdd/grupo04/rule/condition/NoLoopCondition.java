@@ -13,26 +13,20 @@ public class NoLoopCondition extends PathCondition implements ICondition {
     }
 
     @Override
+    protected String getConditionName() {
+        return NoLoopCondition.class.getSimpleName();
+    }
+
+    @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> cells = cellGroup.getCells();
         List<Cell> branchedOffCells = getBranchedOffCells(cells);
         cells.removeAll(branchedOffCells);
         boolean check = cells.isEmpty();
         if (!check) {
-            String message = cells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Loop/s detected: ", (s1, s2) -> s1 + " " + s2);
-            printError(message);
+            printError(cells);
         }
         return check;
-    }
-
-    private void printError(String message) {
-        message = "============= FAILED =============\n" 
-                + "Condition: NoLoopCondition\n" 
-                + message;
-        System.out.println(message);
     }
 
 }

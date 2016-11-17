@@ -2,24 +2,15 @@ package ar.fiuba.tdd.grupo04.board;
 
 import ar.fiuba.tdd.grupo04.Coordinate;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Slot {
-    private List<Coordinate> coordinates;
-    private List<Integer> values;
+public class Slot extends ValuesHolder<Coordinate> {
 
     public Slot(List<Coordinate> coordinates, List<Integer> values) {
-        this.coordinates = new ArrayList<>();
-        this.coordinates.addAll(coordinates);
-        this.values = values;
-    }
-
-    public List<Integer> getValues() {
-        return values;
+        super(coordinates, values);
     }
 
     public List<Coordinate> getCoordinates() {
-        return coordinates;
+        return things;
     }
 }

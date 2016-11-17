@@ -2,7 +2,13 @@ package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
-public class UniqueCondition implements ICondition {
+public class UniqueCondition extends Condition implements ICondition {
+
+    @Override
+    protected String getConditionName() {
+        return UniqueCondition.class.getSimpleName();
+    }
+
     @Override
     public boolean check(CellGroup cellGroup) {
         return cellGroup
@@ -19,4 +25,5 @@ public class UniqueCondition implements ICondition {
                 .filter(cell -> cell.getValue() == value).count();
         return count == 1;
     }
+
 }

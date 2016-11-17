@@ -6,15 +6,15 @@ import java.util.List;
 
 public class RuleMapper {
     @SerializedName("collector")
-    private CollectorMapper collector;
+    private BaseElementMapper collector;
     @SerializedName("conditions")
-    private List<ConditionMapper> conditions;
+    private List<BaseElementMapper> conditions;
 
-    public CollectorMapper getCollector() {
+    public BaseElementMapper getCollector() {
         return collector;
     }
 
-    public List<ConditionMapper> getConditions() {
+    public List<BaseElementMapper> getConditions() {
         return conditions;
     }
 }

@@ -40,7 +40,7 @@ public class Board implements IBoard {
     @Override
     public Cell getCell(Coordinate coordinate) {
         if (!checkBounds(coordinate)) {
-            throw new IndexOutOfBoundsException("Error retrieving a cell. Coordinate out of bound\nCoordinate = " + coordinate.toString());
+            throw new IndexOutOfBoundsException("Error retrieving a cell. Coordinate out of bound\nCoordinate = ".concat(coordinate.toString()));
         }
         return cells
                 .stream()
@@ -61,7 +61,7 @@ public class Board implements IBoard {
         final Coordinate coordinate = input.getCoordinate();
         final Integer value = input.getValue();
         if (!checkBounds(coordinate)) {
-            throw new IndexOutOfBoundsException("Error filling a cell. Coordinate out of bound\nCoordinate = " + coordinate.toString());
+            throw new IndexOutOfBoundsException("Error filling a cell. Coordinate out of bound\nCoordinate = ".concat(coordinate.toString()));
         }
         cells.stream()
                 .filter(cell -> coordinate.equals(cell.getCoordinate()))
@@ -93,16 +93,16 @@ public class Board implements IBoard {
     public String toString() {
         String boardToString = "BOARD:\n";
         for (int i = 0; i < rowSize; i++) {
-            boardToString = boardToString + "\t====================================================================================\n";
+            boardToString = boardToString.concat("\t====================================================================================\n");
             for (int j = 0; j < columnSize; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 Integer value = getCell(coordinate).getValue();
                 String stringValue = value == null ? "" : value.toString();
-                boardToString = boardToString + "\t|\t" + stringValue;
+                boardToString = boardToString.concat("\t|\t").concat(stringValue);
             }
-            boardToString = boardToString + "\t|\t\n";
+            boardToString = boardToString.concat("\t|\t\n");
         }
-        boardToString = boardToString + "\t====================================================================================";
+        boardToString = boardToString.concat("\t====================================================================================");
         return boardToString;
     }
 

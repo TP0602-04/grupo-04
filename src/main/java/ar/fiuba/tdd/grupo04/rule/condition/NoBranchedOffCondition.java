@@ -16,6 +16,11 @@ public class NoBranchedOffCondition extends PathCondition implements ICondition 
     }
 
     @Override
+    protected String getConditionName() {
+        return NoBranchedOffCondition.class.getSimpleName();
+    }
+
+    @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> cells = cellGroup.getCells();
         List<Cell> branchedOffCells = getBranchedOffCells(cells).stream()
@@ -24,20 +29,9 @@ public class NoBranchedOffCondition extends PathCondition implements ICondition 
 
         boolean check = branchedOffCells.isEmpty();
         if (!check) {
-            String errorMessage = branchedOffCells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Branched off cells: ", (s1, s2) -> s1 + " " + s2);
-            printError(errorMessage);
+            printError(branchedOffCells);
         }
         return check;
-    }
-
-    private void printError(String message) {
-        message = "============= FAILED =============\n" 
-                + "Condition: NoBranchedOffCondition\n" 
-                + message;
-        System.out.println(message);
     }
 
 }

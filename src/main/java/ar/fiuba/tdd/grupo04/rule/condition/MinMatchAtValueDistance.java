@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MinMatchAtValueDistance implements ICondition {
+public class MinMatchAtValueDistance extends Condition implements ICondition {
+
+    @Override
+    protected String getConditionName() {
+        return MinMatchAtValueDistance.class.getSimpleName();
+    }
+
     @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> filledCells = cellGroup.getFilledCells();
@@ -16,23 +22,19 @@ public class MinMatchAtValueDistance implements ICondition {
                 .map(cell -> checkCell(cell, filledCells))
                 .reduce(new ArrayList<>(),
                         (list, otherList) -> {
-                        otherList.forEach(
+                            otherList.forEach(
                                     cell -> {
-                                if (!list.contains(cell)) {
-                                    list.add(cell);
-                                }
-                            }
-                        );
-                        return list;
-                    }
+                                        if (!list.contains(cell)) {
+                                            list.add(cell);
+                                        }
+                                    }
+                            );
+                            return list;
+                        }
                 );
         boolean check = problematicCells.isEmpty();
         if (!check) {
-            String message = problematicCells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Problematic cells: ", (s1, s2) -> s1 + " " + s2);
-            printError(message);
+            printError(problematicCells);
         }
         return check;
     }
@@ -51,13 +53,6 @@ public class MinMatchAtValueDistance implements ICondition {
         Coordinate otherCoordinate = otherCell.getCoordinate();
         return coordinate.row() == otherCoordinate.row()
                 || coordinate.column() == otherCoordinate.column();
-    }
-
-    private void printError(String message) {
-        message = "============= FAILED =============\n" 
-                + "Condition: MinMatchAtValueDistance\n" 
-                + message;
-        System.out.println(message);
     }
 
 }

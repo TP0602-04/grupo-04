@@ -22,11 +22,13 @@ public class DiagonalNeighborhood extends Neighborhood {
         int deltaRow = dotCell.getCoordinate().row() - diagonalCell.getCoordinate().row();
         int deltaColumn = dotCell.getCoordinate().column() - diagonalCell.getCoordinate().column();
 
-        return (deltaRow * deltaColumn == 1
-                && diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW)
-                || (deltaRow * deltaColumn == -1
-                && diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE)
-                || !(Math.abs(deltaRow) != 1 && Math.abs(deltaColumn) != 1);
+        boolean checkDistance = Math.abs(deltaRow) == 1 && Math.abs(deltaColumn) == 1;
+        boolean checkDiagonalLeft = deltaRow * deltaColumn == 1 &&
+                diagonalCell.getValue() == DIAGONAL_LEFT_ABOVE_TO_RIGHT_BELOW;
+        boolean checkDiagonalRight = deltaRow * deltaColumn == -1
+                && diagonalCell.getValue() == DIAGONAL_LEFT_BELOW_TO_RIGHT_ABOVE;
+
+        return checkDistance && (checkDiagonalLeft || checkDiagonalRight);
     }
 
     private Cell getUniqueCell(int value, Cell cell1, Cell cell2) {

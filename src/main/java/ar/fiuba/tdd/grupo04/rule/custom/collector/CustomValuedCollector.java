@@ -23,7 +23,7 @@ public class CustomValuedCollector implements ICustomCollector {
         List<ReferencedCellGroup> cellGroups = new ArrayList<>();
         references.forEach(
                 reference -> {
-                List<Integer> values = reference.getReferenceValues();
+                List<Integer> values = reference.getValues();
                 List<Cell> source = reference.getCells();
                 CellGroup filteredCells = valuedCollector.collect(source);
                 ReferencedCellGroup group = new ReferencedCellGroup(filteredCells.getCells(), values);

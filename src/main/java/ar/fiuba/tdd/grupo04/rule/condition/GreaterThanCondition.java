@@ -1,21 +1,14 @@
 package ar.fiuba.tdd.grupo04.rule.condition;
 
-import ar.fiuba.tdd.grupo04.rule.CellGroup;
-
-public class GreaterThanCondition implements ICondition {
-    private int min;
+public class GreaterThanCondition extends CompareCondition {
 
     public GreaterThanCondition(int min) {
-        this.min = min;
+        super(Comparator.GREATER, min);
     }
 
     @Override
-    public boolean check(CellGroup cellGroup) {
-        return cellGroup
-                .getFilledCells()
-                .stream()
-                .map(cell -> cell.getValue() > min)
-                .reduce(true, (b1, b2) -> b1 && b2);
+    protected String getConditionName() {
+        return GreaterThanCondition.class.getSimpleName();
     }
 
 }

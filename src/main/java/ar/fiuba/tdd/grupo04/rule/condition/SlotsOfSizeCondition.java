@@ -8,13 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SlotsOfSizeCondition implements ICondition {
+public class SlotsOfSizeCondition extends Condition implements ICondition {
     private Neighborhood neighborhood;
     private int expectedSlotSize;
 
     public SlotsOfSizeCondition(Neighborhood neighborhood, int slotSize) {
         this.neighborhood = neighborhood;
         expectedSlotSize = slotSize;
+    }
+
+    @Override
+    protected String getConditionName() {
+        return SlotsOfSizeCondition.class.getSimpleName();
     }
 
     @Override
@@ -30,11 +35,7 @@ public class SlotsOfSizeCondition implements ICondition {
     private boolean checkSlotSize(List<Cell> cells) {
         boolean check = cells.size() == expectedSlotSize;
         if (!check) {
-            String message = cells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Slot bigger/smaller than expected", (s1, s2) -> s1 + " " + s2);
-            printError(message);
+            printError(cells);
         }
         return check;
     }
@@ -94,20 +95,12 @@ public class SlotsOfSizeCondition implements ICondition {
         mergedList.addAll(list1);
         list2.forEach(
                 cell -> {
-                if (!mergedList.contains(cell)) {
-                    mergedList.add(cell);
+                    if (!mergedList.contains(cell)) {
+                        mergedList.add(cell);
+                    }
                 }
-            }
         );
         return mergedList;
-    }
-
-    private void printError(String message) {
-        message = "============= FAILED =============\n"
-                + "Condition: SlotsOfSizeCondition\n"
-                + "Expected Size: " + expectedSlotSize + "\n"
-                + message;
-        System.out.println(message);
     }
 
 }

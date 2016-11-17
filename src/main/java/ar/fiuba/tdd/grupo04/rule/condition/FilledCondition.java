@@ -6,7 +6,13 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilledCondition implements ICondition {
+public class FilledCondition extends Condition implements ICondition {
+
+    @Override
+    protected String getConditionName() {
+        return FilledCondition.class.getSimpleName();
+    }
+
     @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> emptyCells = cellGroup
@@ -16,19 +22,9 @@ public class FilledCondition implements ICondition {
                 .collect(Collectors.toList());
         boolean check = emptyCells.isEmpty();
         if (!check) {
-            String message = emptyCells
-                    .stream()
-                    .map(cell -> cell.getCoordinate().toString())
-                    .reduce("Empy cells: ", (s1, s2) -> s1 + " " + s2);
-            printError(message);
+            printError(emptyCells);
         }
         return check;
     }
 
-    private void printError(String message) {
-        message = "============= FAILED =============\n"
-                + "Condition: FilledCondition\n" 
-                + message;
-        System.out.println(message);
-    }
 }

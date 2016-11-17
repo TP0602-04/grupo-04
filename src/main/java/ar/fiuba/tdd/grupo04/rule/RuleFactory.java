@@ -1,7 +1,6 @@
 package ar.fiuba.tdd.grupo04.rule;
 
-import ar.fiuba.tdd.grupo04.json.game.CollectorMapper;
-import ar.fiuba.tdd.grupo04.json.game.ConditionMapper;
+import ar.fiuba.tdd.grupo04.json.game.BaseElementMapper;
 import ar.fiuba.tdd.grupo04.json.game.RuleMapper;
 import ar.fiuba.tdd.grupo04.neighborhood.Neighborhood;
 import ar.fiuba.tdd.grupo04.rule.collector.*;
@@ -20,12 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static ar.fiuba.tdd.grupo04.json.game.CollectorMapper.*;
-import static ar.fiuba.tdd.grupo04.json.game.ConditionMapper.*;
+import static ar.fiuba.tdd.grupo04.rule.Rule.*;
+
 
 public class RuleFactory {
     private interface BaseConditionCreator {
-        public ICondition create(List<Integer> params, Neighborhood neighborhood);
+        ICondition create(List<Integer> params, Neighborhood neighborhood);
     }
 
     private static Map<String, BaseConditionCreator> baseConditionMap;
@@ -46,7 +45,7 @@ public class RuleFactory {
 
     public static IRule createRule(Neighborhood neighborhood, RuleMapper ruleMapper) {
         // Create conditions
-        List<ConditionMapper> conditionMappers = ruleMapper.getConditions();
+        List<BaseElementMapper> conditionMappers = ruleMapper.getConditions();
         List<ICustomCondition> customConditions = conditionMappers.stream()
                 .filter(conditionMapper -> isCustomCondition(conditionMapper.getType()))
                 .map(RuleFactory::createCustomCondition)
@@ -59,7 +58,7 @@ public class RuleFactory {
         boolean customCollectorRequired = !customConditions.isEmpty();
 
         // Create collector
-        CollectorMapper collectorMapper = ruleMapper.getCollector();
+        BaseElementMapper collectorMapper = ruleMapper.getCollector();
         String collectorType = collectorMapper.getType();
         List<Integer> collectorParams = collectorMapper.getParams();
         //      Custom
@@ -89,16 +88,10 @@ public class RuleFactory {
     }
 
     private static boolean isCustomCollector(String collectorType) {
-        switch (collectorType) {
-            case CUSTOM:
-            case CUSTOM_VALUED:
-                return true;
-            default:
-                return false;
-        }
+        return collectorType.equals(CUSTOM) || collectorType.equals(CUSTOM_VALUED);
     }
 
-    private static ICondition createBaseCondition(Neighborhood neighborhood, ConditionMapper conditionMapper) {
+    private static ICondition createBaseCondition(Neighborhood neighborhood, BaseElementMapper conditionMapper) {
         String type = conditionMapper.getType();
         List<Integer> params = conditionMapper.getParams();
         if (!baseConditionMap.containsKey(type)) {
@@ -108,7 +101,7 @@ public class RuleFactory {
         }
     }
 
-    private static ICustomCondition createCustomCondition(ConditionMapper conditionMapper) {
+    private static ICustomCondition createCustomCondition(BaseElementMapper conditionMapper) {
         String type = conditionMapper.getType();
         switch (type) {
             case COUNT_WITHIN_RANGE:
@@ -118,7 +111,8 @@ public class RuleFactory {
             case EQUALS_SUM:
                 return new EqualsSumCondition();
             default:
-                throw new RuntimeException("Parsing error! Check conditions' name. " + type + " NOT VALID!");
+                throw new RuntimeException();
+//                throw new RuntimeException("Parsing error! Check condition's name. " + type + " NOT VALID!");
         }
     }
 
@@ -129,7 +123,8 @@ public class RuleFactory {
             case CUSTOM_VALUED:
                 return new CustomValuedCollector(params);
             default:
-                throw new RuntimeException("Parsing error! Check collectors' name. " + type + " NOT VALID!");
+                throw new RuntimeException();
+//                throw new RuntimeException("Parsing error! Check collector's name. " + type + " NOT VALID!");
         }
     }
 
@@ -138,9 +133,9 @@ public class RuleFactory {
             case ALL:
                 return new AllCollector();
             case ROWS:
-                return new RowCollector();
+                return new GridCollector(GridCollector.Filter.ROW);
             case COLUMNS:
-                return new ColumnCollector();
+                return new GridCollector(GridCollector.Filter.COLUMN);
             case BLOCKS:
                 int blockSize = params.get(0);
                 return new BlockCollector(blockSize);
@@ -154,6 +149,5 @@ public class RuleFactory {
                 return createCustomCollector(type, params);
         }
     }
-
 
 }

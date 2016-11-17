@@ -1,23 +1,15 @@
 package ar.fiuba.tdd.grupo04.board;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Reference {
-    private List<Cell> cells;
-    private List<Integer> referenceValues;
+public class Reference extends ValuesHolder<Cell> {
 
     public Reference(List<Cell> cells, List<Integer> referenceValues) {
-        this.cells = new ArrayList<>();
-        this.cells.addAll(cells);
-        this.referenceValues = referenceValues;
+        super(cells, referenceValues);
     }
 
     public List<Cell> getCells() {
-        return cells;
+        return things;
     }
 
-    public List<Integer> getReferenceValues() {
-        return referenceValues;
-    }
 }
