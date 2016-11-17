@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MinMatchAtValueDistance implements ICondition<CellGroup> {
+public class MinMatchAtValueDistance implements ICondition {
     @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> filledCells = cellGroup.getFilledCells();

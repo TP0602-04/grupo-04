@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllCollector implements ICollector<CellGroup> {
+public class AllCollector implements ICollector {
     @Override
     public List<CellGroup> collect(IBoard board) {
         List<CellGroup> groups = new ArrayList<>();

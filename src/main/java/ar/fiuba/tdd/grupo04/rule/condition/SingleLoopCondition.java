@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
 import java.util.List;
 
-public class SingleLoopCondition extends PathCondition implements ICondition<CellGroup> {
+public class SingleLoopCondition extends PathCondition implements ICondition {
 
     public SingleLoopCondition(Neighborhood neighborhood) {
         super(neighborhood);

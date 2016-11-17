@@ -6,13 +6,12 @@ import ar.fiuba.tdd.grupo04.rule.condition.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
-public class Rule<T> implements IRule {
-    private ICollector<T> collector;
-    private List<ICondition<T>> conditions;
+public class Rule implements IRule {
+    private ICollector collector;
+    private List<ICondition> conditions;
 
-    public Rule(ICollector<T> collector, List<ICondition<T>> conditions) {
+    public Rule(ICollector collector, List<ICondition> conditions) {
         this.collector = collector;
         this.conditions = new ArrayList<>();
         this.conditions.addAll(conditions);
@@ -20,16 +19,15 @@ public class Rule<T> implements IRule {
 
     @Override
     public boolean check(IBoard board) {
-        Stream<T> collections = collector.collect(board).stream();
-        return collections
+        return collector.collect(board).stream()
                 .map(this::check)
                 .reduce(true, (res1, res2) -> res1 && res2);
     }
 
-    public boolean check(T predicate) {
+    public boolean check(CellGroup cellGroup) {
         return conditions
                 .stream()
-                .map(condition -> condition.check(predicate))
+                .map(condition -> condition.check(cellGroup))
                 .reduce(true, (b1, b2) -> b1 && b2);
     }
 

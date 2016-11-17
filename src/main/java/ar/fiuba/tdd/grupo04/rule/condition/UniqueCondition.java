@@ -2,7 +2,7 @@ package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
-public class UniqueCondition implements ICondition<CellGroup> {
+public class UniqueCondition implements ICondition {
     @Override
     public boolean check(CellGroup cellGroup) {
         return cellGroup

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RowCollector implements ICollector<CellGroup> {
+public class RowCollector implements ICollector {
 
     @Override
     public List<CellGroup> collect(IBoard board) {

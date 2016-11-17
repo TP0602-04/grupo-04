@@ -6,7 +6,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilledCondition implements ICondition<CellGroup> {
+public class FilledCondition implements ICondition {
     @Override
     public boolean check(CellGroup cellGroup) {
         List<Cell> emptyCells = cellGroup

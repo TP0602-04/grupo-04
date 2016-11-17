@@ -7,7 +7,7 @@ import ar.fiuba.tdd.grupo04.rule.CellGroup;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class NoBranchedOffCondition extends PathCondition implements ICondition<CellGroup> {
+public class NoBranchedOffCondition extends PathCondition implements ICondition {
     private int filterValue;
 
     public NoBranchedOffCondition(Neighborhood neighborhood, int filterValue) {

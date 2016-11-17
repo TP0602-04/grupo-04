@@ -1,15 +1,16 @@
-package ar.fiuba.tdd.grupo04.rule.collector;
+package ar.fiuba.tdd.grupo04.rule.custom.collector;
 
 import ar.fiuba.tdd.grupo04.board.Cell;
 import ar.fiuba.tdd.grupo04.board.IBoard;
 import ar.fiuba.tdd.grupo04.board.Reference;
 import ar.fiuba.tdd.grupo04.rule.CellGroup;
-import ar.fiuba.tdd.grupo04.rule.ReferencedCellGroup;
+import ar.fiuba.tdd.grupo04.rule.collector.ValuedCollector;
+import ar.fiuba.tdd.grupo04.rule.custom.ReferencedCellGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomValuedCollector implements ICollector<ReferencedCellGroup> {
+public class CustomValuedCollector implements ICustomCollector {
     private ValuedCollector valuedCollector;
 
     public CustomValuedCollector(List<Integer> filterValues) {

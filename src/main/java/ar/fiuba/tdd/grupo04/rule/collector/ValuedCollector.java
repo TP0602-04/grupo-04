@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ValuedCollector implements ICollector<CellGroup> {
+public class ValuedCollector implements ICollector {
     private List<Integer> filterValues;
 
     public ValuedCollector(List<Integer> filterValues) {

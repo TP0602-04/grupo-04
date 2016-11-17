@@ -1,10 +1,10 @@
-package ar.fiuba.tdd.grupo04.rule.condition;
+package ar.fiuba.tdd.grupo04.rule.custom.condition;
 
-import ar.fiuba.tdd.grupo04.rule.ReferencedCellGroup;
+import ar.fiuba.tdd.grupo04.rule.custom.ReferencedCellGroup;
 
 import java.util.List;
 
-public class CountWithinRange implements ICondition<ReferencedCellGroup> {
+public class CountWithinRangeCondition implements ICustomCondition {
     private static final int REF_MIN_IDX = 0;
     private static final int REF_MAX_IDX = 1;
 
@@ -17,7 +17,7 @@ public class CountWithinRange implements ICondition<ReferencedCellGroup> {
         boolean check = count >= min && count <= max;
         if (!check) {
             System.out.println("============= FAILED =============\n" +
-                    "Condition: CountWithinRange\n" +
+                    "Condition: CountWithinRangeCondition\n" +
                     "Count: " + count + "\n" +
                     "Range: [" + min + ", " + max + "]");
         }

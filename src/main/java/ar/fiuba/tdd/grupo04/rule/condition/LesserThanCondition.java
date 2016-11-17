@@ -2,7 +2,7 @@ package ar.fiuba.tdd.grupo04.rule.condition;
 
 import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
-public class LesserThanCondition implements ICondition<CellGroup> {
+public class LesserThanCondition implements ICondition {
     private int max;
 
     public LesserThanCondition(int min) {

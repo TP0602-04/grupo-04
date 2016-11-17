@@ -1,9 +1,9 @@
-package ar.fiuba.tdd.grupo04.rule.condition;
+package ar.fiuba.tdd.grupo04.rule.custom.condition;
 
 import ar.fiuba.tdd.grupo04.board.Cell;
-import ar.fiuba.tdd.grupo04.rule.ReferencedCellGroup;
+import ar.fiuba.tdd.grupo04.rule.custom.ReferencedCellGroup;
 
-public class EqualsMultiplyCondition implements ICondition<ReferencedCellGroup> {
+public class EqualsMultiplyCondition implements ICustomCondition {
     @Override
     public boolean check(ReferencedCellGroup referencedCellGroup) {
         Integer expected = referencedCellGroup.getReferencedValues().get(0);

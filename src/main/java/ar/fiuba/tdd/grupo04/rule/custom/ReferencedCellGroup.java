@@ -1,6 +1,7 @@
-package ar.fiuba.tdd.grupo04.rule;
+package ar.fiuba.tdd.grupo04.rule.custom;
 
 import ar.fiuba.tdd.grupo04.board.Cell;
+import ar.fiuba.tdd.grupo04.rule.CellGroup;
 
 import java.util.List;
 

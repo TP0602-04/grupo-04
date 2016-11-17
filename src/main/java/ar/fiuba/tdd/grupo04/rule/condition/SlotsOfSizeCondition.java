@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SlotsOfSizeCondition implements ICondition<CellGroup> {
+public class SlotsOfSizeCondition implements ICondition {
     private Neighborhood neighborhood;
     private int expectedSlotSize;
 

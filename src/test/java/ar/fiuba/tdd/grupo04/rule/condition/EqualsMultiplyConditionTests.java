@@ -3,7 +3,8 @@ package ar.fiuba.tdd.grupo04.rule.condition;
 import ar.fiuba.tdd.grupo04.board.Cell;
 import ar.fiuba.tdd.grupo04.generator.CellGenerator;
 import ar.fiuba.tdd.grupo04.generator.IntGenerator;
-import ar.fiuba.tdd.grupo04.rule.ReferencedCellGroup;
+import ar.fiuba.tdd.grupo04.rule.custom.ReferencedCellGroup;
+import ar.fiuba.tdd.grupo04.rule.custom.condition.EqualsMultiplyCondition;
 import org.junit.Before;
 import org.junit.Test;
 
