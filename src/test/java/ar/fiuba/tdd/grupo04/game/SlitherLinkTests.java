@@ -1,9 +1,9 @@
 package ar.fiuba.tdd.grupo04.game;
 
 public class SlitherLinkTests extends GameTests {
-    private static final String FILE_GAME = "./src/main/resources/SlitherLink/SlitherLink.json";
-    private static final String FILE_SCENARIO = "./src/main/resources/SlitherLink/init-1/init.json";
-    private static final String FILE_MOVES = "./src/main/resources/SlitherLink/init-1/input-1.json";
+    private static final String FILE_GAME = "./src/main/resources/Slitherlink/Slitherlink.json";
+    private static final String FILE_SCENARIO = "./src/main/resources/Slitherlink/init-1/init.json";
+    private static final String FILE_MOVES = "./src/main/resources/Slitherlink/init-1/input-1.json";
 
     @Override
     String getFileGame() {
